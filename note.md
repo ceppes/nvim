@@ -1,6 +1,5 @@
 
 Lsp 
 ´´´
-npm install -g 
-pyright
+npm install -g pyright
 ´´´

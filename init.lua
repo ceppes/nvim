@@ -10,5 +10,6 @@ require('core/keymaps')
 require('core/colors')
 require('packer_init')
 require('plugins/lsp')
+require('plugins/lsp/python')
 require('plugins/statusline')
 

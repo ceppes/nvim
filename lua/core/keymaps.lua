@@ -45,7 +45,7 @@ map('i', '<C-s>', '<ESC>:w<CR>a', {})
 
 -- Fast saving with <leader> and s
 map('n', '<leader>s', ':w<CR>')
-map('i', '<leader>s', '<C-c>:w<CR>')
+--map('i', '<leader>s', '<C-c>:w<CR>')
 
 -- Move around splits using Ctrl + {h,j,k,l}
 map('n', '<C-h>', '<C-w>h')
