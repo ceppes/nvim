@@ -1,1 +1,2 @@
 -- Java lsp config
+require'lspconfig'.jdtls.setup{}

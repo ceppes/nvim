@@ -15,6 +15,7 @@ return packer.startup(function()
   use 'neovim/nvim-lspconfig'
   --LSP Java
   
+  use 'mfussenegger/nvim-jdtls'
 
   --Color Scheme
   use { "ellisonleao/gruvbox.nvim" }
