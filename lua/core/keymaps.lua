@@ -56,6 +56,8 @@ map('n', '<C-l>', '<C-w>l')
 -- Close all windows and exit from Neovim with <leader> and q
 map('n', '<leader>q', ':qa!<CR>')
 
+-- Access netrw (temp)
+map('n', '<leader>e', ':Ex<CR>')
 -----------------------------------------------------------
 -- Applications and Plugins shortcuts
 -----------------------------------------------------------
