@@ -56,3 +56,68 @@ opt.lazyredraw = true                 -- Faster scrolling
 opt.synmaxcol = 240                   -- Max column for syntax highlight
 opt.updatetime = 400                  -- ms to wait for trigger 'document_highlight'
 
+-----------------------------------------------------------
+-- Startup
+-----------------------------------------------------------
+
+-- Disable nvim intro
+opt.shortmess:append "sI"
+
+-- Disable builtins plugins
+local disabled_built_ins = {
+  --"netrw",
+  --"netrwPlugin",
+  --"netrwSettings",
+  --"netrwFileHandlers",
+  "gzip",
+  "zip",
+  "zipPlugin",
+  "tar",
+  "tarPlugin",
+  "getscript",
+  "getscriptPlugin",
+  "vimball",
+  "vimballPlugin",
+  "2html_plugin",
+  "logipat",
+  "rrhelper",
+  "spellfile_plugin",
+  "matchit"
+}
+
+
+for _, plugin in pairs(disabled_built_ins) do
+  g["loaded_" .. plugin] = 1
+end
+
+-----------------------------------------------------------
+-- Autocommands
+-----------------------------------------------------------
+
+-- Highlight on yank
+exec([[
+  augroup YankHighlight
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=800}
+  augroup end
+]], false)
+
+-- Remove whitespace on save
+cmd [[autocmd BufWritePre * :%s/\s\+$//e]]
+
+-- Don't auto commenting new lines
+cmd [[autocmd BufEnter * set fo-=c fo-=r fo-=o]]
+
+-- Remove line lenght marker for selected filetypes
+cmd [[
+  autocmd FileType text,markdown,html,xhtml,javascript setlocal cc=0
+]]
+
+-- 2 spaces for selected filetypes
+cmd [[
+  autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
+]]
+
+
+
+
