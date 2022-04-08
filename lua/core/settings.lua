@@ -36,6 +36,8 @@ opt.ignorecase = true                 -- Ignore case letters when search
 opt.smartcase = true                  -- Ignore lowercase for the whole pattern
 opt.linebreak = true                  -- Wrap on word boundary
 opt.termguicolors = true              -- Enable 24-bit RGB colors
+opt.cursorline = true                 -- Enable line highlight
+opt.cursorcolumn = true               -- Enable column highlight
 
 -----------------------------------------------------------
 -- Tabs, indent
