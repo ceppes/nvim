@@ -14,7 +14,6 @@ return packer.startup(function()
   -- LSP
   use 'neovim/nvim-lspconfig'
   --LSP Java
-  
   use 'mfussenegger/nvim-jdtls'
 
   --Color Scheme
@@ -23,5 +22,15 @@ return packer.startup(function()
   --  Status Line
   use 'feline-nvim/feline.nvim'
 
+  -- Tag viewer
+  use 'liuchengxu/vista.vim'
+
+  -- Treesitter interface
+  use 'nvim-treesitter/nvim-treesitter'
+
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
 
 end)

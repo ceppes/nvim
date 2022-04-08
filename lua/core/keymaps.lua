@@ -58,7 +58,28 @@ map('n', '<leader>q', ':qa!<CR>')
 
 -- Access netrw (temp)
 map('n', '<leader>e', ':Ex<CR>')
+
 -----------------------------------------------------------
 -- Applications and Plugins shortcuts
 -----------------------------------------------------------
 
+-- NvimTree
+--map('n', '<C-n>', ':NvimTreeToggle<CR>')            -- open/close
+--map('n', '<leader>f', ':NvimTreeRefresh<CR>')       -- refresh
+--map('n', '<leader>n', ':NvimTreeFindFile<CR>')      -- search file
+
+-- Vista tag-viewer
+--map('n', '<C-m>', ':Vista!!<CR>') -- open/close
+
+-- Telescope
+-- Find files using Telescope command-line sugar.
+map('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
+map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
+map('n', '<leader>fb', '<cmd>Telescope buffers<cr>')
+map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
+
+-- Using Lua functions
+--map('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>")
+--map('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>")
+--map('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>")
+--map('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>")

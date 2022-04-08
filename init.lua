@@ -1,4 +1,4 @@
--- ██╗███╗   ██╗██╗████████╗██╗     ██╗   ██╗ █████╗ 
+-- ██╗███╗   ██╗██╗████████╗██╗     ██╗   ██╗ █████╗
 -- ██║████╗  ██║██║╚══██╔══╝██║     ██║   ██║██╔══██╗
 -- ██ ██╔██╗ ██║██║   ██║   ██║     ██║   ██║███████║
 -- ██║██║╚██╗██║██║   ██║   ██║     ██║   ██║██╔══██║
@@ -12,5 +12,6 @@ require('packer_init')
 require('plugins/lsp')
 require('plugins/lsp/python')
 require('plugins/lsp/java')
+require('plugins/telescope')
 require('plugins/statusline')
 
