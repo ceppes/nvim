@@ -33,4 +33,20 @@ return packer.startup(function()
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+  -- Completion
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      --  Use luasnip
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
+      --'hrsh7th/cmp-cmdline',
+      --'hrsh7th/cmp-calc',
+      --'f3fora/cmp-spell',
+    },
+  }
+
 end)
