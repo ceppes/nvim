@@ -15,4 +15,5 @@ require('plugins/lsp/java')
 require('plugins/telescope')
 require('plugins/statusline')
 require('plugins/completion')
+require('plugins/treesitter')
 
