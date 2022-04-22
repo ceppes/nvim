@@ -49,4 +49,8 @@ return packer.startup(function()
     },
   }
 
+  -- Indent
+  use 'lukas-reineke/indent-blankline.nvim'
+
+
 end)
