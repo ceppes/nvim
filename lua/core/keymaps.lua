@@ -83,3 +83,7 @@ map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
 --map('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>")
 --map('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>")
 --map('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>")
+
+
+-- Lazygit
+map('n', '<leader>lg', ':LazyGit<CR>')
