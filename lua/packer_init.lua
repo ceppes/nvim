@@ -54,4 +54,7 @@ return packer.startup(function()
 
   -- Git
   use 'kdheepak/lazygit.nvim'
+
+  -- Distraction free
+  use 'junegunn/goyo.vim'
 end)
