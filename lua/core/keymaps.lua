@@ -44,7 +44,7 @@ map('n', '<C-s>', ':w<CR>', {})
 map('i', '<C-s>', '<ESC>:w<CR>a', {})
 
 -- Fast saving with <leader> and s
-map('n', '<leader>s', ':w<CR>')
+map('n', '<leader>w', ':w<CR>')
 --map('i', '<leader>s', '<C-c>:w<CR>')
 
 -- Move around splits using Ctrl + {h,j,k,l}
@@ -87,6 +87,7 @@ map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
 
 -- Lazygit
 map('n', '<leader>lg', ':LazyGit<CR>')
+
 -- Goyo, distraction free
 map('n', '<leader>g', ':Goyo 100%<CR>')
 map('n', '<leader>G', ':Goyo!<CR>')
