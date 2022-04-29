@@ -4,7 +4,7 @@
 -- ╚════██║██╔══╝     ██║      ██║   ██║██║╚██╗██║██║   ██║╚════██║
 -- ███████║███████╗   ██║      ██║   ██║██║ ╚████║╚██████╔╝███████║
 -- ╚══════╝╚══════╝   ╚═╝      ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝
-                                                                
+
 -----------------------------------------------------------
 -- Neovim API aliases
 -----------------------------------------------------------
@@ -24,7 +24,7 @@ opt.completeopt = 'menuone,noselect'  -- Autocomplete options
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------
-opt.title = true		      -- Change the terminal's title 
+opt.title = true		      -- Change the terminal's title
 opt.number = true                     -- Show line number
 opt.relativenumber = true	      -- Show numbers relative to current line
 opt.showmatch = true                  -- Highlight matching parenthesis
@@ -47,6 +47,7 @@ opt.shiftwidth = 4                    -- Shift 4 spaces when tab
 opt.tabstop = 4                       -- 1 tab == 4 spaces
 opt.smartindent = true                -- Autoindent new lines
 opt.foldmethod = 'indent'             -- Fold on each indent
+opt.foldlevel = 1                     -- Set to 1 to only show mehtods levels
 
 -----------------------------------------------------------
 -- Memory, CPU
