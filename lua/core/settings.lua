@@ -24,9 +24,9 @@ opt.completeopt = 'menuone,noselect'  -- Autocomplete options
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------
-opt.title = true		      -- Change the terminal's title
+opt.title = true		                  -- Change the terminal's title
 opt.number = true                     -- Show line number
-opt.relativenumber = true	      -- Show numbers relative to current line
+opt.relativenumber = false	          -- Show numbers relative to current line
 opt.showmatch = true                  -- Highlight matching parenthesis
 opt.foldmethod = 'marker'             -- Enable folding (default 'foldmarker')
 opt.colorcolumn = '80'                -- Line lenght marker at 80 columns
