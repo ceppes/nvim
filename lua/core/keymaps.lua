@@ -88,6 +88,9 @@ map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
 -- Lazygit
 map('n', '<leader>lg', ':LazyGit<CR>')
 
+-- Vim fugitive
+map('n', '<leader>gb', ':Git blame<CR>')
+
 -- Goyo, distraction free
 map('n', '<leader>g', ':Goyo 100%<CR>')
 map('n', '<leader>G', ':Goyo!<CR>')

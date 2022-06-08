@@ -55,6 +55,7 @@ return packer.startup(function()
   -- Git
   use 'kdheepak/lazygit.nvim'
   use 'airblade/vim-gitgutter'
+	use 'tpope/vim-fugitive'
 
   -- Distraction free
   use 'junegunn/goyo.vim'
