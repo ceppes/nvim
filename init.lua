@@ -16,4 +16,5 @@ require('plugins/statusline')
 require('plugins/completion')
 require('plugins/treesitter')
 require('plugins/lsps')
+require('plugins/lsp/python')
 

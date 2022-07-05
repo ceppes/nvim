@@ -59,4 +59,7 @@ return packer.startup(function()
 
   -- Distraction free
   use 'junegunn/goyo.vim'
+
+  -- Linting
+  use 'mfussenegger/nvim-lint'
 end)
