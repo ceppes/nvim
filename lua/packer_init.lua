@@ -62,4 +62,13 @@ return packer.startup(function()
 
   -- Linting
   use 'mfussenegger/nvim-lint'
+
+  -- Comment
+  use {
+      'numToStr/Comment.nvim',
+      config = function()
+          require('Comment').setup()
+      end
+  }
+
 end)

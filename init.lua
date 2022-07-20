@@ -15,6 +15,7 @@ require('plugins/telescope')
 require('plugins/statusline')
 require('plugins/completion')
 require('plugins/treesitter')
+require('plugins/comment')
 require('plugins/lsps')
 require('plugins/lsp/python')
 
