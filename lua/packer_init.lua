@@ -67,12 +67,7 @@ return packer.startup(function()
   use 'mfussenegger/nvim-lint'
 
   -- Comment
-  use {
-      'numToStr/Comment.nvim',
-      config = function()
-          require('Comment').setup()
-      end
-  }
+  use 'numToStr/Comment.nvim'
 
   -- Tools
   use "folke/which-key.nvim"
