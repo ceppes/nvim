@@ -77,6 +77,8 @@ map('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
 map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
 map('n', '<leader>fb', '<cmd>Telescope buffers<cr>')
 map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
+map('n', '<leader>fr', '<cmd>Telescope resume<cr>')
+map('n', '<leader>fp', '<cmd>Telescope pickers<cr>')
 
 -- Using Lua functions
 --map('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>")
