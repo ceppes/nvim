@@ -71,4 +71,7 @@ return packer.startup(function()
       end
   }
 
+  -- Tools
+  use "folke/which-key.nvim"
+
 end)
