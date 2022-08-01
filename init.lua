@@ -17,5 +17,6 @@ require('plugins/comment')
 require('plugins/whichkey')
 require('plugins/lsps')
 require('plugins/lsp/python')
+require('plugins/lsp/lua')
 --require('plugins/lsp/java')
 
