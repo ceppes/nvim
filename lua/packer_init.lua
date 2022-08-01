@@ -12,7 +12,10 @@ return packer.startup(function()
   use 'wbthomason/packer.nvim' -- packer can manage itself
 
   -- LSP
-  use 'neovim/nvim-lspconfig'
+  use {
+    "williamboman/nvim-lsp-installer",
+    "neovim/nvim-lspconfig",
+  }
   --LSP Java
   use 'mfussenegger/nvim-jdtls'
 

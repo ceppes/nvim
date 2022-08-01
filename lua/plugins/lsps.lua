@@ -8,6 +8,8 @@ if not cmp_status_ok then
   return
 end
 
+require("nvim-lsp-installer").setup {}
+
 -- Diagnostic options, see: `:help vim.diagnostic.config`
 vim.diagnostic.config({ virtual_text = true })
 
