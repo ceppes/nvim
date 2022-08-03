@@ -11,7 +11,9 @@ end
 require("nvim-lsp-installer").setup {}
 
 -- Diagnostic options, see: `:help vim.diagnostic.config`
-vim.diagnostic.config({ virtual_text = true })
+vim.diagnostic.config({ virtual_text = false })
+require("lsp_lines").setup()
+vim.diagnostic.config({ virtual_lines = true })
 
 -- Show line diagnostics automatically in hover window
 vim.cmd([[
