@@ -79,7 +79,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = {'pyright', 'jdtls'}
+local servers = {'jdtls'}
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -91,3 +91,36 @@ for _, lsp in pairs(servers) do
     },
   }
 end
+
+-- python
+local python_root_files = {
+  'WORKSPACE',
+  'pyproject.toml',
+  'setup.py',
+  'setup.cfg',
+  'requirements.txt',
+  'Pipfile',
+  'pyrightconfig.json',
+  '.git'
+}
+lspconfig.pyright.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
+  flags = {
+    -- This will be the default in neovim 0.7+
+    debounce_text_changes = 150,
+  },
+  settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        diagnosticMode = "workspace",
+        -- diagnosticMode = "openFilesOnly",
+        useLibraryCodeForTypes = true,
+        -- extraPaths = {lspconfig.util.root_pattern('src')}
+      }
+    }
+  }
+}
+
