@@ -8,6 +8,8 @@ if not cmp_status_ok then
   return
 end
 
+local cmd = vim.cmd
+
 require("nvim-lsp-installer").setup {}
 
 -- Diagnostic options, see: `:help vim.diagnostic.config`
@@ -16,7 +18,7 @@ require("lsp_lines").setup()
 vim.diagnostic.config({ virtual_lines = true })
 
 -- Show line diagnostics automatically in hover window
-vim.cmd([[
+cmd([[
   autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false })
 ]])
 
