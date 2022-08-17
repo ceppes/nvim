@@ -71,6 +71,10 @@ return packer.startup(function()
 
   -- Tools
   use "folke/which-key.nvim"
+  use {
+    "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  }
 
   use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
 
