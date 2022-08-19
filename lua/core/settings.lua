@@ -46,8 +46,6 @@ opt.expandtab = true                  -- Use spaces instead of tabs
 opt.shiftwidth = 4                    -- Shift 4 spaces when tab
 opt.tabstop = 4                       -- 1 tab == 4 spaces
 opt.smartindent = true                -- Autoindent new lines
-opt.foldmethod = 'indent'             -- Fold on each indent
-opt.foldlevel = 1                     -- Set to 1 to only show mehtods levels
 
 -----------------------------------------------------------
 -- Memory, CPU
@@ -125,6 +123,8 @@ cmd [[
   autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
 ]]
 
-
-
-
+-- Fold
+opt.foldmethod = 'indent'             -- Fold on each indent
+-- Set to 1 to only show mehtods levels
+cmd [[  autocmd FileType python setlocal foldlevel=1 ]]
+cmd [[  autocmd FileType java setlocal foldlevel=2 ]]
