@@ -7,8 +7,8 @@
 
 require('core/settings')
 require('core/keymaps')
-require('core/colors')
 require('packer_init')
+require('core/colors')
 require('plugins/telescope')
 require('plugins/statusline')
 require('plugins/completion')
