@@ -77,6 +77,7 @@ map('n', '<leader>e', ':Ex<CR>')
 -- Telescope
 -- Find files using Telescope command-line sugar.
 map('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
+map('n', '<leader>feh', '<cmd>Telescope find_files hidden=true<cr>')
 map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
 map('n', '<leader>fb', '<cmd>Telescope buffers<cr>')
 map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
