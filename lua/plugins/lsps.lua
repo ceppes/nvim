@@ -12,11 +12,41 @@ local cmd = vim.cmd
 
 require("nvim-lsp-installer").setup {}
 
--- Diagnostic options, see: `:help vim.diagnostic.config`
-vim.diagnostic.config({ virtual_text = false })
-require("lsp_lines").setup()
-vim.diagnostic.config({ virtual_lines = true })
 
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] =
+--   vim.lsp.with(
+--   vim.lsp.diagnostic.on_publish_diagnostics,
+vim.diagnostic.config({
+    underline = true,
+    -- Enable virtual text, override spacing to 4
+    -- virtual_text = {
+    --   spacing = 4,
+    --   severity_linit = "Warning"
+    -- },
+
+    -- Diagnostic options, see: `:help vim.diagnostic.config`
+    virtual_text = false,
+    signs = true,
+    update_in_insert = true
+  }
+)
+
+-- vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsDefaultError"})
+-- vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", numhl = "LspDiagnosticsDefaultWarning"})
+-- vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "", numhl = "LspDiagnosticsDefaultInformation"})
+-- vim.fn.sign_define("LspDiagnosticsSignHint", {text = "", numhl = "LspDiagnosticsDefaultHint"})
+
+cmd([[hi LspDiagnosticsVirtualTextError guifg=red gui=bold,italic,underline]])
+cmd([[hi LspDiagnosticsVirtualTextWarning guifg=orange gui=bold,italic,underline]])
+cmd([[hi LspDiagnosticsVirtualTextInformation guifg=yellow gui=bold,italic,underline]])
+cmd([[hi LspDiagnosticsVirtualTextHint guifg=green gui=bold,italic,underline]])
+
+-- hi LspDiagnosticsVirtualTextError guifg=red gui=bold,italic,underline
+-- hi LspDiagnosticsVirtualTextWarning guifg=orange gui=bold,italic,underline
+-- hi LspDiagnosticsVirtualTextInformation guifg=yellow gui=bold,italic,underline
+-- hi LspDiagnosticsVirtualTextHint guifg=green gui=bold,italic,underline
+
+require("lsp_lines").setup()
 -- Show line diagnostics automatically in hover window
 cmd([[
   autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false })
@@ -69,7 +99,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  buf_set_keymap('n', '<space>ftt', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
@@ -93,6 +123,35 @@ for _, lsp in pairs(servers) do
     },
   }
 end
+-- local servers = { 'jsonls' }
+-- for _, lsp in pairs(servers) do
+--   lspconfig[lsp].setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     -- root_dir = lspconfig.util.root_pattern('.git'),
+--     flags = {
+--       -- This will be the default in neovim 0.7+
+--       debounce_text_changes = 150,
+--     },
+--   }
+-- end
+
+-- json
+lspconfig.jsonls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  flags = {
+    -- This will be the default in neovim 0.7+
+    debounce_text_changes = 150,
+  },
+  commands = {
+    Format = {
+      function()
+        vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+      end
+    }
+  }
+}
 
 -- python
 local python_root_files = {
