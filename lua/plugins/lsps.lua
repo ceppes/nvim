@@ -8,24 +8,63 @@ if not cmp_status_ok then
   return
 end
 
+local lsp_installer_status_ok, lsp_installer = pcall(require, 'nvim-lsp-installer')
+if not lsp_installer_status_ok then
+  return
+end
+
 local cmd = vim.cmd
 
-require("nvim-lsp-installer").setup {}
+lsp_installer.setup({
+  ensure_installed = {
+    'bashls',
+    'jdtls',
+    'jsonls',
+    'pyright',
+    'sumneko_lua',
+  },
+  automatic_installation = true,
+})
 
+local function set_sign(type, icon)
+  local sign = string.format('DiagnosticSign%s', type)
+  local texthl = string.format('DiagnosticDefault%s', type)
+  vim.fn.sign_define(sign, { text = icon, texthl = texthl })
+end
 
+set_sign('Hint', '')
+set_sign('Information', '')
+set_sign('Warning', '')
+set_sign('Error', '')
+
+vim.lsp.set_log_level('error')
+
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  underline = {
+    severity_limit = 'Warning'
+  },
+  virtual_text = {
+    prefix = '●',
+    spacing = 2,
+    severity_limit = 'Warning'
+  },
+  signs = {
+    severity_limit = 'Warning'
+  },
+})
 -- vim.lsp.handlers["textDocument/publishDiagnostics"] =
 --   vim.lsp.with(
 --   vim.lsp.diagnostic.on_publish_diagnostics,
 vim.diagnostic.config({
-    underline = true,
+    -- underline = true,
     -- Enable virtual text, override spacing to 4
-    -- virtual_text = {
-    --   spacing = 4,
-    --   severity_linit = "Warning"
-    -- },
+    virtual_text = {
+      spacing = 4,
+      severity_linit = "Warning"
+    },
 
     -- Diagnostic options, see: `:help vim.diagnostic.config`
-    virtual_text = false,
+    -- virtual_text = false,
     signs = true,
     update_in_insert = true
   }
@@ -184,4 +223,5 @@ lspconfig.pyright.setup {
     }
   }
 }
+
 
