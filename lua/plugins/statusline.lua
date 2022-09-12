@@ -6,6 +6,21 @@ local feline = require 'feline'
 
 -- Colorscheme
 --local colors = require('')
+local gruvbox = {
+    fg = '#928374',
+    bg = '#1F2223',
+    black ='#1B1B1B',
+    skyblue = '#458588',
+    cyan = '#83a597',
+    green = '#689d6a',
+    oceanblue = '#1d2021',
+    magenta = '#fb4934',
+    orange = '#fabd2f',
+    red = '#cc241d',
+    violet = '#b16286',
+    white = '#ebdbb2',
+    yellow = '#d79921',
+}
 
 -- Providers
 local lsp = require 'feline.providers.lsp'
@@ -54,8 +69,8 @@ local my_comps = {
       hl = function()
         return {
           name = vi_mode_utils.get_mode_highlight_name(),
-          bg = vi_mode_utils.get_mode_color(),
-          fg = 'black',
+          -- bg = vi_mode_utils.get_mode_color(),
+          -- fg = 'black',
           style = 'bold',
         }
       end
@@ -65,7 +80,7 @@ local my_comps = {
       hl = function()
           return {
               name = vi_mode_utils.get_mode_highlight_name(),
-              fg = vi_mode_utils.get_mode_color()
+              -- fg = vi_mode_utils.get_mode_color()
           }
       end,
       left_sep = ' '
@@ -77,7 +92,7 @@ local my_comps = {
       -- provider = require("plugins/feline/file_name").get_current_ufn,
         -- return vim.fn.expand("%:F")
       hl = {
-        fg = 'blue',
+        -- fg = 'blue',
         style = 'bold'
       },
       left_sep = ' '
@@ -86,7 +101,7 @@ local my_comps = {
       provider = 'file_encoding',
       left_sep = ' ',
       hl = {
-        fg = 'violet',
+        -- fg = 'violet',
         style = 'bold'
       }
     },
@@ -97,7 +112,7 @@ local my_comps = {
       provider = file_osinfo,
       left_sep = ' ',
       hl = {
-        fg = 'violet',
+        -- fg = 'violet',
         style = 'bold'
       }
     },
@@ -116,12 +131,12 @@ local my_comps = {
         local filename = vim.fn.expand('%:t')
         local extension = vim.fn.expand('%:e')
         local icon, name  = require'nvim-web-devicons'.get_icon(filename, extension)
-        if icon ~= nil then
-          val.fg = vim.fn.synIDattr(vim.fn.hlID(name), 'fg')
-        else
-          val.fg = 'white'
-        end
-        val.bg = 'bg'
+        -- if icon ~= nil then
+          -- val.fg = vim.fn.synIDattr(vim.fn.hlID(name), 'fg')
+        -- else
+          -- val.fg = 'white'
+        -- end
+        -- val.bg = 'bg'
         val.style = 'bold'
         return val
       end,
@@ -131,16 +146,16 @@ local my_comps = {
       provider = 'file_size',
       enabled = function() return vim.fn.getfsize(vim.fn.expand('%:t')) > 0 end,
       hl = {
-        fg = 'skyblue',
-        bg = 'bg',
+        -- fg = 'skyblue',
+        -- bg = 'bg',
         style = 'bold'
       },
     },
     format = {
       provider = function() return '' .. vim.bo.fileformat:upper() .. '' end,
       hl = {
-        fg = 'white',
-        bg = 'bg',
+        -- fg = 'white',
+        -- bg = 'bg',
         style = 'bold'
       },
     },
@@ -163,7 +178,7 @@ local my_comps = {
       local val = {
         name = vi_mode_utils.get_mode_highlight_name(),
         -- fg = colors.bg,
-        bg = vi_mode_utils.get_mode_color(),
+        -- bg = vi_mode_utils.get_mode_color(),
         style = 'bold'
       }
       return val
@@ -173,7 +188,7 @@ local my_comps = {
     provider = 'scroll_bar',
     left_sep = ' ',
     hl = {
-      fg = 'blue',
+      -- fg = 'blue',
       style = 'bold'
     }
   },
@@ -184,7 +199,7 @@ local my_comps = {
         return lsp.diagnostics_exist(vim.diagnostic.severity.ERROR)
       end,
       hl = {
-        fg = 'red'
+        -- fg = 'red'
       }
     },
     warn = {
@@ -193,7 +208,7 @@ local my_comps = {
         return lsp.diagnostics_exist(vim.diagnostic.severity.WARN)
       end,
       hl = {
-        fg = 'yellow'
+        -- fg = 'yellow'
       }
     },
     hint = {
@@ -202,7 +217,7 @@ local my_comps = {
         return lsp.diagnostics_exist(vim.diagnostic.severity.HINT)
       end,
       hl = {
-        fg = 'cyan'
+        -- fg = 'cyan'
       }
     },
     info = {
@@ -211,7 +226,7 @@ local my_comps = {
         return lsp.diagnostics_exist(vim.diagnostic.severity.INFO)
       end,
       hl = {
-        fg = 'blue'
+        -- fg = 'blue'
       }
     },
   },
@@ -221,7 +236,7 @@ local my_comps = {
       left_sep = ' ',
       icon = ' ',
       hl = {
-        fg = 'yellow'
+        -- fg = 'yellow'
       }
     }
   },
@@ -231,7 +246,7 @@ local my_comps = {
       icon = ' ',
       left_sep = ' ',
       hl = {
-        fg = 'violet',
+        -- fg = 'violet',
         style = 'bold'
       },
       enabled = function()
@@ -241,19 +256,19 @@ local my_comps = {
     add = {
       provider = 'git_diff_added',
       hl = {
-        fg = 'green'
+        -- fg = 'green'
       }
     },
     change = {
       provider = 'git_diff_changed',
       hl = {
-        fg = 'orange'
+        -- fg = 'orange'
       }
     },
     remove = {
       provider = 'git_diff_removed',
       hl = {
-        fg = 'red'
+        -- fg = 'red'
       }
     }
   }
@@ -315,7 +330,8 @@ feline.setup({
     },
     buftypes = {'terminal'},
     bufnames = {}
-  }
+  },
+  theme = gruvbox
   -- default_bg = colors.bg,
   -- default_fg = colors.fg,
   -- properties = properties,
