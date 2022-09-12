@@ -61,6 +61,8 @@ return packer.startup(function()
   use 'airblade/vim-gitgutter'
 	use 'tpope/vim-fugitive'
 
+  use {'lewis6991/gitsigns.nvim'} -- needed for feline
+
   -- Distraction free
   use 'junegunn/goyo.vim'
 
@@ -78,5 +80,6 @@ return packer.startup(function()
   }
 
   use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
+  use "kyazdani42/nvim-web-devicons"
 
 end)
