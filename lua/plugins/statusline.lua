@@ -69,8 +69,8 @@ local my_comps = {
       hl = function()
         return {
           name = vi_mode_utils.get_mode_highlight_name(),
-          -- bg = vi_mode_utils.get_mode_color(),
-          -- fg = 'black',
+          bg = vi_mode_utils.get_mode_color(),
+          fg = 'black',
           style = 'bold',
         }
       end
@@ -168,7 +168,7 @@ local my_comps = {
     }
   },
   position = {
-    position = 'position',
+    provider = 'position',
     -- provider = function()
       -- pos = feline.providers.cursor.position()
       -- return ' '..pos..' '
@@ -199,7 +199,7 @@ local my_comps = {
         return lsp.diagnostics_exist(vim.diagnostic.severity.ERROR)
       end,
       hl = {
-        -- fg = 'red'
+        fg = 'red'
       }
     },
     warn = {
@@ -208,7 +208,7 @@ local my_comps = {
         return lsp.diagnostics_exist(vim.diagnostic.severity.WARN)
       end,
       hl = {
-        -- fg = 'yellow'
+        fg = 'yellow'
       }
     },
     hint = {
@@ -217,7 +217,7 @@ local my_comps = {
         return lsp.diagnostics_exist(vim.diagnostic.severity.HINT)
       end,
       hl = {
-        -- fg = 'cyan'
+        fg = 'cyan'
       }
     },
     info = {
@@ -226,7 +226,7 @@ local my_comps = {
         return lsp.diagnostics_exist(vim.diagnostic.severity.INFO)
       end,
       hl = {
-        -- fg = 'blue'
+        fg = 'blue'
       }
     },
   },
@@ -236,7 +236,7 @@ local my_comps = {
       left_sep = ' ',
       icon = ' ',
       hl = {
-        -- fg = 'yellow'
+        fg = 'yellow'
       }
     }
   },
@@ -246,7 +246,7 @@ local my_comps = {
       icon = ' ',
       left_sep = ' ',
       hl = {
-        -- fg = 'violet',
+        fg = 'violet',
         style = 'bold'
       },
       enabled = function()
@@ -256,19 +256,19 @@ local my_comps = {
     add = {
       provider = 'git_diff_added',
       hl = {
-        -- fg = 'green'
+        fg = 'green'
       }
     },
     change = {
       provider = 'git_diff_changed',
       hl = {
-        -- fg = 'orange'
+        fg = 'orange'
       }
     },
     remove = {
       provider = 'git_diff_removed',
       hl = {
-        -- fg = 'red'
+        fg = 'red'
       }
     }
   }
@@ -297,10 +297,10 @@ local active = {
     -- my_comps.file.size,
     my_comps.file.encoding,
     my_comps.file.os,
-    my_comps.scroll_bar,
-    my_comps.line_percentage,
-    -- comps.vi_mode.right
     my_comps.position,
+    my_comps.line_percentage,
+    my_comps.scroll_bar,
+    -- comps.vi_mode.right
 
   }
 }
