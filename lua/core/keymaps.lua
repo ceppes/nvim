@@ -101,5 +101,5 @@ map('n', '<leader>gb', ':Git blame<CR>')
 map('n', '<leader>g', ':Goyo 100%<CR>')
 map('n', '<leader>G', ':Goyo!<CR>')
 
--- Open outline
+-- Open structure (outlint)
 map('n', '<leader>v', '<cmd>SymbolsOutline<cr>')
