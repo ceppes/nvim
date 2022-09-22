@@ -87,7 +87,18 @@ local my_comps = {
   },
   file = {
     info = {
-      provider = 'file_info',
+      provider = {
+        name = 'file_info',
+        opts = {
+            type = 'full-path'
+        }
+      },
+      short_provider = {
+        name = 'file_info',
+        opts = {
+            type = 'short-path'
+        }
+      },
       -- provider = require("plugins/feline/file_name").get_current_ufn,
         -- provider = vim.fn.expand("%:F"),
       hl = {
@@ -232,6 +243,7 @@ local my_comps = {
   lsp = {
     name = {
       provider = 'lsp_client_names',
+      truncate_hide = true,
       left_sep = ' ',
       icon = ' ',
       hl = {
@@ -242,6 +254,7 @@ local my_comps = {
   git = {
     branch = {
       provider = 'git_branch',
+      truncate_hide = true,
       icon = ' ',
       left_sep = ' ',
       hl = {
@@ -254,18 +267,21 @@ local my_comps = {
     },
     add = {
       provider = 'git_diff_added',
+      truncate_hide = true,
       hl = {
         fg = 'green'
       }
     },
     change = {
       provider = 'git_diff_changed',
+      truncate_hide = true,
       hl = {
         fg = 'orange'
       }
     },
     remove = {
       provider = 'git_diff_removed',
+      truncate_hide = true,
       hl = {
         fg = 'red'
       }
