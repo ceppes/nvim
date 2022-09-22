@@ -58,7 +58,7 @@ return packer.startup(function()
 
   -- Git
   use 'kdheepak/lazygit.nvim'
-  use 'airblade/vim-gitgutter'
+  -- use 'airblade/vim-gitgutter'
 	use 'tpope/vim-fugitive'
 
   use {'lewis6991/gitsigns.nvim'} -- needed for feline
@@ -82,4 +82,6 @@ return packer.startup(function()
   use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
   use "kyazdani42/nvim-web-devicons"
 
+
+  use 'simrat39/symbols-outline.nvim'
 end)

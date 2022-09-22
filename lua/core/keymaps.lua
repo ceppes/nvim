@@ -100,3 +100,6 @@ map('n', '<leader>gb', ':Git blame<CR>')
 -- Goyo, distraction free
 map('n', '<leader>g', ':Goyo 100%<CR>')
 map('n', '<leader>G', ':Goyo!<CR>')
+
+-- Open outline
+map('n', '<leader>v', '<cmd>SymbolsOutline<cr>')

@@ -25,7 +25,6 @@ local gruvbox = {
 -- Providers
 local lsp = require 'feline.providers.lsp'
 local vi_mode_utils = require 'feline.providers.vi_mode'
-require 'gitsigns'.setup{}
 
 local vi_mode_text = {
     n = "NORMAL",
@@ -90,7 +89,7 @@ local my_comps = {
     info = {
       provider = 'file_info',
       -- provider = require("plugins/feline/file_name").get_current_ufn,
-        -- return vim.fn.expand("%:F")
+        -- provider = vim.fn.expand("%:F"),
       hl = {
         -- fg = 'blue',
         style = 'bold'

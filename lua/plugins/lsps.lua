@@ -26,66 +26,52 @@ lsp_installer.setup({
   automatic_installation = true,
 })
 
+-- vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsDefaultError"})
 local function set_sign(type, icon)
   local sign = string.format('DiagnosticSign%s', type)
   local texthl = string.format('DiagnosticDefault%s', type)
   vim.fn.sign_define(sign, { text = icon, texthl = texthl })
 end
 
-set_sign('Hint', '')
-set_sign('Information', '')
-set_sign('Warning', '')
-set_sign('Error', '')
+set_sign(vim.diagnostic.severity.HINT, '')
+set_sign(vim.diagnostic.severity.INFO, '')
+set_sign(vim.diagnostic.severity.WARN, '')
+set_sign(vim.diagnostic.severity.ERROR, '')
 
 vim.lsp.set_log_level('error')
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  underline = {
-    severity_limit = 'Warning'
-  },
-  virtual_text = {
-    prefix = '●',
-    spacing = 2,
-    severity_limit = 'Warning'
-  },
-  signs = {
-    severity_limit = 'Warning'
-  },
-})
+
+-- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 -- vim.lsp.handlers["textDocument/publishDiagnostics"] =
 --   vim.lsp.with(
 --   vim.lsp.diagnostic.on_publish_diagnostics,
 vim.diagnostic.config({
-    -- underline = true,
-    -- Enable virtual text, override spacing to 4
+    underline = {
+      severity_limit = 'Warning'
+    },
     virtual_text = {
-      spacing = 4,
+      prefix = '●',
+      spacing = 2, --4
       severity_linit = "Warning"
     },
-
-    -- Diagnostic options, see: `:help vim.diagnostic.config`
-    -- virtual_text = false,
-    signs = true,
-    update_in_insert = true
+    signs = {
+      severity_limit = 'Warning'
+    },
+    update_in_insert = true,
+    virtual_lines = false
   }
 )
 
--- vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsDefaultError"})
--- vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", numhl = "LspDiagnosticsDefaultWarning"})
--- vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "", numhl = "LspDiagnosticsDefaultInformation"})
--- vim.fn.sign_define("LspDiagnosticsSignHint", {text = "", numhl = "LspDiagnosticsDefaultHint"})
 
-cmd([[hi LspDiagnosticsVirtualTextError guifg=red gui=bold,italic,underline]])
-cmd([[hi LspDiagnosticsVirtualTextWarning guifg=orange gui=bold,italic,underline]])
-cmd([[hi LspDiagnosticsVirtualTextInformation guifg=yellow gui=bold,italic,underline]])
-cmd([[hi LspDiagnosticsVirtualTextHint guifg=green gui=bold,italic,underline]])
-
--- hi LspDiagnosticsVirtualTextError guifg=red gui=bold,italic,underline
--- hi LspDiagnosticsVirtualTextWarning guifg=orange gui=bold,italic,underline
--- hi LspDiagnosticsVirtualTextInformation guifg=yellow gui=bold,italic,underline
--- hi LspDiagnosticsVirtualTextHint guifg=green gui=bold,italic,underline
+cmd([[hi LspDiagnosticsVirtualTextError guifg=red gui=bold,italic,undercurl]])
+cmd([[hi LspDiagnosticsVirtualTextWarning guifg=orange gui=bold,italic,undercurl]])
+cmd([[hi LspDiagnosticsVirtualTextInformation guifg=yellow gui=bold,italic,undercurl]])
+cmd([[hi LspDiagnosticsVirtualTextHint guifg=green gui=bold,italic,undercurl]])
 
 require("lsp_lines").setup()
+vim.api.nvim_create_user_command('LspLineOff', 'lua vim.diagnostic.config({ virtual_lines = false, virtual_text = true })', { nargs = 0 })
+vim.api.nvim_create_user_command('LspLineOn', 'lua vim.diagnostic.config({ virtual_lines = true, virtual_text = false })', { nargs = 0 })
+
 -- Show line diagnostics automatically in hover window
 cmd([[
   autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false })
@@ -225,3 +211,6 @@ lspconfig.pyright.setup {
 }
 
 
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "rounded",
+})
