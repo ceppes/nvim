@@ -8,14 +8,74 @@ if not cmp_status_ok then
   return
 end
 
--- Diagnostic options, see: `:help vim.diagnostic.config`
-vim.diagnostic.config({ virtual_text = true })
+local lsp_installer_status_ok, lsp_installer = pcall(require, 'nvim-lsp-installer')
+if not lsp_installer_status_ok then
+  return
+end
+
+local cmd = vim.cmd
+
+lsp_installer.setup({
+  ensure_installed = {
+    'bashls',
+    'jdtls',
+    'jsonls',
+    'pyright',
+    'sumneko_lua',
+  },
+  automatic_installation = true,
+})
+
+-- vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsDefaultError"})
+local function set_sign(type, icon)
+  local sign = string.format('DiagnosticSign%s', type)
+  local texthl = string.format('DiagnosticDefault%s', type)
+  vim.fn.sign_define(sign, { text = icon, texthl = texthl })
+end
+
+set_sign(vim.diagnostic.severity.HINT, '')
+set_sign(vim.diagnostic.severity.INFO, '')
+set_sign(vim.diagnostic.severity.WARN, '')
+set_sign(vim.diagnostic.severity.ERROR, '')
+
+vim.lsp.set_log_level('error')
+
+
+-- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] =
+--   vim.lsp.with(
+--   vim.lsp.diagnostic.on_publish_diagnostics,
+vim.diagnostic.config({
+    underline = {
+      severity_limit = 'Warning'
+    },
+    virtual_text = {
+      prefix = '●',
+      spacing = 2, --4
+      severity_linit = "Warning"
+    },
+    signs = {
+      severity_limit = 'Warning'
+    },
+    update_in_insert = true,
+    virtual_lines = false
+  }
+)
+
+
+cmd([[hi LspDiagnosticsVirtualTextError guifg=red gui=bold,italic,undercurl]])
+cmd([[hi LspDiagnosticsVirtualTextWarning guifg=orange gui=bold,italic,undercurl]])
+cmd([[hi LspDiagnosticsVirtualTextInformation guifg=yellow gui=bold,italic,undercurl]])
+cmd([[hi LspDiagnosticsVirtualTextHint guifg=green gui=bold,italic,undercurl]])
+
+require("lsp_lines").setup()
+vim.api.nvim_create_user_command('LspLineOff', 'lua vim.diagnostic.config({ virtual_lines = false, virtual_text = true })', { nargs = 0 })
+vim.api.nvim_create_user_command('LspLineOn', 'lua vim.diagnostic.config({ virtual_lines = true, virtual_text = false })', { nargs = 0 })
 
 -- Show line diagnostics automatically in hover window
-vim.cmd([[
+cmd([[
   autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false })
 ]])
-
 
 -- Add additional capabilities supported by nvim-cmp
 -- See: https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
@@ -38,13 +98,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   },
 }
 
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
---vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
---vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
---vim.api.nvim_set_keymap('n', '<space>d', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
---vim.api.nvim_set_keymap('n', '<space>ld', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -57,11 +110,13 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   local opts = { noremap=true, silent=true }
 
+  -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
@@ -69,18 +124,19 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  buf_set_keymap('n', '<space>ftt', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>d', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+--buf_set_keymap('n', '<space>d', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   buf_set_keymap('n', '<space>ld', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+--buf_set_keymap('n', '<space>ld', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright' }
+local servers = {'jdtls'}
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -92,3 +148,69 @@ for _, lsp in pairs(servers) do
     },
   }
 end
+-- local servers = { 'jsonls' }
+-- for _, lsp in pairs(servers) do
+--   lspconfig[lsp].setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     -- root_dir = lspconfig.util.root_pattern('.git'),
+--     flags = {
+--       -- This will be the default in neovim 0.7+
+--       debounce_text_changes = 150,
+--     },
+--   }
+-- end
+
+-- json
+lspconfig.jsonls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  flags = {
+    -- This will be the default in neovim 0.7+
+    debounce_text_changes = 150,
+  },
+  commands = {
+    Format = {
+      function()
+        vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+      end
+    }
+  }
+}
+
+-- python
+local python_root_files = {
+  'WORKSPACE',
+  'pyproject.toml',
+  'setup.py',
+  'setup.cfg',
+  'requirements.txt',
+  'Pipfile',
+  'pyrightconfig.json',
+  '.git'
+}
+lspconfig.pyright.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
+  flags = {
+    -- This will be the default in neovim 0.7+
+    debounce_text_changes = 150,
+  },
+  settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        diagnosticMode = "workspace",
+        -- diagnosticMode = "openFilesOnly",
+        useLibraryCodeForTypes = true,
+        -- extraPaths = {lspconfig.util.root_pattern('src')}
+      }
+    }
+  }
+}
+
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "rounded",
+})

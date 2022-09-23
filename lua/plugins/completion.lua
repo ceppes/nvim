@@ -2,7 +2,6 @@
 -- Competion configuration file
 -----------------------------------------------------------
 
-
 -- Plugin : nvim-cmp
 -- https://github.com/hrsh7th/nvim-cmp
 
@@ -16,17 +15,25 @@ if not luasnip_status_ok then
   return
 end
 
-cmp.setup{
+cmp.setup({
+  sources = {
+    { name = "nvim_lsp", priority = 100 }, -- Keep LSP results on top.
+    { name = "emoji", option = { insert = true } },
+    { name = 'nvim_lsp_signature_help' },
+    { name = 'luasnip' },
+    { name = "path" },
+    { name = "spell" },
+    { name = "treesitter" },
+    { name = "nvim_lua" },
+    { name = "buffer", priority = 1 }, -- Keep buffer words last
+  },
 
-  -- Load snippet support
   snippet = {
-    -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      luasnip.lsp_expand(ags.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
 
-  -- Key mapping
   mapping = {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -61,11 +68,21 @@ cmp.setup{
     end
    },
 
-   -- Load sources
-   sources = {
-      { name = 'nvim_lsp' },
-      { name = 'luasnip' },
-      { name = 'path' },
-      { name = 'buffer' },
+   formatting = {
+    format = function(entry, vim_item)
+      -- set a name for each source
+      vim_item.menu = ({
+        buffer = "[Buffer]",
+        emoji = "[Emoji]",
+        nvim_lsp = "[LSP]",
+        path = "[Path]",
+        spell = "[Spell]",
+        treesitter = "[Treesitter]",
+        nvim_lua = "[Neovim]",
+        luasnip = "[LuaSnip]",
+        nvim_lsp_signature_help = "[Nvim Lsp Signature Help]"
+      })[entry.source.name]
+      return vim_item
+    end,
   },
-}
+})

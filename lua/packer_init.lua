@@ -12,9 +12,12 @@ return packer.startup(function()
   use 'wbthomason/packer.nvim' -- packer can manage itself
 
   -- LSP
-  use 'neovim/nvim-lspconfig'
+  use {
+    "williamboman/nvim-lsp-installer",
+    "neovim/nvim-lspconfig",
+  }
   --LSP Java
-  use 'mfussenegger/nvim-jdtls'
+  use {'mfussenegger/nvim-jdtls', ft = 'java'}
 
   --Color Scheme
   use { "ellisonleao/gruvbox.nvim" }
@@ -40,6 +43,7 @@ return packer.startup(function()
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
       --  Use luasnip
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
@@ -54,12 +58,30 @@ return packer.startup(function()
 
   -- Git
   use 'kdheepak/lazygit.nvim'
-  use 'airblade/vim-gitgutter'
+  -- use 'airblade/vim-gitgutter'
 	use 'tpope/vim-fugitive'
+
+  use {'lewis6991/gitsigns.nvim'} -- needed for feline
 
   -- Distraction free
   use 'junegunn/goyo.vim'
 
   -- Linting
   use 'mfussenegger/nvim-lint'
+
+  -- Comment
+  use 'numToStr/Comment.nvim'
+
+  -- Tools
+  use "folke/which-key.nvim"
+  use {
+    "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  }
+
+  use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
+  use "kyazdani42/nvim-web-devicons"
+
+  -- Structure
+  use 'simrat39/symbols-outline.nvim'
 end)

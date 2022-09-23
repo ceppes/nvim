@@ -47,6 +47,9 @@ map('i', '<C-s>', '<ESC>:w<CR>a', {})
 map('n', '<leader>w', ':w<CR>')
 --map('i', '<leader>s', '<C-c>:w<CR>')
 
+-- Fast saving with ss
+map('n', 'ss', ':w<CR>')
+
 -- Move around splits using Ctrl + {h,j,k,l}
 map('n', '<C-h>', '<C-w>h')
 map('n', '<C-j>', '<C-w>j')
@@ -74,9 +77,12 @@ map('n', '<leader>e', ':Ex<CR>')
 -- Telescope
 -- Find files using Telescope command-line sugar.
 map('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
+map('n', '<leader>feh', '<cmd>Telescope find_files hidden=true<cr>')
 map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
 map('n', '<leader>fb', '<cmd>Telescope buffers<cr>')
 map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
+map('n', '<leader>fr', '<cmd>Telescope resume<cr>')
+map('n', '<leader>fp', '<cmd>Telescope pickers<cr>')
 
 -- Using Lua functions
 --map('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>")
@@ -94,3 +100,6 @@ map('n', '<leader>gb', ':Git blame<CR>')
 -- Goyo, distraction free
 map('n', '<leader>g', ':Goyo 100%<CR>')
 map('n', '<leader>G', ':Goyo!<CR>')
+
+-- Open structure (outlint)
+map('n', '<leader>v', '<cmd>SymbolsOutline<cr>')

@@ -17,15 +17,25 @@ nvim_treesitter.setup {
   ensure_installed = {
     'bash',
     'c',
+    'comment',
     'cpp',
     'css',
+    'dockerfile',
+    'dot',
+    'go',
     'html',
+    'java',
     'javascript',
     'json',
+    'latex',
     'lua',
+    'markdown',
     'python',
+    'regex',
+    'sql',
     'typescript',
-    'vim'
+    'vim',
+    'yaml'
   },
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
