@@ -38,6 +38,7 @@ opt.linebreak = true                  -- Wrap on word boundary
 opt.termguicolors = true              -- Enable 24-bit RGB colors
 opt.cursorline = true                 -- Enable line highlight
 opt.cursorcolumn = true               -- Enable column highlight
+opt.signcolumn='auto:3'               -- Set 3 column for gitsigns and lsp
 
 -----------------------------------------------------------
 -- Tabs, indent

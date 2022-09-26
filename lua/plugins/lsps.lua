@@ -26,17 +26,16 @@ lsp_installer.setup({
   automatic_installation = true,
 })
 
--- vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsDefaultError"})
 local function set_sign(type, icon)
   local sign = string.format('DiagnosticSign%s', type)
   local texthl = string.format('DiagnosticDefault%s', type)
-  vim.fn.sign_define(sign, { text = icon, texthl = texthl })
+  vim.fn.sign_define(sign, { text = icon, texthl = sign, numhl=sign })
 end
 
-set_sign(vim.diagnostic.severity.HINT, '')
-set_sign(vim.diagnostic.severity.INFO, '')
-set_sign(vim.diagnostic.severity.WARN, '')
-set_sign(vim.diagnostic.severity.ERROR, '')
+set_sign('Hint', '')
+set_sign('Info', '')
+set_sign('Warn', '')
+set_sign('Error', '')
 
 vim.lsp.set_log_level('error')
 
