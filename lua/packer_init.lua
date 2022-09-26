@@ -20,7 +20,8 @@ return packer.startup(function()
   use {'mfussenegger/nvim-jdtls', ft = 'java'}
 
   --Color Scheme
-  use { "ellisonleao/gruvbox.nvim" }
+  use "ellisonleao/gruvbox.nvim"
+  use 'folke/tokyonight.nvim'
 
   --  Status Line
   use 'feline-nvim/feline.nvim'
