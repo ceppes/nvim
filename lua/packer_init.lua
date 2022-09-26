@@ -85,4 +85,6 @@ return packer.startup(function()
 
   -- Structure
   use 'simrat39/symbols-outline.nvim'
+
+  use 'norcalli/nvim-colorizer.lua'
 end)
