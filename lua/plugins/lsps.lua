@@ -213,3 +213,6 @@ lspconfig.pyright.setup {
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "rounded",
 })
+
+-- little progress bar for lsp loading
+require"fidget".setup{}
