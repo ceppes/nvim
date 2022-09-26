@@ -81,6 +81,7 @@ return packer.startup(function()
 
   use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
   use "kyazdani42/nvim-web-devicons"
+  use "onsails/lspkind.nvim"
 
   -- Structure
   use 'simrat39/symbols-outline.nvim'
