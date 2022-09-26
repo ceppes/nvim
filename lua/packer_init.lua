@@ -87,4 +87,8 @@ return packer.startup(function()
   use 'simrat39/symbols-outline.nvim'
 
   use 'norcalli/nvim-colorizer.lua'
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+  }
 end)

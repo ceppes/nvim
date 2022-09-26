@@ -105,3 +105,11 @@ map('n', '<leader>gd', ':Gitsigns diffthis<CR>')
 
 -- Open structure (outlint)
 map('n', '<leader>v', '<cmd>SymbolsOutline<cr>')
+
+-- Trouble
+map('n', '<leader>xx', '<cmd>TroubleToggle<cr>')
+map('n', '<leader>xw', '<cmd>TroubleToggle workspace_diagnostics<cr>')
+map('n', '<leader>xd', '<cmd>TroubleToggle document_diagnostics<cr>')
+map('n', '<leader>xl', '<cmd>TroubleToggle loclist<cr>')
+map('n', '<leader>xq', '<cmd>TroubleToggle quickfix<cr>')
+map('n', 'gR', '<cmd>TroubleToggle lsp_references<cr>')
