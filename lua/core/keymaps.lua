@@ -117,3 +117,6 @@ map('n', '<leader>xd', '<cmd>TroubleToggle document_diagnostics<cr>')
 map('n', '<leader>xl', '<cmd>TroubleToggle loclist<cr>')
 map('n', '<leader>xq', '<cmd>TroubleToggle quickfix<cr>')
 map('n', 'gR', '<cmd>TroubleToggle lsp_references<cr>')
+
+-- paste over currently selected text without yanking it
+map('v', '<leader>p', '"_dP', {desc = 'over paste'})
