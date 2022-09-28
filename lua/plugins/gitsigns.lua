@@ -12,3 +12,16 @@ require("gitsigns").setup({
   },
   sign_priority=0 -- for column
 })
+
+require'which-key'.register({
+  g = {
+    name = "Git",
+  }
+}, {
+  mode = "n",
+  prefix = "<leader>",
+  buffer = nil,
+  silent = true,
+  noremap = true,
+  nowait = false,
+})
