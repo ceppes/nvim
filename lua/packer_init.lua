@@ -87,6 +87,24 @@ return packer.startup(function()
   -- Structure
   use 'simrat39/symbols-outline.nvim'
 
+  -- debugger
+  use {
+    'mfussenegger/nvim-dap',
+    wants = {
+      "nvim-dap-virtual-text",
+      "nvim-dap-ui",
+      "nvim-dap-python",
+      "which-key.nvim"
+    },
+    requires = {
+      "theHamsta/nvim-dap-virtual-text",
+      "rcarriga/nvim-dap-ui",
+      "mfussenegger/nvim-dap-python",
+      "nvim-telescope/telescope-dap.nvim",
+      "jbyuki/one-small-step-for-vimkind",
+    },
+  }
+
   use 'norcalli/nvim-colorizer.lua'
   use {
     "folke/trouble.nvim",
