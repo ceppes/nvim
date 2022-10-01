@@ -90,13 +90,13 @@ local my_comps = {
       provider = {
         name = 'file_info',
         opts = {
-            type = 'full-path'
+            type = 'relative'
         }
       },
       short_provider = {
         name = 'file_info',
         opts = {
-            type = 'short-path'
+            type = 'relative-short'
         }
       },
       -- provider = require("plugins/feline/file_name").get_current_ufn,
