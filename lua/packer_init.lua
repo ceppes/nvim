@@ -16,6 +16,10 @@ return packer.startup(function()
     "williamboman/nvim-lsp-installer",
     "neovim/nvim-lspconfig",
   }
+  use {
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig"
+  }
   --LSP Java
   use {'mfussenegger/nvim-jdtls', ft = 'java'}
 

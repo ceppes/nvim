@@ -39,6 +39,7 @@ opt.termguicolors = true              -- Enable 24-bit RGB colors
 opt.cursorline = true                 -- Enable line highlight
 opt.cursorcolumn = true               -- Enable column highlight
 opt.signcolumn='auto:3'               -- Set 3 column for gitsigns and lsp
+opt.winbar = "%f > %{%v:lua.require'nvim-navic'.get_location()%}" -- File name and lsp location
 
 -----------------------------------------------------------
 -- Tabs, indent

@@ -13,6 +13,8 @@ if not lsp_installer_status_ok then
   return
 end
 
+local navic = require("nvim-navic")
+
 local cmd = vim.cmd
 
 lsp_installer.setup({
@@ -134,6 +136,10 @@ local on_attach = function(client, bufnr)
 --buf_set_keymap('n', '<space>d', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   buf_set_keymap('n', '<space>ld', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 --buf_set_keymap('n', '<space>ld', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
