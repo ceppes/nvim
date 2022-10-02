@@ -122,3 +122,6 @@ map('n', 'gR', '<cmd>TroubleToggle lsp_references<cr>')
 map('v', '<leader>p', '"_dP', {desc = 'over paste'})
 
 map('n', '<leader>ft', '<cmd>lua vim.lsp.buf.format()<cr>', {desc = 'Format buffer'})
+
+map('n', '<leader>tn', '<cmd>tabnew<cr>', {desc = 'New tab'})
+map('n', '<leader>tx', '<cmd>tabclose<cr>', {desc = 'Close tab'})
