@@ -85,8 +85,8 @@ map('n', '<leader>fr', '<cmd>Telescope resume<cr>')
 map('n', '<leader>fp', '<cmd>Telescope pickers<cr>')
 
 map('n', '<leader>tc', "<cmd>lua require('telescope.builtin').colorscheme()<cr>")
-map('n', '<leader>tgr', "<cmd>lua require('telescope.builtin').lsp_references()<cr>")
-map('n', '<leader>tgd', "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>")
+map('n', 'gR', "<cmd>lua require('telescope.builtin').lsp_references()<cr>", {desc = 'Telescope Lsp References'})
+map('n', 'gD', "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", {desc = 'Telescope Lsp Definitions'})
 
 -- Using Lua functions
 --map('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>")
@@ -99,8 +99,8 @@ map('n', '<leader>tgd', "<cmd>lua require('telescope.builtin').lsp_definitions()
 map('n', '<leader>lg', ':LazyGit<CR>')
 
 -- Vim fugitive
-map('n', '<leader>gb', ':Git blame<CR>')
-map('n', '<leader>gd', ':Gitsigns diffthis<CR>')
+map('n', '<leader>gb', ':Git blame<CR>', {desc = 'Git blame'})
+map('n', '<leader>gd', ':Gitsigns diffthis<CR>', {desc = 'Git diff this'})
 
 
 -- Goyo, distraction free
@@ -108,7 +108,7 @@ map('n', '<leader>gd', ':Gitsigns diffthis<CR>')
 -- map('n', '<leader>G', ':Goyo!<CR>')
 
 -- Open structure (outlint)
-map('n', '<leader>v', '<cmd>SymbolsOutline<cr>')
+map('n', '<leader>v', '<cmd>SymbolsOutline<cr>', {desc = 'Open Symbols Outline'})
 
 -- Trouble
 map('n', '<leader>xx', '<cmd>TroubleToggle<cr>')
@@ -116,7 +116,7 @@ map('n', '<leader>xw', '<cmd>TroubleToggle workspace_diagnostics<cr>')
 map('n', '<leader>xd', '<cmd>TroubleToggle document_diagnostics<cr>')
 map('n', '<leader>xl', '<cmd>TroubleToggle loclist<cr>')
 map('n', '<leader>xq', '<cmd>TroubleToggle quickfix<cr>')
-map('n', 'gR', '<cmd>TroubleToggle lsp_references<cr>')
+map('n', '<leader>xr', '<cmd>TroubleToggle lsp_references<cr>')
 
 -- paste over currently selected text without yanking it
 map('v', '<leader>p', '"_dP', {desc = 'over paste'})
