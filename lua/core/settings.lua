@@ -129,5 +129,6 @@ cmd [[
 -- Fold
 opt.foldmethod = 'indent'             -- Fold on each indent
 -- Set to 1 to only show mehtods levels
+cmd [[  autocmd FileType * setlocal foldlevel=1000 ]]
 cmd [[  autocmd FileType python setlocal foldlevel=1 ]]
 cmd [[  autocmd FileType java setlocal foldlevel=2 ]]
