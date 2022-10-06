@@ -178,11 +178,12 @@ local my_comps = {
     }
   },
   position = {
-    provider = 'position',
-    -- provider = function()
-      -- pos = feline.providers.cursor.position()
-      -- return ' '..pos..' '
-    -- end,
+    name = 'line_number',
+    provider = function()
+      local cursor_row, cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
+      local line_count = vim.api.nvim_buf_line_count(0)
+      return cursor_row .. '/' .. line_count .. ':' .. cursor_col
+    end,
     left_sep = ' ',
     hl = function()
       local val = {
@@ -196,6 +197,7 @@ local my_comps = {
   },
  scroll_bar = {
     provider = 'scroll_bar',
+    reverse = false, -- doesnt work
     left_sep = ' ',
     hl = {
       -- fg = 'blue',
