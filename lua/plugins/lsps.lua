@@ -24,6 +24,7 @@ lsp_installer.setup({
     'jsonls',
     'pyright',
     'sumneko_lua',
+    'yamlls',
   },
   automatic_installation = true,
 })
@@ -218,6 +219,8 @@ lspconfig.pyright.setup {
   }
 }
 
+--yaml
+lspconfig.yamlls.setup {}
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "rounded",
