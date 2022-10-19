@@ -166,7 +166,7 @@ dapui.setup({
         -- "console",
       },
       size = 40, -- 40 columns
-      position = "left",
+      position = "right",
     },
   },
   controls = {
@@ -200,6 +200,31 @@ dapui.setup({
   }
 })
 
+-- config lua
+-- doesn't work
+-- dap.configurations.lua = {
+--   {
+--     type = "nlua",
+--     request = "attach",
+--     name = "Attach to running Neovim instance",
+--     host = function()
+--       local value = vim.fn.input "Host [127.0.0.1]: "
+--       if value ~= "" then
+--         return value
+--       end
+--       return "127.0.0.1"
+--     end,
+--     port = function()
+--       local val = tonumber(vim.fn.input("Port: ", "54321"))
+--       assert(val, "Please provide a port number")
+--       return val
+--     end,
+--   },
+-- }
+-- dap.adapters.nlua = function(callback, config)
+--   callback { type = "server", host = config.host, port = config.port }
+-- end
+
 -- config python
 local python_path = '/Users/diego/.pyenv/shims/python'
 
@@ -220,7 +245,7 @@ dap.configurations.python = {
 
     program = "${file}"; -- This configuration will launch the current file if used.
     pythonPath = function()
-      return '~/.pyenv/shims/python'
+      return '/Users/diego/.pyenv/shims/python'
       -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
       -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
       -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
@@ -234,4 +259,13 @@ dap.configurations.python = {
       -- end
     end;
   },
+  -- {
+  --   name = "Python : Attach using Process Id",
+  --   type = 'python',
+  --   request = 'attach',
+  --   proc
+  -- }
 }
+-- require("dap-python").setup("python", {})
+
+
