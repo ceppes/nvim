@@ -83,8 +83,13 @@ return packer.startup(function()
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
   }
+  use {
+    "windwp/nvim-ts-autotag",
+    config = function() require("nvim-ts-autotag").setup {} end
+  }
 
   use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
+
   use "kyazdani42/nvim-web-devicons"
   use "onsails/lspkind.nvim"
 
@@ -94,19 +99,34 @@ return packer.startup(function()
   -- debugger
   use {
     'mfussenegger/nvim-dap',
+    -- opt = true,
+    -- event = "BufReadPre",
+    -- module = {
+    --   "dap"
+    -- },
     wants = {
       "nvim-dap-virtual-text",
+      -- "DAPInstall.nvim",
       "nvim-dap-ui",
       "nvim-dap-python",
       "which-key.nvim"
     },
     requires = {
+      -- "Pocco81/DAPInstall.nvim",
       "theHamsta/nvim-dap-virtual-text",
       "rcarriga/nvim-dap-ui",
       "mfussenegger/nvim-dap-python",
       "nvim-telescope/telescope-dap.nvim",
+      -- { "leoluz/nvim-dap-go", module = "dap-go" },
+      -- { "jbyuki/one-small-step-for-vimkind", module = "osv" },
       "jbyuki/one-small-step-for-vimkind",
     },
+  }
+
+  use {
+    'akinsho/bufferline.nvim',
+    tag = "v2.*",
+    requires = 'kyazdani42/nvim-web-devicons'
   }
 
   use 'norcalli/nvim-colorizer.lua'

@@ -120,8 +120,15 @@ map('n', '<leader>xr', '<cmd>TroubleToggle lsp_references<cr>')
 
 -- paste over currently selected text without yanking it
 map('v', '<leader>p', '"_dP', {desc = 'over paste'})
+-- map('n', '<leader>y', '"+y')
+-- map('v', '<leader>y', '"+y')
+-- map('n', '<leader>Y', 'gg"+yG')
+-- map('n', '<leader>d', '"_d')
+-- map('v', '<leader>d', '"_d')
 
 map('n', '<leader>ft', '<cmd>lua vim.lsp.buf.format()<cr>', {desc = 'Format buffer'})
 
 map('n', '<leader>tn', '<cmd>tabnew<cr>', {desc = 'New tab'})
 map('n', '<leader>tx', '<cmd>tabclose<cr>', {desc = 'Close tab'})
+
+
