@@ -123,7 +123,6 @@ return packer.startup(function()
     },
   }
 
-  -- using packer.nvim
   use {
     'akinsho/bufferline.nvim',
     tag = "v2.*",
