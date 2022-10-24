@@ -147,4 +147,7 @@ return packer.startup(function()
     requires = { "zhaozg/vim-diagram", "aklt/plantuml-syntax" },
   }
 
+  --welcome screen
+  use {'goolord/alpha-nvim'}
+
 end)
