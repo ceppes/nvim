@@ -131,4 +131,5 @@ map('n', '<leader>ft', '<cmd>lua vim.lsp.buf.format()<cr>', {desc = 'Format buff
 map('n', '<leader>tn', '<cmd>tabnew<cr>', {desc = 'New tab'})
 map('n', '<leader>tx', '<cmd>tabclose<cr>', {desc = 'Close tab'})
 
-
+map('n', '<leader>jq', '<cmd>%!jq .<cr>', {desc = 'Format json'})
+map('n', '<leader>jqs', '<cmd>%!jq .<cr>', {desc = 'Format json and sort by name'})
