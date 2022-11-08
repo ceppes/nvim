@@ -149,5 +149,6 @@ return packer.startup(function()
 
   --welcome screen
   use {'goolord/alpha-nvim'}
+  use {'MTDL9/vim-log-highlighting'}
 
 end)
