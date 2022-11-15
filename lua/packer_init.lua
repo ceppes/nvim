@@ -26,6 +26,7 @@ return packer.startup(function()
   --Color Scheme
   use "ellisonleao/gruvbox.nvim"
   use 'folke/tokyonight.nvim'
+  use { "catppuccin/nvim", as = "catppuccin" }
 
   --  Status Line
   use 'feline-nvim/feline.nvim'
