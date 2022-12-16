@@ -83,6 +83,7 @@ map('n', '<leader>fb', '<cmd>Telescope buffers<cr>')
 map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
 map('n', '<leader>fr', '<cmd>Telescope resume<cr>')
 map('n', '<leader>fp', '<cmd>Telescope pickers<cr>')
+map('n', '<leader>fwr', '<cmd>lua require"telescope.builtin".grep_string({search = vim.fn.expand("<cword>")})<cr>')
 
 map('n', '<leader>tc', "<cmd>lua require('telescope.builtin').colorscheme()<cr>")
 map('n', 'gR', "<cmd>lua require('telescope.builtin').lsp_references()<cr>", {desc = 'Telescope Lsp References'})
