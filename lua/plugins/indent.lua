@@ -10,12 +10,24 @@ vim.api.nvim_create_user_command('CopyModeToggle', function ()
     vim.opt.listchars:append "eol:↴"
     vim.opt.number = true
     require('gitsigns').setup({current_line_blame=true})
+    require('indent_blankline').setup({
+      show_end_of_line = true,
+      space_char_blankline = " ",
+      show_current_context_start = true,
+    })
+
     copyMode = false
   else
     vim.opt.listchars:append "space: "
     vim.opt.listchars:append "eol: "
     vim.opt.number = false
     require('gitsigns').setup({current_line_blame=false})
+    require('indent_blankline').setup({
+      show_end_of_line = false,
+      space_char_blankline = " ",
+      show_current_context_start = false,
+    })
+
     copyMode = true
   end
 end, { nargs = 0, desc = 'Turn on indent signs' })
