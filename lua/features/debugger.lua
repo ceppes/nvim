@@ -104,36 +104,38 @@ local function map(mode, lhs, rhs, opts)
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+  vim.keymap.set(mode, lhs, rhs, options)
 end
 
-map('n', '<leader>dR', "<cmd>lua require'dap'.run_to_cursor()<cr>", {desc = "Run to Cursor"})
-map('n', '<leader>dE', "<cmd>lua require'dapui'.eval(vim.fn.input '[Expression] > ')<cr>", {desc = "Evaluate Input"})
-map('n', '<leader>dC', "<cmd>lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<cr>", {desc = "Conditional Breakpoint" })
-map('n', '<leader>dU', "<cmd>lua require'dapui'.toggle()<cr>", {desc = "Toggle UI" })
-map('n', '<leader>db', "<cmd>lua require'dap'.step_back()<cr>", {desc = " Step Back" })
-map('n', '<leader>dc', "<cmd>lua require'dap'.continue()<cr>", {desc = " Continue" })
+
+map('n', '<leader>dR', function() dap.run_to_cursor() end, {desc = "Run to Cursor"})
+map('n', '<leader>dE', function() dapui.eval(vim.fn.input '[Expression] > ') end, {desc = "Evaluate Input"})
+map('n', '<leader>dC', function() dap.set_breakpoint(vim.fn.input '[Condition] > ') end, {desc = "Conditional Breakpoint" })
+map('n', '<leader>dU', function() dapui.toggle() end, {desc = "Toggle UI" })
+map('n', '<leader>db', function() dap.step_back() end, {desc = " Step Back" })
+map('n', '<leader>dc', function() dap.continue() end, {desc = " Continue" })
 -- local icon = vim.fn.nr2char(61453)
-map('n', '<leader>dd', "<cmd>lua require'dap'.disconnect()<cr>", {desc = "□ Disconnect" })
-map('n', '<leader>de', "<cmd>lua require'dapui'.eval()<cr>", {desc = "Evaluate" })
-map('v', '<leader>de', "<cmd>lua require'dapui'.eval()<cr>", {desc = "Evaluate" })
-map('n', '<leader>dg', "<cmd>lua require'dap'.session()<cr>", {desc = "Get Session" })
-map('n', '<leader>dh', "<cmd>lua require'dap.ui.widgets'.hover()<cr>", {desc = "Hover Variables" })
-map('n', '<leader>dS', "<cmd>lua require'dap.ui.widgets'.scopes()<cr>", {desc = "Scopes" })
+map('n', '<leader>dd', function() dap.disconnect() end, {desc = "□ Disconnect" })
+
+map('n', '<leader>de', function() dapui.eval() end, {desc = "Evaluate" })
+map('v', '<leader>de', function() dapui.eval() end, {desc = "Evaluate" })
+map('n', '<leader>dg', function() dap.session() end, {desc = "Get Session" })
+map('n', '<leader>dh', function() dap.ui.widgets.hover() end, {desc = "Hover Variables" })
+map('n', '<leader>dS', function() dap.ui.widgets.scopes() end, {desc = "Scopes" })
 -- local icon = vim.fn.nr2char(63162)
-map('n', '<leader>di', "<cmd>lua require'dap'.step_into()<cr>", {desc = " Step Into"})
+map('n', '<leader>di', function() dap.step_into() end, {desc = " Step Into"})
 -- local icon = vim.fn.nr2char(63164)
-map('n', '<leader>do', "<cmd>lua require'dap'.step_over()<cr>", {desc = " Step Over" })
+map('n', '<leader>do', function() dap.step_over() end, {desc = " Step Over" })
 -- local icon = vim.fn.nr2char(63715)
-map('n', '<leader>dp', "<cmd>lua require'dap'.pause.toggle()<cr>", {desc = " Pause" })
-map('n', '<leader>dq', "<cmd>lua require'dap'.close()<cr>", {desc = "Quit" })
-map('n', '<leader>dr', "<cmd>lua require'dap'.repl.toggle()<cr>", {desc = "Toggle Repl" })
+map('n', '<leader>dp', function() dap.pause.toggle() end, {desc = " Pause" })
+map('n', '<leader>dq', function() dap.close() end, {desc = "Quit" })
+map('n', '<leader>dr', function() dap.repl.toggle() end, {desc = "Toggle Repl" })
 -- local icon = vim.fn.nr2char(61515)
-map('n', '<leader>ds', "<cmd>lua require'dap'.continue()<cr>", {desc = " Start" })
-map('n', '<leader>dt', "<cmd>lua require'dap'.toggle_breakpoint()<cr>", {desc = "Toggle Breakpoint" })
-map('n', '<leader>dx', "<cmd>lua require'dap'.terminate()<cr>", {desc = "□ Terminate" })
+map('n', '<leader>ds', function() dap.continue() end, {desc = " Start" })
+map('n', '<leader>dt', function() dap.toggle_breakpoint() end, {desc = "Toggle Breakpoint" })
+map('n', '<leader>dx', function() dap.terminate() end, {desc = "□ Terminate" })
 -- local icon = vim.fn.nr2char(63163)
-map('n', '<leader>du', "<cmd>lua require'dap'.step_out()<cr>", {desc = " Step Out" })
+map('n', '<leader>du', function() dap.step_out() end, {desc = " Step Out" })
 
 which_key.register({
   d = {
@@ -226,85 +228,4 @@ dapui.setup({
     max_value_lines = 100, -- Can be integer or nil.
   }
 })
-
--- config lua
--- doesn't work
--- dap.configurations.lua = {
---   {
---     type = "nlua",
---     request = "attach",
---     name = "Attach to running Neovim instance",
---     host = function()
---       local value = vim.fn.input "Host [127.0.0.1]: "
---       if value ~= "" then
---         return value
---       end
---       return "127.0.0.1"
---     end,
---     port = function()
---       local val = tonumber(vim.fn.input("Port: ", "54321"))
---       assert(val, "Please provide a port number")
---       return val
---     end,
---   },
--- }
--- dap.adapters.nlua = function(callback, config)
---   callback { type = "server", host = config.host, port = config.port }
--- end
-
--- config python
-local python_path = '/Users/diego/.pyenv/shims/python'
-
-dap.adapters.python = {
-  type = 'executable';
-  command = python_path;
-  args = { '-m', 'debugpy.adapter' };
-}
-
-dap.configurations.python = {
-  {
-    -- The first three options are required by nvim-dap
-    name = "Python : Current file";
-    type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
-    request = 'launch';
-
-    -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
-
-    program = "${file}"; -- This configuration will launch the current file if used.
-    pythonPath = function()
-      return '/Users/diego/.pyenv/shims/python'
-      -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
-      -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
-      -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
-      -- local cwd = vim.fn.getcwd()
-      -- if vim.fn.executable(cwd .. python_path) == 1 then
-      --   return cwd .. python_path
-      -- elseif vim.fn.executable(cwd .. python_path) == 1 then
-      --   return cwd .. python_path
-      -- else
-      --   return python_path
-      -- end
-    end;
-  },
-    {
-  },
-  {
-    name = "Run pytest";
-    type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
-    request = 'launch';
-    module = "pytest";
-    args = function()
-      local filter = vim.fn.input('Enter unittest args: ')
-      return {'-v', filter}
-    end
-  },
-  -- {
-  --   name = "Python : Attach using Process Id",
-  --   type = 'python',
-  --   request = 'attach',
-  --   proc
-  -- }
-}
--- require("dap-python").setup("python", {})
-
 
