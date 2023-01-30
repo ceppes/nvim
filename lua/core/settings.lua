@@ -8,10 +8,10 @@
 -----------------------------------------------------------
 -- Neovim API aliases
 -----------------------------------------------------------
-local cmd = vim.cmd		      -- Execute Vim commands
+local cmd = vim.cmd		                -- Execute Vim commands
 local exec = vim.api.nvim_exec	      -- Execute Vimscript
-local g = vim.g			      -- Global variables
-local opt = vim.opt		      -- Set options (global/buffer/windows-scoped)
+local g = vim.g			                  -- Global variables
+local opt = vim.opt		                -- Set options (global/buffer/windows-scoped)
 
 -----------------------------------------------------------
 -- General
@@ -20,6 +20,9 @@ opt.mouse = 'a'                       -- Enable mouse support
 opt.clipboard = 'unnamedplus'         -- Copy/paste to system clipboard
 opt.swapfile = false                  -- Don't use swapfile
 opt.completeopt = 'menuone,noselect'  -- Autocomplete options
+opt.backup = false                    -- No backup
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- Long history
+opt.undofile = true                   -- Undo file
 
 -----------------------------------------------------------
 -- Neovim UI
@@ -35,19 +38,22 @@ opt.splitbelow = true                 -- Orizontal split to the bottom
 opt.ignorecase = true                 -- Ignore case letters when search
 opt.smartcase = true                  -- Ignore lowercase for the whole pattern
 opt.linebreak = true                  -- Wrap on word boundary
+-- opt.wrap = false
 opt.termguicolors = true              -- Enable 24-bit RGB colors
 opt.cursorline = true                 -- Enable line highlight
 opt.cursorcolumn = true               -- Enable column highlight
 opt.signcolumn='auto:3'               -- Set 3 column for gitsigns and lsp
 opt.winbar = "%f > %{%v:lua.require'nvim-navic'.get_location()%}" -- File name and lsp location
 opt.scrolloff = 8                     -- Keep lines above and below cursor
-
+opt.hlsearch = false                  -- No highlight in search
+opt.incsearch = true                  --
 -----------------------------------------------------------
 -- Tabs, indent
 -----------------------------------------------------------
 opt.expandtab = true                  -- Use spaces instead of tabs
 opt.shiftwidth = 4                    -- Shift 4 spaces when tab
 opt.tabstop = 4                       -- 1 tab == 4 spaces
+opt.softtabstop = 4                   --
 opt.smartindent = true                -- Autoindent new lines
 
 -----------------------------------------------------------
@@ -57,7 +63,7 @@ opt.hidden = true                     -- Enable background buffers
 opt.history = 100                     -- Remember N lines in history
 opt.lazyredraw = true                 -- Faster scrolling
 opt.synmaxcol = 240                   -- Max column for syntax highlight
-opt.updatetime = 400                  -- ms to wait for trigger 'document_highlight'
+opt.updatetime = 50                   -- ms to wait for trigger 'document_highlight'
 
 -----------------------------------------------------------
 -- netrw

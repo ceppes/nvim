@@ -4,6 +4,24 @@
 
 -- Plugin : nvim-cmp
 -- https://github.com/hrsh7th/nvim-cmp
+local packer = require 'packer'
+packer.use {
+  'hrsh7th/nvim-cmp',
+  requires = {
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-nvim-lsp-signature-help',
+    --  Snipper : Use luasnip
+    'L3MON4D3/LuaSnip',
+    'saadparwaiz1/cmp_luasnip',
+    'hrsh7th/cmp-nvim-lua',
+    'rafamadriz/friendly-snippets',
+    --'hrsh7th/cmp-cmdline',
+    --'hrsh7th/cmp-calc',
+    --'f3fora/cmp-spell',
+  },
+}
 
 local cmp_status_ok, cmp = pcall(require, 'cmp')
 if not cmp_status_ok then

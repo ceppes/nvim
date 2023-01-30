@@ -1,3 +1,30 @@
+local packer = require 'packer'
+packer.use {
+  'mfussenegger/nvim-dap',
+  -- opt = true,
+  -- event = "BufReadPre",
+  -- module = {
+  --   "dap"
+  -- },
+  wants = {
+    "nvim-dap-virtual-text",
+    -- "DAPInstall.nvim",
+    "nvim-dap-ui",
+    "nvim-dap-python",
+    "which-key.nvim"
+  },
+  requires = {
+    -- "Pocco81/DAPInstall.nvim",
+    "theHamsta/nvim-dap-virtual-text",
+    "rcarriga/nvim-dap-ui",
+    "mfussenegger/nvim-dap-python",
+    "nvim-telescope/telescope-dap.nvim",
+    -- { "leoluz/nvim-dap-go", module = "dap-go" },
+    -- { "jbyuki/one-small-step-for-vimkind", module = "osv" },
+    "jbyuki/one-small-step-for-vimkind",
+  },
+}
+
 local dap_status_ok, dap = pcall(require, 'dap')
 if not dap_status_ok then
   return
@@ -245,7 +272,7 @@ dap.configurations.python = {
 
     program = "${file}"; -- This configuration will launch the current file if used.
     pythonPath = function()
-      return '~/.pyenv/shims/python'
+      return '/Users/diego/.pyenv/shims/python'
       -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
       -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
       -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
@@ -258,6 +285,18 @@ dap.configurations.python = {
       --   return python_path
       -- end
     end;
+  },
+    {
+  },
+  {
+    name = "Run pytest";
+    type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
+    request = 'launch';
+    module = "pytest";
+    args = function()
+      local filter = vim.fn.input('Enter unittest args: ')
+      return {'-v', filter}
+    end
   },
   -- {
   --   name = "Python : Attach using Process Id",

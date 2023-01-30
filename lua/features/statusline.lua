@@ -1,6 +1,9 @@
-----------------------------------------------------------
--- Statusline configuration file
------------------------------------------------------------
+--[[
+ Statusline configuration file
+-- ]]
+--
+local packer = require 'packer'
+packer.use 'feline-nvim/feline.nvim'
 
 local feline = require 'feline'
 

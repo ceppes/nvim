@@ -1,3 +1,6 @@
+local packer = require'packer'
+packer.use 'lukas-reineke/indent-blankline.nvim'
+
 local indent_blankline = require 'indent_blankline'
 vim.opt.list = true
 vim.opt.listchars:append "space:⋅"

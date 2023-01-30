@@ -1,3 +1,11 @@
+local packer = require 'packer'
+packer.use "williamboman/nvim-lsp-installer"
+packer.use "neovim/nvim-lspconfig"
+packer.use "SmiteshP/nvim-navic"
+packer.use {'mfussenegger/nvim-jdtls', ft = 'java'}
+packer.use 'williamboman/mason.nvim'
+packer.use 'williamboman/mason-lspconfig.nvim'
+
 local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')
 if not lsp_status_ok then
   return
@@ -113,30 +121,32 @@ local on_attach = function(client, bufnr)
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
-  local opts = { noremap=true, silent=true }
+  local opts = { noremap=true, silent=true, buffer = bufnr, remap = false}
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  -- buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', '<space>ftt', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, opts)
+  vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
+  vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
+  vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, opts)
+  vim.keymap.set('n', '<leader>rn', function() vim.lsp.buf.rename() end, opts)
+  vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
+  vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help() end, opts)
+  vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workspace_symbol() end, opts)
+  vim.keymap.set('n', '<leader>vd', function() vim.lsp.buf.open_float() end, opts)
+  vim.keymap.set('n', '<leader>wa', function() vim.lsp.buf.add_workspace_folder() end, opts)
+  vim.keymap.set('n', '<leader>wr', function() vim.lsp.buf.remove_workspace_folder() end, opts)
+  vim.keymap.set('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
+  -- vim.keymap.set('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end, opts)
+  vim.keymap.set('n', '<leader>ftt', function() vim.lsp.buf.formatting() end, opts)
 
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  -- buf_set_keymap('n', '<space>d', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  -- buf_set_keymap('n', '<space>d', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  buf_set_keymap('n', '<space>ld', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  -- buf_set_keymap('n', '<space>ld', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+  vim.keymap.set('n', '[d', function() vim.lsp.diagnostic.goto_prev() end, opts)
+  vim.keymap.set('n', ']d', function() vim.lsp.diagnostic.goto_next() end, opts)
+  -- vim.keymap.set('n', '<space>d', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  -- vim.keymap.set('n', '<space>d', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  vim.keymap.set('n', '<leader>ld', function() vim.lsp.diagnostic.set_loclist() end, opts)
+  -- vim.keymap.set('n', '<space>ld', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
@@ -219,8 +229,6 @@ lspconfig.pyright.setup {
   }
 }
 
---yaml
-lspconfig.yamlls.setup {}
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "rounded",
@@ -228,3 +236,9 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 
 -- little progress bar for lsp loading
 require"fidget".setup{}
+
+vim.keymap.set('n', 'gR', require('telescope.builtin').lsp_references, {desc = 'Telescope Lsp References'})
+vim.keymap.set('n', 'gD', require('telescope.builtin').lsp_definitions, {desc = 'Telescope Lsp Definitions'})
+
+
+require("mason").setup()

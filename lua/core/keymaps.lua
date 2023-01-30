@@ -1,9 +1,11 @@
--- ██╗  ██╗███████╗██╗   ██╗██████╗ ██╗███╗   ██╗██████╗ ██╗███╗   ██╗ ██████╗ ███████╗
--- ██║ ██╔╝██╔════╝╚██╗ ██╔╝██╔══██╗██║████╗  ██║██╔══██╗██║████╗  ██║██╔════╝ ██╔════╝
--- █████╔╝ █████╗   ╚████╔╝ ██████╔╝██║██╔██╗ ██║██║  ██║██║██╔██╗ ██║██║  ███╗███████╗
--- ██╔═██╗ ██╔══╝    ╚██╔╝  ██╔══██╗██║██║╚██╗██║██║  ██║██║██║╚██╗██║██║   ██║╚════██║
--- ██║  ██╗███████╗   ██║   ██████╔╝██║██║ ╚████║██████╔╝██║██║ ╚████║╚██████╔╝███████║
--- ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═════╝ ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝
+--[[
+██╗  ██╗███████╗██╗   ██╗██████╗ ██╗███╗   ██╗██████╗ ██╗███╗   ██╗ ██████╗ ███████╗
+██║ ██╔╝██╔════╝╚██╗ ██╔╝██╔══██╗██║████╗  ██║██╔══██╗██║████╗  ██║██╔════╝ ██╔════╝
+█████╔╝ █████╗   ╚████╔╝ ██████╔╝██║██╔██╗ ██║██║  ██║██║██╔██╗ ██║██║  ███╗███████╗
+██╔═██╗ ██╔══╝    ╚██╔╝  ██╔══██╗██║██║╚██╗██║██║  ██║██║██║╚██╗██║██║   ██║╚════██║
+██║  ██╗███████╗   ██║   ██████╔╝██║██║ ╚████║██████╔╝██║██║ ╚████║╚██████╔╝███████║
+╚═╝  ╚═╝╚══════╝   ╚═╝   ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═════╝ ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝
+--]]
 
 -----------------------------------------------------------
 -- Define keymaps of Neovim and installed plugins.
@@ -28,7 +30,7 @@ vim.g.mapleader = ' '
 -----------------------------------------------------------
 
 -- Clear search highlighting with <leader> and c
-map('n', '<leader>c', ':nohl<CR>')
+map('n', '<leader>cs', ':nohl<CR>')
 
 -- Map Esc to kk
 --map('i', 'kk', '<Esc>')
@@ -59,9 +61,8 @@ map('n', '<C-l>', '<C-w>l')
 -- Close all windows and exit from Neovim with <leader> and q
 map('n', '<leader>q', ':qa!<CR>')
 
--- Access netrw (temp)
-map('n', '<leader>e', ':Ex<CR>')
-
+vim.keymap.set('n', '<leader>e', vim.cmd.Ex, { desc = "Access netrw" })
+-- vim.cmd.Ex
 -----------------------------------------------------------
 -- Applications and Plugins shortcuts
 -----------------------------------------------------------
@@ -74,42 +75,9 @@ map('n', '<leader>e', ':Ex<CR>')
 -- Vista tag-viewer
 --map('n', '<C-m>', ':Vista!!<CR>') -- open/close
 
--- Telescope
--- Find files using Telescope command-line sugar.
-map('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
-map('n', '<leader>feh', '<cmd>Telescope find_files hidden=true<cr>')
-map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
-map('n', '<leader>fb', '<cmd>Telescope buffers<cr>')
-map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
-map('n', '<leader>fr', '<cmd>Telescope resume<cr>')
-map('n', '<leader>fp', '<cmd>Telescope pickers<cr>')
-map('n', '<leader>fwr', '<cmd>lua require"telescope.builtin".grep_string({search = vim.fn.expand("<cword>")})<cr>')
-
-map('n', '<leader>tc', "<cmd>lua require('telescope.builtin').colorscheme()<cr>")
-map('n', 'gR', "<cmd>lua require('telescope.builtin').lsp_references()<cr>", {desc = 'Telescope Lsp References'})
-map('n', 'gD', "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", {desc = 'Telescope Lsp Definitions'})
-
--- Using Lua functions
---map('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>")
---map('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>")
---map('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>")
---map('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>")
-
-
--- Lazygit
-map('n', '<leader>lg', ':LazyGit<CR>')
-
--- Vim fugitive
-map('n', '<leader>gb', ':Git blame<CR>', {desc = 'Git blame'})
-map('n', '<leader>gd', ':Gitsigns diffthis<CR>', {desc = 'Git diff this'})
-
-
 -- Goyo, distraction free
 -- map('n', '<leader>g', ':Goyo 100%<CR>')
 -- map('n', '<leader>G', ':Goyo!<CR>')
-
--- Open structure (outlint)
-map('n', '<leader>v', '<cmd>SymbolsOutline<cr>', {desc = 'Open Symbols Outline'})
 
 -- Trouble
 map('n', '<leader>xx', '<cmd>TroubleToggle<cr>')
@@ -120,17 +88,28 @@ map('n', '<leader>xq', '<cmd>TroubleToggle quickfix<cr>')
 map('n', '<leader>xr', '<cmd>TroubleToggle lsp_references<cr>')
 
 -- paste over currently selected text without yanking it
-map('v', '<leader>p', '"_dP', {desc = 'over paste'})
--- map('n', '<leader>y', '"+y')
--- map('v', '<leader>y', '"+y')
--- map('n', '<leader>Y', 'gg"+yG')
+vim.keymap.set('v', '<leader>p', '"_dP', { desc = 'Over paste' })
+
+vim.keymap.set('n', '<leader>y', '"+y', { desc = 'Copy to system' })
+vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy to system' })
+vim.keymap.set('n', '<leader>Y', 'gg"+yG', { desc = 'Copy all file to system' })
+
 -- map('n', '<leader>d', '"_d')
 -- map('v', '<leader>d', '"_d')
 
-map('n', '<leader>ft', '<cmd>lua vim.lsp.buf.format()<cr>', {desc = 'Format buffer'})
+vim.keymap.set('n', '<leader>ft', function() vim.lsp.buf.format() end, { desc = 'Format buffer' })
 
-map('n', '<leader>tn', '<cmd>tabnew<cr>', {desc = 'New tab'})
-map('n', '<leader>tx', '<cmd>tabclose<cr>', {desc = 'Close tab'})
+vim.keymap.set('n', '<leader>jq', '<cmd>%!jq .<cr>', { desc = 'Format json' })
+vim.keymap.set('n', '<leader>jqs', '<cmd>%!jq -S .<cr>', { desc = 'Format json and sort by name' })
 
-map('n', '<leader>jq', '<cmd>%!jq .<cr>', {desc = 'Format json'})
-map('n', '<leader>jqs', '<cmd>%!jq -S .<cr>', {desc = 'Format json and sort by name'})
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = "Move visual line up" })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = "Move visual line down" })
+
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = "Go up with keeping cursor in the middle" })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = "Go down with keeping cursor in the middle" })
+
+vim.keymap.set('n', 'n', 'nzzzv', { desc = "Next search inc with cursor in the middle" })
+vim.keymap.set('n', 'N', 'Nzzzv', { desc = "Next search inc with cursor in the middle" })
+
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {desc = "Live replace word"})
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "chmod +x current_file" })
