@@ -6,9 +6,11 @@
 -- url: https://github.com/nvim-treesitter/nvim-treesitter
 
 local packer = require 'packer'
-packer.use 'nvim-treesitter/nvim-treesitter'
+packer.use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
 packer.use 'nvim-treesitter/playground'
-
 local status_ok, nvim_treesitter = pcall(require, 'nvim-treesitter.configs')
 if not status_ok then
   return
@@ -30,6 +32,7 @@ nvim_treesitter.setup {
     'java',
     'javascript',
     'json',
+    'hcl',
     'latex',
     'lua',
     'markdown',
