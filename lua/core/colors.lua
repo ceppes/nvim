@@ -13,3 +13,10 @@ ColorIt()
 vim.o.background = "dark"
 
 vim.keymap.set('n', '<leader>c', require('telescope.builtin').colorscheme, { desc = "T Colorscheme"})
+
+-- For markdown checkbox highlight
+require('catppuccin').setup{
+  styles = {
+    comment = {},
+  }
+}
