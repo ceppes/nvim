@@ -121,32 +121,34 @@ local on_attach = function(client, bufnr)
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
-  local opts = { noremap=true, silent=true, buffer = bufnr, remap = false}
+  local function optiones(options)
+      local default_options = { noremap=true, silent=true, buffer = bufnr, remap = false}
+      return vim.tbl_extend('force', default_options, options)
+  end
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, opts)
-  vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
-  vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
-  vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, opts)
-  vim.keymap.set('n', '<leader>rn', function() vim.lsp.buf.rename() end, opts)
-  vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
-  vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help() end, opts)
-  vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workspace_symbol() end, opts)
-  vim.keymap.set('n', '<leader>vd', function() vim.lsp.buf.open_float() end, opts)
-  vim.keymap.set('n', '<leader>wa', function() vim.lsp.buf.add_workspace_folder() end, opts)
-  vim.keymap.set('n', '<leader>wr', function() vim.lsp.buf.remove_workspace_folder() end, opts)
-  vim.keymap.set('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
-  -- vim.keymap.set('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end, opts)
-  vim.keymap.set('n', '<leader>ftt', function() vim.lsp.buf.formatting() end, opts)
+  vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, optiones({desc = 'LSP Go declaration'}))
+  vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, optiones({desc = 'LSP Go definition'}))
+  vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, optiones({desc = 'LSP Implementation'}))
+  vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, optiones({desc = 'LSP References'}))
+  vim.keymap.set('n', '<leader>rn', function() vim.lsp.buf.rename() end, optiones({desc = 'LSP Rename'}))
+  vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, optiones({desc = 'LSP Hover'}))
+  vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help() end, optiones({desc = 'LSP Signature help'}))
+  vim.keymap.set('n', '<leader>vd', function() vim.lsp.buf.open_float() end, optiones({desc = 'LSP Open float'}))
 
-  vim.keymap.set('n', '[d', function() vim.lsp.diagnostic.goto_prev() end, opts)
-  vim.keymap.set('n', ']d', function() vim.lsp.diagnostic.goto_next() end, opts)
+  vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workspace_symbol() end, optiones({desc = 'LSP Workspace symbol'}))
+  vim.keymap.set('n', '<leader>wa', function() vim.lsp.buf.add_workspace_folder() end, optiones({desc = 'LSP Add workspace symbol'}))
+  vim.keymap.set('n', '<leader>wr', function() vim.lsp.buf.remove_workspace_folder() end, optiones({desc = 'LSP Remove workspace symbol'}))
+  vim.keymap.set('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, optiones({desc = 'LSP List workspace folders'}))
+  -- vim.keymap.set('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end, optiones({desc = 'LSP Code action'}))
+  vim.keymap.set('n', '<leader>ftt', function() vim.lsp.buf.formatting() end, optiones({desc = 'LSP Format'}))
+
+  vim.keymap.set('n', '[d', function() vim.lsp.diagnostic.goto_prev() end, optiones({desc = 'LSP Goto prev'}))
+  vim.keymap.set('n', ']d', function() vim.lsp.diagnostic.goto_next() end, optiones({desc = 'LSP Goto next'}))
   -- vim.keymap.set('n', '<space>d', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  -- vim.keymap.set('n', '<space>d', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  vim.keymap.set('n', '<leader>ld', function() vim.lsp.diagnostic.set_loclist() end, opts)
-  -- vim.keymap.set('n', '<space>ld', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+  vim.keymap.set('n', '<leader>ld', function() vim.lsp.diagnostic.set_loclist() end, optiones({desc = 'LSP Loc list'}))
 
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
