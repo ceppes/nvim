@@ -58,6 +58,7 @@ local function keymaps()
     end,
     {desc = 'T Grep string'})
   vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "T Buffers"})
+  vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = "T Keymaps"})
   map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
   map('n', '<leader>fr', '<cmd>Telescope resume<cr>')
   map('n', '<leader>fp', '<cmd>Telescope pickers<cr>')
