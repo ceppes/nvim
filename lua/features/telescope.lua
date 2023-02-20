@@ -6,7 +6,7 @@ local function loadPlugins()
   }
 end
 
-local telescope = require('Telescope')
+local telescope = require('telescope')
 
 local function setup()
   telescope.setup({

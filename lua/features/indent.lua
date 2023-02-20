@@ -17,6 +17,7 @@ vim.api.nvim_create_user_command('CopyModeToggle', function ()
       show_end_of_line = true,
       space_char_blankline = " ",
       show_current_context_start = true,
+      show_trailing_blankline_indent = true,
     })
 
     copyMode = false
@@ -29,6 +30,8 @@ vim.api.nvim_create_user_command('CopyModeToggle', function ()
       show_end_of_line = false,
       space_char_blankline = " ",
       show_current_context_start = false,
+      show_trailing_blankline_indent = false,
+      char = ""
     })
 
     copyMode = true
