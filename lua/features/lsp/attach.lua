@@ -11,6 +11,9 @@ function M.attach(client, bufnr)
   require("features.lsp.diagnostics").setup()
 
   vim.api.nvim_buf_set_var(bufnr, "lsp_attached", true)
+
+  local navic = require("nvim-navic")
+  vim.opt.winbar = "%f > %{%v:lua.require'nvim-navic'.get_location()%}"
 end
 
 function M.keymaps()
@@ -28,6 +31,9 @@ function M.keymaps()
   vim.keymap.set('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, optiones({desc = 'LSP List workspace folders'}))
   vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end, optiones({desc = 'LSP Code action'}))
   vim.keymap.set('n', '<leader>ftt', function() vim.lsp.buf.formatting() end, optiones({desc = 'LSP Format'}))
+
+  vim.keymap.set('n', 'gR', require('telescope.builtin').lsp_references, {desc = 'Telescope Lsp References'})
+  vim.keymap.set('n', 'gD', require('telescope.builtin').lsp_definitions, {desc = 'Telescope Lsp Definitions'})
 end
 
 function M.diagnostic_keymaps()

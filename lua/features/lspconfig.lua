@@ -11,6 +11,9 @@ M.plugins = {
     'j-hui/fidget.nvim',
   },
   config = function ()
+    require('features.lspconfig').highlight()
+    require('features.lspconfig').commands()
+    require('features.lspconfig').autocmd()
     require('features.lspconfig').setup_servers()
  end
 }
@@ -37,10 +40,6 @@ function M.autocmd()
   ]])
 end
 
-function M.keymaps()
-  vim.keymap.set('n', 'gR', require('telescope.builtin').lsp_references, {desc = 'Telescope Lsp References'})
-  vim.keymap.set('n', 'gD', require('telescope.builtin').lsp_definitions, {desc = 'Telescope Lsp Definitions'})
-end
 
 function M.setup_servers()
   local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')
