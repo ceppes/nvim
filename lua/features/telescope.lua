@@ -1,14 +1,20 @@
-local function loadPlugins()
-  local packer = require 'packer'
-  packer.use {
-    'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
-end
+local M = {}
 
-local telescope = require('telescope')
+M.plugins = {
+  'nvim-telescope/telescope.nvim',
+  requires = { {'nvim-lua/plenary.nvim'} },
+  config = function ()
+    require('features.telescope').setup()
+    require('features.telescope').keymaps()
+  end
+}
 
-local function setup()
+function M.setup()
+  local telescope_status_ok, telescope = pcall(require, 'telescope')
+  if not telescope_status_ok then
+    return
+  end
+
   telescope.setup({
     defaults = {
       layout_strategy = "vertical",
@@ -21,16 +27,7 @@ local function setup()
   })
 end
 
-local function map(mode, lhs, rhs, opts)
-  -- noremap : no recursive mapping
-  local options = { noremap = true, silent = true }
-  if opts then
-    options = vim.tbl_extend('force', options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
-local function keymaps()
+function M.keymaps()
   require'which-key'.register({
     f = {
       name = "Find",
@@ -59,10 +56,9 @@ local function keymaps()
     {desc = 'T Grep string'})
   vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "T Buffers"})
   vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = "T Keymaps"})
-  map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
-  map('n', '<leader>fr', '<cmd>Telescope resume<cr>')
-  map('n', '<leader>fp', '<cmd>Telescope pickers<cr>')
-  map('n', '<leader>fwr', '<cmd>lua require"telescope.builtin".grep_string({search = vim.fn.expand("<cword>")})<cr>')
+  vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "T Help tag"})
+  vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = "T Resume"})
+  vim.keymap.set('n', '<leader>fp', builtin.pickers, { desc = "T Pickers"})
 
 
   -- TODO google telescope.buitlin.grep_string
@@ -77,7 +73,4 @@ local function keymaps()
   --   options)
 end
 
-loadPlugins()
-setup()
-keymaps()
-
+return M

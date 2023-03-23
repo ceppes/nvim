@@ -1,11 +1,15 @@
-local function loadPlugins()
-  local packer = require 'packer'
-  packer.use 'numToStr/Comment.nvim'
-end
+local M = {}
 
-local function setup()
+M.plugins = {
+  'numToStr/Comment.nvim',
+  config = function ()
+    require("features.comment").setup()
+  end
+}
+
+function M.setup()
   require('Comment').setup()
 end
 
-loadPlugins()
-setup()
+return M
+

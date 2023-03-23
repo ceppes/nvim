@@ -1,12 +1,20 @@
-local function loadPlugins()
-  local packer = require'packer'
-  packer.use 'kdheepak/lazygit.nvim'
-	packer.use 'tpope/vim-fugitive'
-  packer.use 'lewis6991/gitsigns.nvim' -- needed for feline status line
-  -- use 'airblade/vim-gitgutter'
-end
+local M = {}
 
-local function setup()
+M.plugins = {
+  'kdheepak/lazygit.nvim',
+  requires = {
+    'kdheepak/lazygit.nvim',
+    'tpope/vim-fugitive',
+    'lewis6991/gitsigns.nvim', -- needed for feline status line
+  -- use 'airblade/vim-gitgutter'
+  },
+  config = function()
+    require("features.git").setup()
+    require("features.git").keymaps()
+  end
+}
+
+function M.setup()
   require("gitsigns").setup({
     signs = {
       add          = { hl = "GitSignsAdd"   , text = "▋" },
@@ -23,7 +31,7 @@ local function setup()
   })
 end
 
-local function keymaps()
+function M.keymaps()
   require'which-key'.register({
     g = {
       name = "Git",
@@ -45,6 +53,5 @@ local function keymaps()
   vim.keymap.set('n', '<leader>gd', ':Gitsigns diffthis<CR>', {desc = 'Git diff this'})
 end
 
-loadPlugins()
-setup()
-keymaps()
+
+return M

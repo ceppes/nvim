@@ -1,48 +1,60 @@
 -----------------------------------------------------------
 -- Plugin manager configuration file
 -----------------------------------------------------------
+vim.cmd.packadd('packer.nvim')
 
-local cmd = vim.cmd
-cmd [[packadd packer.nvim]]
+local packer_helper = require('features.packer')
+packer_helper.keymap()
 
-local packer = require 'packer'
-
-packer.startup(function()
-  use 'wbthomason/packer.nvim' -- packer can manage itself
+local plugins = {
+  require('features.whichkey').plugins,
+  require('features.telescope').plugins,
+  require('features.trouble').plugins,
+  require('features.lspconfig').plugins,
+  require('features.debugger').plugins,
+  require('features.lint').plugins,
+  require('features.git').plugins,
+  require('features.statusline').plugins,
+  require('features.completion').plugins,
+  require('features.treesitter').plugins,
+  require('features.comment').plugins,
+  require('features.indent').plugins,
+  require('features.colorizer').plugins,
+  require('features.structure').plugins,
+  require('features.tab').plugins,
+  require('features.welcome').plugins,
+  require('features.session').plugins,
+  require('features.ui').plugins,
+ {
+   'mbbill/undotree',
+   config = function ()
+    vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, {desc = 'Undotree Toggle'})
+   end
+ },
 
   -- Tag viewer
-  use 'liuchengxu/vista.vim'
+  'liuchengxu/vista.vim',
 
   -- Distraction free
-  use 'junegunn/goyo.vim'
-
-  -- Linting
-  use 'mfussenegger/nvim-lint'
+  'junegunn/goyo.vim',
 
   -- Tools
-  use "folke/which-key.nvim"
-  use {
+  {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
-  }
-  use {
+  },
+  {
     "windwp/nvim-ts-autotag",
     config = function() require("nvim-ts-autotag").setup {} end
-  }
+    -- require treesiter
+  },
 
-  use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
-
-  use "kyazdani42/nvim-web-devicons"
-  use "onsails/lspkind.nvim"
-
-  use {
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-  }
-  use 'j-hui/fidget.nvim'
+  "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+  "kyazdani42/nvim-web-devicons",
+  "onsails/lspkind.nvim",
 
   -- Markdown
-  use {
+  {
     "iamcco/markdown-preview.nvim",
     run = function()
       vim.fn["mkdp#util#install"]()
@@ -50,12 +62,11 @@ packer.startup(function()
     ft = "markdown",
     cmd = { "MarkdownPreview" },
     requires = { "zhaozg/vim-diagram", "aklt/plantuml-syntax" },
-  }
+  },
 
-  --welcome screen
-  use {'goolord/alpha-nvim'}
-  use {'MTDL9/vim-log-highlighting'}
+  -- better log highlight
+  'MTDL9/vim-log-highlighting',
+}
 
-end)
-
-vim.keymap.set('n', '<leader>ps', packer.sync, {desc = 'Packer Sync'})
+local packer = require('packer')
+packer.startup(packer_helper.use(plugins))

@@ -150,13 +150,5 @@ vim.bo.shiftwidth = 2
 vim.bo.tabstop = 2
 
 
-local function map(mode, lhs, rhs, opts)
-  -- noremap : no recursive mapping
-  local options = { noremap = true, silent = true }
-  if opts then
-    options = vim.tbl_extend('force', options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
 
-map('n', '<leader>og', "<Cmd>lua require'jdtls'.organize_imports()<CR>")
+vim.keymap.set('n', '<leader>og', "<Cmd>lua require'jdtls'.organize_imports()<CR>")

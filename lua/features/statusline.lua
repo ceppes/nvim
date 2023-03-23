@@ -1,14 +1,14 @@
---[[
- Statusline configuration file
--- ]]
---
-local packer = require 'packer'
-packer.use 'feline-nvim/feline.nvim'
+local M = {}
 
-local feline = require 'feline'
+M.plugins = {
+  'feline-nvim/feline.nvim',
+  config = function()
+    require("features.statusline").setup()
+  end
+}
+
 
 -- Colorscheme
---local colors = require('')
 local gruvbox = {
     fg = '#928374',
     bg = '#1F2223',
@@ -25,9 +25,6 @@ local gruvbox = {
     yellow = '#d79921',
 }
 
--- Providers
-local lsp = require 'feline.providers.lsp'
-local vi_mode_utils = require 'feline.providers.vi_mode'
 
 local vi_mode_text = {
     n = "NORMAL",
@@ -62,299 +59,336 @@ local function file_osinfo()
     return icon .. os
 end
 
-local my_comps = {
-  vi_mode = {
-    left = {
-      provider = function()
-        return ' '..vi_mode_text[vim.fn.mode()]..' '
-      end,
-      hl = function()
-        return {
-          name = vi_mode_utils.get_mode_highlight_name(),
-          bg = vi_mode_utils.get_mode_color(),
-          fg = 'black',
-          style = 'bold',
+local function composition()
+  local lspproviders_status_ok, lsp = pcall(require, 'feline.providers.lsp')
+  if not lspproviders_status_ok then
+    return
+  end
+
+  local vimodeutils_status_ok, vi_mode_utils = pcall(require, 'feline.providers.vi_mode')
+  if not vimodeutils_status_ok then
+    return
+  end
+  -- local vi_mode_utils = require('feline.providers.vi_mode')
+  -- local lsp = require('feline.providers.lsp')
+
+  return {
+    vi_mode = {
+      left = {
+        provider = function()
+          return ' '..vi_mode_text[vim.fn.mode()]..' '
+        end,
+        hl = function()
+          return {
+            name = vi_mode_utils.get_mode_highlight_name(),
+            bg = vi_mode_utils.get_mode_color(),
+            fg = 'black',
+            style = 'bold',
+          }
+        end
+      },
+      right = {
+        provider = '▊',
+        hl = function()
+            return {
+                name = vi_mode_utils.get_mode_highlight_name(),
+                -- fg = vi_mode_utils.get_mode_color()
+            }
+        end,
+        left_sep = ' '
+      }
+    },
+    file = {
+      info = {
+        provider = {
+          name = 'file_info',
+          opts = {
+              type = 'relative'
+          }
+        },
+        short_provider = {
+          name = 'file_info',
+          opts = {
+              type = 'relative-short'
+          }
+        },
+        -- provider = require("plugins/feline/file_name").get_current_ufn,
+          -- provider = vim.fn.expand("%:F"),
+        hl = {
+          -- fg = 'blue',
+          style = 'bold'
+        },
+        left_sep = ' '
+      },
+      encoding = {
+        provider = 'file_encoding',
+        left_sep = ' ',
+        hl = {
+          -- fg = 'violet',
+          style = 'bold'
         }
+      },
+      type = {
+        provider = 'file_type'
+      },
+      os = {
+        provider = file_osinfo,
+        left_sep = ' ',
+        hl = {
+          -- fg = 'violet',
+          style = 'bold'
+        }
+      },
+      icon = {
+        provider = function()
+          local filename = vim.fn.expand('%:t')
+          local extension = vim.fn.expand('%:e')
+          local icon  = require'nvim-web-devicons'.get_icon(filename, extension)
+          if icon == nil then
+            icon = ''
+          end
+          return icon
+        end,
+        hl = function()
+          local val = {}
+          local filename = vim.fn.expand('%:t')
+          local extension = vim.fn.expand('%:e')
+          local icon, name  = require'nvim-web-devicons'.get_icon(filename, extension)
+          -- if icon ~= nil then
+            -- val.fg = vim.fn.synIDattr(vim.fn.hlID(name), 'fg')
+          -- else
+            -- val.fg = 'white'
+          -- end
+          -- val.bg = 'bg'
+          val.style = 'bold'
+          return val
+        end,
+        left_sep = ' '
+      },
+      size = {
+        provider = 'file_size',
+        enabled = function() return vim.fn.getfsize(vim.fn.expand('%:t')) > 0 end,
+        hl = {
+          -- fg = 'skyblue',
+          -- bg = 'bg',
+          style = 'bold'
+        },
+      },
+      format = {
+        provider = function() return '' .. vim.bo.fileformat:upper() .. '' end,
+        hl = {
+          -- fg = 'white',
+          -- bg = 'bg',
+          style = 'bold'
+        },
+      },
+    },
+    line_percentage = {
+      provider = 'line_percentage',
+      left_sep = ' ',
+      hl = {
+        style = 'bold'
+      }
+    },
+    position = {
+      name = 'line_number',
+      provider = function()
+        local cursor_row, cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
+        local line_count = vim.api.nvim_buf_line_count(0)
+        return cursor_row .. '/' .. line_count .. ':' .. cursor_col
+      end,
+      left_sep = ' ',
+      hl = function()
+        local val = {
+          name = vi_mode_utils.get_mode_highlight_name(),
+          -- fg = colors.bg,
+          -- bg = vi_mode_utils.get_mode_color(),
+          style = 'bold'
+        }
+        return val
       end
     },
-    right = {
-      provider = '▊',
-      hl = function()
-          return {
-              name = vi_mode_utils.get_mode_highlight_name(),
-              -- fg = vi_mode_utils.get_mode_color()
-          }
-      end,
-      left_sep = ' '
-    }
-  },
-  file = {
-    info = {
-      provider = {
-        name = 'file_info',
-        opts = {
-            type = 'relative'
-        }
-      },
-      short_provider = {
-        name = 'file_info',
-        opts = {
-            type = 'relative-short'
-        }
-      },
-      -- provider = require("plugins/feline/file_name").get_current_ufn,
-        -- provider = vim.fn.expand("%:F"),
+   scroll_bar = {
+      provider = 'scroll_bar',
+      reverse = false, -- doesnt work
+      left_sep = ' ',
       hl = {
         -- fg = 'blue',
         style = 'bold'
+      }
+    },
+    diagnos = {
+      err = {
+        provider = 'diagnostic_errors',
+        enabled = function()
+          return lsp.diagnostics_exist(vim.diagnostic.severity.ERROR)
+        end,
+        hl = {
+          fg = 'red'
+        }
       },
-      left_sep = ' '
-    },
-    encoding = {
-      provider = 'file_encoding',
-      left_sep = ' ',
-      hl = {
-        -- fg = 'violet',
-        style = 'bold'
-      }
-    },
-    type = {
-      provider = 'file_type'
-    },
-    os = {
-      provider = file_osinfo,
-      left_sep = ' ',
-      hl = {
-        -- fg = 'violet',
-        style = 'bold'
-      }
-    },
-    icon = {
-      provider = function()
-        local filename = vim.fn.expand('%:t')
-        local extension = vim.fn.expand('%:e')
-        local icon  = require'nvim-web-devicons'.get_icon(filename, extension)
-        if icon == nil then
-          icon = ''
-        end
-        return icon
-      end,
-      hl = function()
-        local val = {}
-        local filename = vim.fn.expand('%:t')
-        local extension = vim.fn.expand('%:e')
-        local icon, name  = require'nvim-web-devicons'.get_icon(filename, extension)
-        -- if icon ~= nil then
-          -- val.fg = vim.fn.synIDattr(vim.fn.hlID(name), 'fg')
-        -- else
-          -- val.fg = 'white'
-        -- end
-        -- val.bg = 'bg'
-        val.style = 'bold'
-        return val
-      end,
-      left_sep = ' '
-    },
-    size = {
-      provider = 'file_size',
-      enabled = function() return vim.fn.getfsize(vim.fn.expand('%:t')) > 0 end,
-      hl = {
-        -- fg = 'skyblue',
-        -- bg = 'bg',
-        style = 'bold'
+      warn = {
+        provider = 'diagnostic_warnings',
+        enabled = function()
+          return lsp.diagnostics_exist(vim.diagnostic.severity.WARN)
+        end,
+        hl = {
+          fg = 'yellow'
+        }
+      },
+      hint = {
+        provider = 'diagnostic_hints',
+        enabled = function()
+          return lsp.diagnostics_exist(vim.diagnostic.severity.HINT)
+        end,
+        hl = {
+          fg = 'cyan'
+        }
+      },
+      info = {
+        provider = 'diagnostic_info',
+        enabled = function()
+          return lsp.diagnostics_exist(vim.diagnostic.severity.INFO)
+        end,
+        hl = {
+          fg = 'blue'
+        }
       },
     },
-    format = {
-      provider = function() return '' .. vim.bo.fileformat:upper() .. '' end,
-      hl = {
-        -- fg = 'white',
-        -- bg = 'bg',
-        style = 'bold'
+    lsp = {
+      name = {
+        provider = 'lsp_client_names',
+        truncate_hide = true,
+        left_sep = ' ',
+        icon = ' ',
+        hl = {
+          fg = 'yellow'
+        }
+      }
+    },
+    git = {
+      branch = {
+        provider = 'git_branch',
+        truncate_hide = true,
+        icon = ' ',
+        left_sep = ' ',
+        hl = {
+          fg = 'violet',
+          style = 'bold'
+        },
+        enabled = function()
+          return vim.b.gitsigns_status_dict ~= nil
+        end,
       },
-    },
-  },
-  line_percentage = {
-    provider = 'line_percentage',
-    left_sep = ' ',
-    hl = {
-      style = 'bold'
-    }
-  },
-  position = {
-    name = 'line_number',
-    provider = function()
-      local cursor_row, cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
-      local line_count = vim.api.nvim_buf_line_count(0)
-      return cursor_row .. '/' .. line_count .. ':' .. cursor_col
-    end,
-    left_sep = ' ',
-    hl = function()
-      local val = {
-        name = vi_mode_utils.get_mode_highlight_name(),
-        -- fg = colors.bg,
-        -- bg = vi_mode_utils.get_mode_color(),
-        style = 'bold'
-      }
-      return val
-    end
-  },
- scroll_bar = {
-    provider = 'scroll_bar',
-    reverse = false, -- doesnt work
-    left_sep = ' ',
-    hl = {
-      -- fg = 'blue',
-      style = 'bold'
-    }
-  },
-  diagnos = {
-    err = {
-      provider = 'diagnostic_errors',
-      enabled = function()
-        return lsp.diagnostics_exist(vim.diagnostic.severity.ERROR)
-      end,
-      hl = {
-        fg = 'red'
-      }
-    },
-    warn = {
-      provider = 'diagnostic_warnings',
-      enabled = function()
-        return lsp.diagnostics_exist(vim.diagnostic.severity.WARN)
-      end,
-      hl = {
-        fg = 'yellow'
-      }
-    },
-    hint = {
-      provider = 'diagnostic_hints',
-      enabled = function()
-        return lsp.diagnostics_exist(vim.diagnostic.severity.HINT)
-      end,
-      hl = {
-        fg = 'cyan'
-      }
-    },
-    info = {
-      provider = 'diagnostic_info',
-      enabled = function()
-        return lsp.diagnostics_exist(vim.diagnostic.severity.INFO)
-      end,
-      hl = {
-        fg = 'blue'
-      }
-    },
-  },
-  lsp = {
-    name = {
-      provider = 'lsp_client_names',
-      truncate_hide = true,
-      left_sep = ' ',
-      icon = ' ',
-      hl = {
-        fg = 'yellow'
-      }
-    }
-  },
-  git = {
-    branch = {
-      provider = 'git_branch',
-      truncate_hide = true,
-      icon = ' ',
-      left_sep = ' ',
-      hl = {
-        fg = 'violet',
-        style = 'bold'
+      add = {
+        provider = 'git_diff_added',
+        truncate_hide = true,
+        hl = {
+          fg = 'green'
+        }
       },
-      enabled = function()
-        return vim.b.gitsigns_status_dict ~= nil
-      end,
-    },
-    add = {
-      provider = 'git_diff_added',
-      truncate_hide = true,
-      hl = {
-        fg = 'green'
-      }
-    },
-    change = {
-      provider = 'git_diff_changed',
-      truncate_hide = true,
-      hl = {
-        fg = 'orange'
-      }
-    },
-    remove = {
-      provider = 'git_diff_removed',
-      truncate_hide = true,
-      hl = {
-        fg = 'red'
+      change = {
+        provider = 'git_diff_changed',
+        truncate_hide = true,
+        hl = {
+          fg = 'orange'
+        }
+      },
+      remove = {
+        provider = 'git_diff_removed',
+        truncate_hide = true,
+        hl = {
+          fg = 'red'
+        }
       }
     }
   }
-}
+end
 
-local active = {
+local active = function()
+  local feline_status_ok, feline = pcall(require, 'feline')
+  if not feline_status_ok then
+    return
+  end
+
+  return {
   { -- left
-    my_comps.vi_mode.left,
-    my_comps.file.info,
-    my_comps.diagnos.err,
-    my_comps.diagnos.warn,
-    my_comps.diagnos.hint,
-    my_comps.diagnos.info
+    composition().vi_mode.left,
+    composition().file.info,
+    composition().diagnos.err,
+    composition().diagnos.warn,
+    composition().diagnos.hint,
+    composition().diagnos.info
   },
   { -- mid
 
   },
   { -- right
-    my_comps.git.branch,
-    my_comps.git.add,
-    my_comps.git.change,
-    my_comps.git.remove,
-    my_comps.file.icon,
-    my_comps.lsp.name,
-    -- my_comps.file.format
-    -- my_comps.file.size,
-    my_comps.file.encoding,
-    my_comps.file.os,
-    my_comps.position,
-    my_comps.line_percentage,
-    my_comps.scroll_bar,
+    composition().git.branch,
+    composition().git.add,
+    composition().git.change,
+    composition().git.remove,
+    composition().file.icon,
+    composition().lsp.name,
+    -- M.composition().file.format
+    -- M.composition().file.size,
+    composition().file.encoding,
+    composition().file.os,
+    composition().position,
+    composition().line_percentage,
+    composition().scroll_bar,
     -- comps.vi_mode.right
 
   }
 }
+end
 
-local inactive = {
+local inactive = function()
+  local feline_status_ok, feline = pcall(require, 'feline')
+  if not feline_status_ok then
+    return
+  end
+  return {
   { -- left
-    my_comps.file.info,
+    composition().file.info,
   },
   { -- mid
 
   },
   { -- right
-    my_comps.file.os
+    composition().file.os
   }
 }
+end
 
-feline.setup({
-  components = {
-    active = active,
-    inactive = inactive
-  },
-  force_inactive = {
-    filetypes = {
-      'packer',
-      'fugitive',
-      'fugitiveblame'
+function M.setup()
+  -- local feline = require 'feline'
+  local feline_status_ok, feline = pcall(require, 'feline')
+  if not feline_status_ok then
+    return
+  end
+
+  feline.setup({
+    components = {
+      active = active(),
+      inactive = inactive()
     },
-    buftypes = {'terminal'},
-    bufnames = {}
-  },
-  theme = gruvbox
-  -- default_bg = colors.bg,
-  -- default_fg = colors.fg,
-  -- properties = properties,
-  -- vi_mode_colors = vi_mode_colors
-})
+    force_inactive = {
+      filetypes = {
+        'packer',
+        'fugitive',
+        'fugitiveblame'
+      },
+      buftypes = {'terminal'},
+      bufnames = {}
+    },
+    theme = gruvbox
+    -- default_bg = colors.bg,
+    -- default_fg = colors.fg,
+    -- properties = properties,
+    -- vi_mode_colors = vi_mode_colors
+  })
+end
 
+
+return M
