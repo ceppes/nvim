@@ -81,6 +81,16 @@ function M.debugger()
         return {'-v', filter}
       end
     },
+    {
+      name = "Python: Attach",
+      type = "python",
+      request = "attach",
+      connect = {
+        port = 5678,
+        -- host = "localhost",
+        host = "127.0.0.1",
+      },
+    }
   }
 end
 
