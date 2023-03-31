@@ -66,23 +66,15 @@ local plugins = {
 
   -- better log highlight
   'MTDL9/vim-log-highlighting',
-  -- lsp and more install manager
-  {
-    "williamboman/mason.nvim",
-    requires = {
-      "williamboman/mason-lspconfig.nvim",
-      "neovim/nvim-lspconfig",
-    },
-    config = function()
-      require("mason").setup()
-      require("mason-lspconfig").setup{
-        ensure_installed = {
-          "lua_ls",
-          "pyright"
-        }
-      }
 
-    end
+  -- other
+  {
+    'rcarriga/nvim-notify',
+    config = function ()
+      require("notify").setup{}
+      vim.notify = require("notify")
+      require("telescope").load_extension("notify")
+    end,
   },
 }
 

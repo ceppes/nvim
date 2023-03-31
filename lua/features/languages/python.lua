@@ -22,22 +22,22 @@ function M.lsp()
   }
 
   return require("features.lsp.server_config").config(
-  M.lspbin,
-  {
-    root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
-    flags = {
-      debounce_text_changes = 150,
-    },
-    settings = {
-      python = {
-        analysis = {
-          autoSearchPaths = true,
-          diagnosticMode = "workspace",
-          useLibraryCodeForTypes = true,
+    M.lspbin,
+    {
+      root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
+      flags = {
+        debounce_text_changes = 150,
+      },
+      settings = {
+        python = {
+          analysis = {
+            autoSearchPaths = true,
+            diagnosticMode = "workspace",
+            useLibraryCodeForTypes = true,
+          }
         }
       }
-    }
-  })
+    })
 end
 
 
@@ -72,14 +72,19 @@ function M.debugger()
       {
     },
     {
-      name = "Run pytest";
+      name = "Python: Run pytest";
       type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
       request = 'launch';
       module = "pytest";
       args = function()
         local filter = vim.fn.input('Enter unittest args: ')
         return {'-v', filter}
-      end
+      end,
+      pythonPath = function()
+        return python_path
+      end,
+      args = {'test'}
+    -- program = "-m pytest ${file}";
     },
     {
       name = "Python: Attach",

@@ -3,8 +3,11 @@ local M = {}
 function M.config(bin, opts)
 
   if vim.fn.executable(bin) ~= 1 then
+    vim.notify("[Server config] Executable check failed for " .. bin)
     return false
   end
+  vim.notify("[Server config] Executable success for " .. bin)
+
 
   local config = {
     capabilities = require("features.lsp.capabilities"),

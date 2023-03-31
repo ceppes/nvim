@@ -9,13 +9,28 @@ M.plugins = {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     'j-hui/fidget.nvim',
+    "jayp0521/mason-null-ls.nvim",
+    "jose-elias-alvarez/null-ls.nvim",
   },
   config = function ()
     require('features.lspconfig').highlight()
     require('features.lspconfig').commands()
     require('features.lspconfig').autocmd()
+    require('features.lspconfig').setup()
     require('features.lspconfig').setup_servers()
  end
+}
+
+local lsp_ensure_installed = {
+  "lua_ls",
+  "pyright",
+  "tsserver"
+}
+
+local lint_ensure_installed = {
+  'pylint',
+  'markdownlint',
+  'prettier'
 }
 
 function M.highlight()
@@ -41,14 +56,18 @@ function M.autocmd()
 end
 
 
+function M.setup()
+  require('mason').setup({ ui = { border = 'rounded' } })
+  require("mason-lspconfig").setup{ ensure_installed = lsp_ensure_installed }
+  require('mason-null-ls').setup({ ensure_installed = lint_ensure_installed })
+  require("fidget").setup{} -- little progress bar for lsp loading
+end
+
 function M.setup_servers()
   local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')
   if not lsp_status_ok then
     return
   end
-
-  -- little progress bar for lsp loading
-  require"fidget".setup{}
 
   local servers = {
     pyright = require('features.languages.python').lsp(),

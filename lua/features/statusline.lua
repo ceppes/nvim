@@ -336,7 +336,7 @@ local active = function()
     composition().file.os,
     composition().position,
     composition().line_percentage,
-    composition().scroll_bar,
+    -- composition().scroll_bar,
     -- comps.vi_mode.right
 
   }
