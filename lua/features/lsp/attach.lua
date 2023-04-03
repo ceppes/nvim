@@ -13,7 +13,11 @@ function M.attach(client, bufnr)
   vim.api.nvim_buf_set_var(bufnr, "lsp_attached", true)
 
   local navic = require("nvim-navic")
+  if client.server_capabilities.documentSymbolProvider then
+      navic.attach(client, bufnr)
+  end
   vim.opt.winbar = "%f > %{%v:lua.require'nvim-navic'.get_location()%}"
+
 end
 
 function M.keymaps()

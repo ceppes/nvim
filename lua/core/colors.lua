@@ -16,13 +16,13 @@ local telescope_builtin_status_ok, telescope_builtin = pcall(require, 'telescope
 if not telescope_builtin_status_ok then
   return
 end
+
 vim.keymap.set('n', '<leader>c', require('telescope.builtin').colorscheme, { desc = "T Colorscheme"})
 
--- For markdown checkbox highlight
 require('catppuccin').setup{
   styles = {
-    comment = {},
-  }
+    comment = {}, -- For markdown checkbox highlight
+  },
 }
 
 -- Name 	Latte 	Frappe 	Macchiato 	Mocha 	Usage
