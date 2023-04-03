@@ -72,9 +72,13 @@ local function composition()
   -- local vi_mode_utils = require('feline.providers.vi_mode')
   -- local lsp = require('feline.providers.lsp')
 
+  local clrs = require("catppuccin.palettes").get_palette()
+
   return {
     vi_mode = {
       left = {
+        left_sep = "",
+        right_sep = "",
         provider = function()
           return ' '..vi_mode_text[vim.fn.mode()]..' '
         end,
@@ -195,7 +199,7 @@ local function composition()
       provider = function()
         local cursor_row, cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
         local line_count = vim.api.nvim_buf_line_count(0)
-        return cursor_row .. '/' .. line_count .. ':' .. cursor_col
+        return ' ' .. cursor_row .. '/' .. line_count .. ': ' .. cursor_col
       end,
       left_sep = ' ',
       hl = function()
@@ -268,12 +272,13 @@ local function composition()
     },
     git = {
       branch = {
+        left_sep = "",
         provider = 'git_branch',
         truncate_hide = true,
         icon = ' ',
-        left_sep = ' ',
         hl = {
-          fg = 'violet',
+          fg = clrs.lavender,
+          bg = clrs.overlay1,
           style = 'bold'
         },
         enabled = function()
@@ -284,21 +289,25 @@ local function composition()
         provider = 'git_diff_added',
         truncate_hide = true,
         hl = {
-          fg = 'green'
+          fg = 'green',
+          bg = clrs.overlay1,
         }
       },
       change = {
         provider = 'git_diff_changed',
         truncate_hide = true,
         hl = {
-          fg = 'orange'
+          fg = 'orange',
+          bg = clrs.overlay1,
         }
       },
       remove = {
         provider = 'git_diff_removed',
         truncate_hide = true,
+        right_sep = "",
         hl = {
-          fg = 'red'
+          fg = 'red',
+          bg = clrs.overlay1,
         }
       }
     }
@@ -314,7 +323,7 @@ local active = function()
   return {
   { -- left
     composition().vi_mode.left,
-    composition().file.info,
+    -- composition().file.info,
     composition().diagnos.err,
     composition().diagnos.warn,
     composition().diagnos.hint,
@@ -334,8 +343,8 @@ local active = function()
     -- M.composition().file.size,
     composition().file.encoding,
     composition().file.os,
-    composition().position,
     composition().line_percentage,
+    composition().position,
     -- composition().scroll_bar,
     -- comps.vi_mode.right
 
@@ -368,6 +377,8 @@ function M.setup()
     return
   end
 
+  local clrs = require("catppuccin.palettes").get_palette()
+
   feline.setup({
     components = {
       active = active(),
@@ -382,7 +393,29 @@ function M.setup()
       buftypes = {'terminal'},
       bufnames = {}
     },
-    theme = gruvbox
+    mode_colors = {
+      ["n"] = { "NORMAL", clrs.lavender },
+      ["no"] = { "N-PENDING", clrs.lavender },
+      ["i"] = { "INSERT", clrs.green },
+      ["ic"] = { "INSERT", clrs.green },
+      ["t"] = { "TERMINAL", clrs.green },
+      ["v"] = { "VISUAL", clrs.flamingo },
+      ["V"] = { "V-LINE", clrs.flamingo },
+      ["�"] = { "V-BLOCK", clrs.flamingo },
+      ["R"] = { "REPLACE", clrs.maroon },
+      ["Rv"] = { "V-REPLACE", clrs.maroon },
+      ["s"] = { "SELECT", clrs.maroon },
+      ["S"] = { "S-LINE", clrs.maroon },
+      ["�"] = { "S-BLOCK", clrs.maroon },
+      ["c"] = { "COMMAND", clrs.peach },
+      ["cv"] = { "COMMAND", clrs.peach },
+      ["ce"] = { "COMMAND", clrs.peach },
+      ["r"] = { "PROMPT", clrs.teal },
+      ["rm"] = { "MORE", clrs.teal },
+      ["r?"] = { "CONFIRM", clrs.mauve },
+      ["!"] = { "SHELL", clrs.green },
+    },
+    -- theme = gruvbox
     -- default_bg = colors.bg,
     -- default_fg = colors.fg,
     -- properties = properties,

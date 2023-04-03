@@ -18,6 +18,7 @@ function M.setup()
     'javascript';
     'html';
     'python';
+    'lua';
   }
 end
 
