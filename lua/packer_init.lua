@@ -9,6 +9,7 @@ packer_helper.keymap()
 local plugins = {
   require('features.whichkey').plugins,
   require('features.telescope').plugins,
+  require('features.notify').plugins,
   require('features.trouble').plugins,
   require('features.lspconfig').plugins,
   require('features.debugger').plugins,
@@ -66,16 +67,6 @@ local plugins = {
 
   -- better log highlight
   'MTDL9/vim-log-highlighting',
-
-  -- other
-  {
-    'rcarriga/nvim-notify',
-    config = function ()
-      require("notify").setup{}
-      vim.notify = require("notify")
-      require("telescope").load_extension("notify")
-    end,
-  },
 }
 
 local packer = require('packer')
