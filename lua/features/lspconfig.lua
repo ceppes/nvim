@@ -27,10 +27,8 @@ local lsp_ensure_installed = {
   "tsserver"
 }
 
-local lint_ensure_installed = {
-  'pylint',
-  'markdownlint',
-  'prettier'
+local dap_ensure_installed = {
+  'debugpy',
 }
 
 function M.highlight()
@@ -59,7 +57,6 @@ end
 function M.setup()
   require('mason').setup({ ui = { border = 'rounded' } })
   require("mason-lspconfig").setup{ ensure_installed = lsp_ensure_installed }
-  require('mason-null-ls').setup({ ensure_installed = lint_ensure_installed })
   require("fidget").setup{} -- little progress bar for lsp loading
 end
 
@@ -72,6 +69,7 @@ function M.setup_servers()
   local servers = {
     pyright = require('features.languages.python').lsp(),
     lua_ls = require('features.languages.lua').lsp(),
+    yamlls = require('features.languages.yaml').lsp(),
   }
 
   for server, config in pairs(servers) do

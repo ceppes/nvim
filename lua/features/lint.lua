@@ -7,7 +7,15 @@ M.plugins = {
   end
 }
 
+local lint_ensure_installed = {
+  'pylint',
+  'markdownlint',
+  'prettier'
+}
+
 function M.setup()
+  require('mason-null-ls').setup({ ensure_installed = lint_ensure_installed })
+
   local null_ls = require("null-ls")
   null_ls.setup({
     sources = {
