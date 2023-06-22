@@ -23,7 +23,7 @@ local ensure_installed = {
   'dockerfile',
   'dot',
   'go',
-  'help',
+  -- 'help',
   'html',
   'java',
   'javascript',
