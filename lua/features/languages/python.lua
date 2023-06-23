@@ -34,6 +34,7 @@ function M.lsp()
             autoSearchPaths = true,
             diagnosticMode = "workspace",
             useLibraryCodeForTypes = true,
+            typeCheckingMode = "off"
           }
         }
       }
