@@ -3,11 +3,10 @@ local M = {}
 function M.config(bin, opts)
 
   if vim.fn.executable(bin) ~= 1 then
-    vim.notify("[Server config] Executable check failed for " .. bin)
+    vim.notify("[LSP][Server config] [ERROR] " .. bin .. " bin not found")
     return false
   end
-  vim.notify("[Server config] Executable success for " .. bin)
-
+  vim.notify("[LSP][Server config] [SUCCESS] " .. bin .. " bin found")
 
   local config = {
     capabilities = require("features.lsp.capabilities"),
@@ -16,6 +15,12 @@ function M.config(bin, opts)
       require("features.lsp.attach").attach(client, bufnr)
     end
   }
+
+  if opts then
+    for key, value in pairs(opts) do
+      config[key] = value
+    end
+  end
 
   return config
 end

@@ -1,5 +1,9 @@
 local M = {}
 
+local dap_ensure_installed = {
+  'debugpy',
+}
+
 M.plugins = {
   'mfussenegger/nvim-dap',
   -- opt = true,

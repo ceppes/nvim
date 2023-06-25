@@ -11,7 +11,7 @@ local plugins = {
   require('features.telescope').plugins,
   require('features.notify').plugins,
   require('features.trouble').plugins,
-  require('features.lspconfig').plugins,
+  require('features.lspconfig.packerconf'),
   require('features.debugger').plugins,
   require('features.lint').plugins,
   require('features.git').plugins,
@@ -69,5 +69,6 @@ local plugins = {
   'MTDL9/vim-log-highlighting',
 }
 
+print("pacer")
 local packer = require('packer')
 packer.startup(packer_helper.use(plugins))

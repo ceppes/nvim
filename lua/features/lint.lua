@@ -2,6 +2,9 @@ local M = {}
 
 M.plugins = {
   'jose-elias-alvarez/null-ls.nvim',
+  requires = {
+    "jayp0521/mason-null-ls.nvim",
+  },
   config = function ()
     require("features.lint").setup()
   end
