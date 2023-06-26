@@ -20,7 +20,6 @@ end
 
 function M.setup()
 
-print("colors setup")
   ColorIt()
 
   local color = "catppuccin-mocha"

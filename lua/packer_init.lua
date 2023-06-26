@@ -70,11 +70,11 @@ local plugins = {
   'MTDL9/vim-log-highlighting',
 }
 
-print("pacer")
 local packer = require('packer')
-packer.init({
-  snapshot = vim.env.HOME .. "/.dotfiles/nvim/snapshots/snapshot-main", -- Snapshot name to load at startup
-  snapshot_path = vim.env.HOME .. "/.dotfiles/nvim/snapshots/" -- Snapshot save path,
-})
-
-packer.startup(packer_helper.use(plugins))
+packer.startup{
+  packer_helper.use(plugins),
+  config = {
+    snapshot = vim.env.HOME .. "/.dotfiles/nvim/snapshots/snapshot-main", -- Snapshot name to load at startup
+    snapshot_path = vim.env.HOME .. "/.dotfiles/nvim/snapshots/" -- Snapshot save path,
+  }
+}
