@@ -1,7 +1,8 @@
 local M = {}
 
 function M.keymap()
-  vim.keymap.set('n', '<leader>ps', require('packer').sync, {desc = 'Packer Sync'})
+  packer = require('packer')
+  vim.keymap.set('n', '<leader>ps', packer.sync, {desc = 'Packer Sync'})
 end
 
 function M.use(plugins)
