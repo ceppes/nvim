@@ -26,6 +26,7 @@ local plugins = {
   require('features.welcome').plugins,
   require('features.session').plugins,
   require('features.ui').plugins,
+  require('core.colors').plugins,
  {
    'mbbill/undotree',
    config = function ()

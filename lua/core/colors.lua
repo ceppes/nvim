@@ -1,29 +1,50 @@
-local packer = require 'packer'
-packer.use "ellisonleao/gruvbox.nvim"
-packer.use 'folke/tokyonight.nvim'
-packer.use { "catppuccin/nvim", as = "catppuccin" }
+local M = {}
 
-function ColorIt(color)
+M.plugins = {
+  "catppuccin/nvim",
+  as = "catppuccin",
+  requires = {
+    "ellisonleao/gruvbox.nvim",
+    "folke/tokyonight.nvim",
+  },
+  config = function()
+    require("core.colors").setup()
+    require("core.colors").keymaps()
+  end
+}
+
+local function ColorIt(color)
   color = color or "catppuccin-mocha"
   vim.cmd.colorscheme(color)
 end
 
-ColorIt()
+function M.setup()
 
-vim.o.background = "dark"
+print("colors setup")
+  ColorIt()
 
-local telescope_builtin_status_ok, telescope_builtin = pcall(require, 'telescope.builtin')
-if not telescope_builtin_status_ok then
-  return
+  local color = "catppuccin-mocha"
+  vim.cmd.colorscheme(color)
+
+  vim.o.background = "dark"
+
+  require('catppuccin').setup{
+    styles = {
+      comment = {}, -- For markdown checkbox highlight
+    },
+  }
+
 end
 
-vim.keymap.set('n', '<leader>c', require('telescope.builtin').colorscheme, { desc = "T Colorscheme"})
+function M.keymaps()
+  -- local telescope_builtin_status_ok, telescope_builtin = pcall(require, 'telescope.builtin')
+  -- if not telescope_builtin_status_ok then
+  --   return
+  -- end
+  vim.keymap.set('n', '<leader>c', require('telescope.builtin').colorscheme, { desc = "T Colorscheme"})
+end
 
-require('catppuccin').setup{
-  styles = {
-    comment = {}, -- For markdown checkbox highlight
-  },
-}
+return M
 
 -- Name 	Latte 	Frappe 	Macchiato 	Mocha 	Usage
 -- rosewater 	#dc8a78 	#F2D5CF 	#F4DBD6 	#F5E0DC 	Winbar
