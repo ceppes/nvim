@@ -74,7 +74,7 @@ local packer = require('packer')
 packer.startup{
   packer_helper.use(plugins),
   config = {
-    snapshot = vim.env.HOME .. "/.dotfiles/nvim/snapshots/snapshot-main", -- Snapshot name to load at startup
+    snapshot = vim.env.HOME .. "/.dotfiles/nvim/snapshots/snapshot-main.json", -- Snapshot name to load at startup
     snapshot_path = vim.env.HOME .. "/.dotfiles/nvim/snapshots/" -- Snapshot save path,
   }
 }
