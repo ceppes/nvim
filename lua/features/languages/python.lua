@@ -74,6 +74,8 @@ function M.lsp()
         }
       },
       before_init = function(_, config)
+        print("Test")
+        print(get_python_path(config.root_dir))
         config.settings.python.pythonPath = get_python_path(config.root_dir)
       end
     }
