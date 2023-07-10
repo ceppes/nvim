@@ -51,7 +51,7 @@ local plugins = {
     -- require treesiter
   },
 
-  "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+  -- "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
   "kyazdani42/nvim-web-devicons",
   "onsails/lspkind.nvim",
 
