@@ -2,6 +2,7 @@ local M = {}
 
 M.plugins = {
   'simrat39/symbols-outline.nvim',
+  cmd = "SymbolsOutline",
   config = function()
     require("features.structure").setup()
     require("features.structure").keymaps()

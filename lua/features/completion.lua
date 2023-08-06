@@ -31,31 +31,38 @@ function M.setup()
   if not luasnip_status_ok then
     return
   end
+  require("luasnip.loaders.from_vscode").lazy_load()
 
   local lspkind_status_ok, lspkind = pcall(require, 'lspkind')
   if not lspkind_status_ok then
     return
   end
 
+  local border_opts = {
+    border = "rounded",
+    winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+  }
+
   cmp.setup({
+    preselect = cmp.PreselectMode.None,
     sources = {
       { name = "nvim_lsp", priority = 100 }, -- Keep LSP results on top.
-      { name = "emoji", option = { insert = true } },
+      { name = 'luasnip', priority = 75 },
+      { name = "path", priority = 50},
+      { name = "emoji",
+        option = {
+          insert = true } },
       { name = 'nvim_lsp_signature_help' },
-      { name = 'luasnip' },
-      { name = "path" },
       { name = "spell" },
       { name = "treesitter" },
       { name = "nvim_lua" },
       { name = "buffer", priority = 1 }, -- Keep buffer words last
     },
-
     snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body)
       end,
     },
-
     mapping = {
       ['<C-n>'] = cmp.mapping.select_next_item(),
       ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -89,8 +96,8 @@ function M.setup()
         end
       end
      },
-
-     formatting = {
+    format = lspkind_status_ok and lspkind.cmp_format(lspkind) or nil,
+    formatting = {
       format = lspkind.cmp_format({
         -- defines how annotations are shown
         -- default: symbol
@@ -119,8 +126,22 @@ function M.setup()
         end
       })
     },
+    window = {
+      completion = cmp.config.window.bordered(border_opts),
+      documentation = cmp.config.window.bordered(border_opts),
+    },
+    confirm_opts = {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = false,
+    },
+    duplicates = {
+      nvim_lsp = 1,
+      luasnip = 1,
+      cmp_tabnine = 1,
+      buffer = 1,
+      path = 1,
+    },
   })
 end
-
 
 return M
