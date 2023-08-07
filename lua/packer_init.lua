@@ -8,7 +8,7 @@ packer_helper.keymap()
 
 local plugins = {
   require('features.whichkey').plugins,
-  require('features.telescope').plugins,
+  require('features.telescope.packerconf'),
   require('features.notify').plugins,
   require('features.trouble').plugins,
   require('features.lspconfig.packerconf'),
