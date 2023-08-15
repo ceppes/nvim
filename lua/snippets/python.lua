@@ -3,7 +3,7 @@ local i = ls.insert_node
 local s = ls.s
 local t = ls.text_node
 local fmt = require("luasnip.extras.fmt").fmt
-
+--https://github.com/L3MON4D3/LuaSnip/blob/master/Examples/snippets.lua
 return {
   s("def",
     fmt(
