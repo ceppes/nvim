@@ -521,3 +521,9 @@ snippet fprs
 	print("$0", file=${1:sys.stderr})
 snippet fprf
 	print(f"$0", file=${1:sys.stderr})
+
+# Custom
+snippet fixture
+	@pytest.fixture(name="${1:name}")
+	def ${1:name}(${2:`indent('.') ? 'self' : ''`}):
+		${0}
