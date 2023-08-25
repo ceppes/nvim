@@ -8,6 +8,7 @@ local servers = {
   pyright = require('features.languages.python').lsp(),
   lua_ls = require('features.languages.lua').lsp(),
   yamlls = require('features.languages.yaml').lsp(),
+  tsserver = require('features.languages.typescript').lsp(),
 }
 -- debug
 -- :lua vim.inspect(vim.lsp.get_active_clients()))
