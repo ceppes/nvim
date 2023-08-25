@@ -68,6 +68,22 @@ local plugins = {
 
   -- better log highlight
   'MTDL9/vim-log-highlighting',
+  {
+   "m4xshen/hardtime.nvim",
+   requires = {
+     'MunifTanjim/nui.nvim',
+     "nvim-lua/plenary.nvim"
+   },
+   config = function ()
+     require("hardtime").setup{
+      max_time = 2000,
+      max_count = 10,
+      disable_mouse = false,
+      disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil" },
+     }
+
+   end
+  }
 }
 
 local packer = require('packer')
