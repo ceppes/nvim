@@ -20,7 +20,7 @@ local pickers = {}
 pickers.live_grep = {
   layout_config = {
     anchor = "N",
-    height = 0.35,
+    height = 0.80,
     mirror = true,
     width = 0.55,
   },
