@@ -22,7 +22,7 @@ pickers.live_grep = {
     anchor = "N",
     height = 0.80,
     mirror = true,
-    width = 0.55,
+    width = 0.80,
   },
   prompt_prefix = "   ",
   theme = "dropdown",
