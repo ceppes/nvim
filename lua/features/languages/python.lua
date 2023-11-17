@@ -19,7 +19,7 @@ function M.lsp()
 
     -- Use activated virtualenv.
     if vim.env.VIRTUAL_ENV then
-      -- print("1 " .. path.join(vim.env.VIRTUAL_ENV, 'bin', 'python'))
+      print("1 " .. path.join(vim.env.VIRTUAL_ENV, 'bin', 'python'))
       return path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
     end
 
@@ -27,7 +27,7 @@ function M.lsp()
     local match = vim.fn.glob(path.join(workspace, 'poetry.lock'))
     if match ~= '' then
       local venv = vim.fn.trim(vim.fn.system('poetry env info -p'))
-      -- print("2 " .. path.join(venv, 'bin', 'python'))
+      print("2 " .. path.join(venv, 'bin', 'python'))
       return path.join(venv, 'bin', 'python')
     end
 
@@ -35,13 +35,15 @@ function M.lsp()
     for _, pattern in ipairs({'*', '.*'}) do
       local match = vim.fn.glob(path.join(workspace, pattern, 'pyvenv.cfg'))
       if match ~= '' then
-        -- print("3 " .. path.join(path.dirname(match), 'bin', 'python'))
+        print("3 " .. path.join(path.dirname(match), 'bin', 'python'))
         return path.join(path.dirname(match), 'bin', 'python')
       end
     end
 
     -- Fallback to system Python.
-    return exepath('python3') or exepath('python') or 'python'
+    local res = exepath('python3') or exepath('python') or 'python'
+    vim.notify("python path : ".. res)
+    return res
   end
 
   local python_root_files = {
@@ -74,8 +76,7 @@ function M.lsp()
         }
       },
       before_init = function(_, config)
-        print("Test")
-        print(get_python_path(config.root_dir))
+        vim.notify("python path : " .. get_python_path(config.root_dir))
         config.settings.python.pythonPath = get_python_path(config.root_dir)
       end
     }
