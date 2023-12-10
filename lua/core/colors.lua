@@ -9,33 +9,30 @@ M =
   }, {
     "catppuccin/nvim" ,
     as = "catppuccin",
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require("core.colors").setup()
       require("core.colors").keymaps()
     end
   }
 }
+local default_color = "catppuccin-mocha"
 
 local function ColorIt(color)
-  color = color or "catppuccin-mocha"
+  color = color or default_color
   vim.cmd.colorscheme(color)
 end
 
 function M.setup()
-
-  ColorIt()
-
-  local color = "catppuccin-mocha"
-  vim.cmd.colorscheme(color)
-
-  vim.o.background = "dark"
-
   require('catppuccin').setup{
     styles = {
       comment = {}, -- For markdown checkbox highlight
     },
   }
 
+  ColorIt()
+  vim.o.background = "dark"
 end
 
 function M.keymaps()

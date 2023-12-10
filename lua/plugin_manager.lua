@@ -65,8 +65,6 @@ local plugins = {
    end
  },
  --
- --  -- Tag viewer
- --  'liuchengxu/vista.vim',
  --
  --  -- Tools
   {

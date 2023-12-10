@@ -1,17 +1,20 @@
 local M = {}
 
 M = {
-  'kdheepak/lazygit.nvim',
-  dependencies = {
-    'kdheepak/lazygit.nvim',
+  {
     'tpope/vim-fugitive',
+  },{
+    'kdheepak/lazygit.nvim',
+    -- use 'airblade/vim-gitgutter'
+  },{
+    "FabijanZulj/blame.nvim"
+  },{
     'lewis6991/gitsigns.nvim', -- needed for feline status line
-  -- use 'airblade/vim-gitgutter'
-  },
-  config = function()
-    require("features.git").setup()
-    require("features.git").keymaps()
-  end
+    config = function()
+      require("features.git").setup()
+      require("features.git").keymaps()
+    end
+  }
 }
 
 function M.setup()
@@ -23,7 +26,7 @@ function M.setup()
       topdelete    = { hl = "GitSignsDelete", text = "▔" },
       changedelete = { hl = "GitSignsChange", text = "▎" },
     },
-    current_line_blame = true,
+    current_line_blame = false, -- :Gitsigns toggle_current_line_blame
     current_line_blame_opts = {
       delay = 0,
     },
@@ -49,7 +52,7 @@ function M.keymaps()
   vim.keymap.set('n', '<leader>lg', lazygit.lazygit, {desc = "Lazygit"})
 
   -- Vim fugitive
-  vim.keymap.set('n', '<leader>gb', ':Git blame<CR>', {desc = 'Git blame'})
+  vim.keymap.set('n', '<leader>gb', ':ToggleBlame<CR>', {desc = 'Git blame'})
   vim.keymap.set('n', '<leader>gd', ':Gitsigns diffthis<CR>', {desc = 'Git diff this'})
 end
 
