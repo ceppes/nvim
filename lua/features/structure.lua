@@ -1,8 +1,8 @@
 local M = {}
 
-M.plugins = {
+M = {
   'simrat39/symbols-outline.nvim',
-  cmd = "SymbolsOutline",
+  -- cmd = "SymbolsOutline",
   config = function()
     require("features.structure").setup()
     require("features.structure").keymaps()
@@ -16,7 +16,7 @@ end
 
 function M.keymaps()
   local symbols_outline = require("symbols-outline")
-  vim.keymap.set('n', '<leader>v', symbols_outline.toggle_outline, {desc = 'Open Structure'})
+  vim.keymap.set('n', '<leader>h', symbols_outline.toggle_outline, {desc = 'Open Structure'})
 end
 
 return M

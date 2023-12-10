@@ -1,6 +1,6 @@
 local M = {}
 
-M.plugins = {
+M = {
   "folke/which-key.nvim",
   config = function()
     require("features.whichkey").setup()
@@ -11,7 +11,7 @@ function M.setup()
   local whichkey =  require('which-key')
   vim.o.timeout = true
   vim.opt.timeoutlen = 900
-  whichkey.setup {}
+  whichkey.setup({})
 end
 
 return M

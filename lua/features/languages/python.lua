@@ -3,6 +3,7 @@ local M = {}
 M.linter = 'pylint'
 M.lspbin = 'pyright-langserver'
 M.debugger = 'debugpy'
+M.treesitter = 'python'
 
 function M.lsp()
   local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')

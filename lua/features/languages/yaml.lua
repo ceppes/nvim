@@ -3,6 +3,7 @@
 local M = {}
 
 M.lspbin = "yaml-language-server"
+M.treesitter = "yaml"
 
 function M.lsp()
 

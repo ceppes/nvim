@@ -9,4 +9,4 @@
 
 require('core.settings')
 require('core.keymaps')
-require('packer_init')
+require('plugin_manager')

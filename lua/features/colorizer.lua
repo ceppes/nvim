@@ -1,6 +1,6 @@
 local M = {}
 
-M.plugins = {
+M = {
   'norcalli/nvim-colorizer.lua',
   config = function()
     require("features.colorizer").setup()
@@ -13,13 +13,13 @@ function M.setup()
     return
   end
 
-  colorizer.setup {
+  colorizer.setup({
     'css';
     'javascript';
     'html';
     'python';
     'lua';
-  }
+  })
 end
 
 return M

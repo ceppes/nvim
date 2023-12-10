@@ -1,8 +1,8 @@
 local M = {}
 
-M.plugins = {
+M = {
   'jose-elias-alvarez/null-ls.nvim',
-  requires = {
+  dependencies = {
     "jayp0521/mason-null-ls.nvim",
   },
   config = function ()

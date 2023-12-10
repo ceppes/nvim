@@ -10,7 +10,7 @@ function M.setup()
 
   for _, severity in pairs(severities) do
     local hl = ("DiagnosticSign%s"):format(severity.text)
-    vim.fn.sign_define(hl, { text = severity.sign, texthl = hl, numhl = hl })
+    vim.fn.sign_define(hl, { text = severity.sign, texthl = hl, numhl = "" })
   end
 
   vim.diagnostic.config({

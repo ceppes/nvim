@@ -3,6 +3,7 @@ local M = {}
 M.linter = ''
 M.lspbin = 'typescript-language-server'
 M.debugger = ''
+M.treesitter = 'typescript'
 
 function M.lsp()
   local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')

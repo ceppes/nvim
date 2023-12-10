@@ -3,6 +3,7 @@ local M = {}
 M.linter = ''
 M.lspbin = 'vscode-css-language-server'
 M.debugger = ''
+M.treesitter = 'css'
 
 function M.lsp()
   local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')

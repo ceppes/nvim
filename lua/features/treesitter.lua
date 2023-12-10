@@ -1,14 +1,16 @@
+-- https://github.com/nvim-treesitter/nvim-treesitter
+
 local M = {}
 
-M.plugins = {
+M = {
   'nvim-treesitter/nvim-treesitter',
-  requires = {
+  dependencies = {
     'nvim-treesitter/playground'
   },
-  run = function()
-      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-      ts_update()
-  end,
+  -- run = function()
+  --     local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+  --     ts_update()
+  -- end,
   config = function()
     require("features.treesitter").setup()
   end
@@ -19,25 +21,36 @@ local ensure_installed = {
   'c',
   'comment',
   'cpp',
-  'css',
+  require("features.languages.css").treesitter,
   'dockerfile',
   'dot',
+  'git_config',
+  'git_rebase',
+  'gitcommit',
+  'gitignore',
   'go',
+  'gomod',
   -- 'help',
   'html',
-  'java',
+  'http',
+  require("features.languages.java").treesitter,
   'javascript',
   'json',
+  'jsonc',
   'hcl',
   'latex',
-  'lua',
+  require("features.languages.lua").treesitter,
+  'luadoc',
   'markdown',
-  'python',
+  require("features.languages.python").treesitter,
+  'query', -- treesitter
   'regex',
+  'scss',
   'sql',
-  'typescript',
+  'terraform',
+  require("features.languages.typescript").treesitter,
   'vim',
-  'yaml'
+  require("features.languages.yaml").treesitter,
 }
 
 
@@ -53,7 +66,7 @@ function M.setup()
     sync_install = false,
     -- Automatically install missing parsers when entering buffer
     -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-    auto_install = true,
+    auto_install = false, -- Run :TSUpdate
     highlight = {
       -- `false` will disable the whole extension
       enable = true,

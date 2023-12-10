@@ -1,6 +1,6 @@
 local M = {}
 
-M.plugins = {
+M = {
   'feline-nvim/feline.nvim',
   config = function()
     require("features.statusline").setup()

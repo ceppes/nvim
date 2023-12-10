@@ -1,5 +1,5 @@
 local function optiones(options)
-  local default_options = { noremap=true, silent=true, buffer = bufnr, remap = false}
+  local default_options = { noremap=true, silent=true, remap = false}
   return vim.tbl_extend('force', default_options, options)
 end
 

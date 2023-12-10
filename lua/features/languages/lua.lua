@@ -1,6 +1,7 @@
 local M = {}
 
 M.lspbin = 'lua-language-server'
+M.treesitter = 'lua'
 
 function M.lsp()
   return require("features.lsp.server_config").config(
@@ -20,6 +21,10 @@ function M.lsp()
           -- Make the server aware of Neovim runtime files
           library = vim.api.nvim_get_runtime_file("lua", true),
           preloadFileSize = 1000,
+          checkThirdParty = false
+        },
+        completion = {
+          callSnippet = "Replace",
         },
         -- Do not send telemetry data containing a randomized but unique identifier
         telemetry = { enable = false,},
@@ -30,6 +35,8 @@ function M.lsp()
   })
 
 end
+
+
 
 
 return M

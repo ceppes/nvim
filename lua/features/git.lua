@@ -1,8 +1,8 @@
 local M = {}
 
-M.plugins = {
+M = {
   'kdheepak/lazygit.nvim',
-  requires = {
+  dependencies = {
     'kdheepak/lazygit.nvim',
     'tpope/vim-fugitive',
     'lewis6991/gitsigns.nvim', -- needed for feline status line

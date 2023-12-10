@@ -1,8 +1,10 @@
 local M = {}
 
-M.plugins = {
+M = {
  'Shatur/neovim-session-manager',
-  requires = { {'nvim-lua/plenary.nvim'} },
+  dependencies = {
+    'nvim-lua/plenary.nvim'
+  },
   config = function()
     require("features.session").setup()
     require("features.session").keymaps()

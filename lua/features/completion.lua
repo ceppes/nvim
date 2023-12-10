@@ -1,8 +1,9 @@
 local M = {}
 
-M.plugins = {
+M = {
   'hrsh7th/nvim-cmp',
-  requires = {
+  event = "InsertEnter",
+  dependencies = {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
@@ -15,6 +16,7 @@ M.plugins = {
     --'hrsh7th/cmp-cmdline',
     --'hrsh7th/cmp-calc',
     --'f3fora/cmp-spell',
+    "onsails/lspkind.nvim", -- vscodelike picto
   },
   config = function()
     require("features.completion").setup()

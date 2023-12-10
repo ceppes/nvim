@@ -1,6 +1,6 @@
 local M = {}
 
-M.plugins = {
+M = {
   'goolord/alpha-nvim',
   config = function()
     require("features.welcome").setup()
@@ -15,8 +15,8 @@ local footer = function()
   local version = " " .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch
 
   local plugins_count = "   ?? Plugins"
-  if packer_plugins ~= nil then
-    plugins_count = "   " .. #vim.tbl_keys(packer_plugins) .. " Plugins"
+  if require("lazy").plugins() ~= nil then
+    plugins_count = "   " .. #vim.tbl_keys(require("lazy").plugins()) .. " Plugins"
   end
   local datetime = os.date "  %d-%m-%Y  %H:%M:%S"
 

@@ -1,8 +1,8 @@
 local M = {}
 
-M.plugins = {
+M = {
     "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    dependencies = "kyazdani42/nvim-web-devicons",
     config = function ()
       require('features.trouble').setup()
       require('features.trouble').keymaps()

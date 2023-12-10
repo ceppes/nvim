@@ -1,6 +1,6 @@
 local M = {}
 
-M.plugins = {
+M = {
   'numToStr/Comment.nvim',
   config = function ()
     require("features.comment").setup()

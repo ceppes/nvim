@@ -4,21 +4,14 @@ local dap_ensure_installed = {
   'debugpy',
 }
 
-M.plugins = {
+M = {
   'mfussenegger/nvim-dap',
   -- opt = true,
   -- event = "BufReadPre",
   -- module = {
   --   "dap"
   -- },
-  wants = {
-    "nvim-dap-virtual-text",
-    -- "DAPInstall.nvim",
-    "nvim-dap-ui",
-    "nvim-dap-python",
-    "which-key.nvim"
-  },
-  requires = {
+  dependencies = {
     -- "Pocco81/DAPInstall.nvim",
     "theHamsta/nvim-dap-virtual-text",
     "rcarriga/nvim-dap-ui",
@@ -35,7 +28,6 @@ M.plugins = {
 }
 
 
--- configure
 local dap_breakpoint = {
   error = {
     text = "🔴",

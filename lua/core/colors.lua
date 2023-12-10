@@ -1,16 +1,19 @@
 local M = {}
 
-M.plugins = {
-  "catppuccin/nvim",
-  as = "catppuccin",
-  requires = {
+M =
+{
+  {
     "ellisonleao/gruvbox.nvim",
+  },{
     "folke/tokyonight.nvim",
-  },
-  config = function()
-    require("core.colors").setup()
-    require("core.colors").keymaps()
-  end
+  }, {
+    "catppuccin/nvim" ,
+    as = "catppuccin",
+    config = function()
+      require("core.colors").setup()
+      require("core.colors").keymaps()
+    end
+  }
 }
 
 local function ColorIt(color)
