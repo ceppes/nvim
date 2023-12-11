@@ -1,9 +1,8 @@
 local M = {}
 
 M.linter = ''
-M.lspbin = 'vscode-css-language-server'
+M.lspbin = 'helm_ls'
 M.debugger = ''
-M.treesitter = 'css'
 
 function M.lsp()
   local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')
@@ -14,9 +13,11 @@ function M.lsp()
   return require("features.lsp.server_config").config(
     M.lspbin,
     {
-      cmd = {"vscode-css-language-server", "--stdio"},
-      filetypes = {"css", "scss", "less"},
-      root_dir = lspconfig.util.root_pattern("package.json", ".git"),
+      cmd = {"helm_ls", "serve"},
+      filetypes = {"helm", "yaml", "yml"},
+        root_dir = function(fname)
+          return lspconfig.util.root_pattern('Chart.yaml')(fname)
+          end
     }
   )
 end

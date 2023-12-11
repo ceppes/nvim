@@ -87,15 +87,17 @@ local plugins = {
       })
     end,
   },
- {
-   'mbbill/undotree',
-   config = function ()
-    vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, {desc = 'Undotree Toggle'})
-   end
- },
- --
- --
- --  -- Tools
+  {
+    "towolf/vim-helm",
+    -- ft = {"yaml"}
+  },
+  {
+    'mbbill/undotree',
+    config = function ()
+      vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, {desc = 'Undotree Toggle'})
+    end
+  },
+  --  -- Tools
   {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end

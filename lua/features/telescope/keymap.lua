@@ -21,7 +21,8 @@ vim.keymap.set('n', '<leader>feh', function ()
 vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = "T Git files"})
 vim.keymap.set('n', '<leader>fl', builtin.live_grep, { desc = "T Live grep"})
 vim.keymap.set('n', '<leader>fs', function ()
-    builtin.grep_string({ search = vim.fn.input("Grep > ")});
+    builtin.grep_string();
+    -- builtin.grep_string({ search = vim.fn.input("Grep > ")});
   end,
   {desc = 'T Grep string'})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "T Buffers"})

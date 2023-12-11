@@ -19,9 +19,9 @@ config = {
 local pickers = {}
 pickers.live_grep = {
   layout_config = {
-    anchor = "N",
-    height = 0.80,
-    mirror = true,
+    -- anchor = "N",
+    -- mirror = true,
+    -- height = 0.80,
     width = 0.80,
   },
   prompt_prefix = "   ",

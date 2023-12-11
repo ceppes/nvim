@@ -27,9 +27,9 @@ function M.setup()
       changedelete = { hl = "GitSignsChange", text = "▎" },
     },
     current_line_blame = false, -- :Gitsigns toggle_current_line_blame
-    current_line_blame_opts = {
-      delay = 0,
-    },
+    -- current_line_blame_opts = {
+    --   delay = 0,
+    -- },
     sign_priority=0 -- for column
   })
 end
