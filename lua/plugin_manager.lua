@@ -18,10 +18,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-
-
-
-
 -- vim.cmd.packadd('packer.nvim')
 --
 -- local packer_helper = require('features.packer')
@@ -58,6 +54,39 @@ local plugins = {
   require('features.welcome'),
   require('features.session'),
   require('features.ui'),
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    -- branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    },
+    keys = {
+      { "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
+    },
+    config = function()
+      require("neo-tree").setup({
+        source_selector = {
+          winbar = true,
+          status = false,
+          sources = {
+            { source = "filesystem"},
+            { source = "buffers"},
+            { source = "git_status"},
+            { source = "document_symbols"}
+          }
+        },
+        sources = {
+          "filesystem",
+          "buffers",
+          "git_status",
+          "document_symbols"
+        }
+      })
+    end,
+  },
  {
    'mbbill/undotree',
    config = function ()
