@@ -2,7 +2,7 @@ local M = {}
 
 M = {
   'akinsho/bufferline.nvim',
-  dependencies = 'kyazdani42/nvim-web-devicons',
+  dependencies = 'nvim-tree/nvim-web-devicons',
   config = function ()
     require("features.tab").setup()
     require("features.tab").keymaps()
