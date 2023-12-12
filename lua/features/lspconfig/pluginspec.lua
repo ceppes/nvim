@@ -15,6 +15,8 @@ local M = {
     require('features.lspconfig.autocmds')
     require('features.lspconfig.setup')
     require('features.lspconfig.setup_servers')
+    require('features.lsp.keymaps').keymaps()
+    require('features.lsp.keymaps').diagnostic_keymaps()
   end,
   ft = {
     -- "cs",
