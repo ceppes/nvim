@@ -9,23 +9,38 @@ config = {
   defaults = {
     layout_strategy = "vertical",
     layout_config = {
-      prompt_position = 'top',
-      mirror = true,
-      -- preview_height = 0.65
+      vertical ={
+        prompt_position = 'top',
+        mirror = true,
+      }
     }
   }
 }
 
 local pickers = {}
-pickers.live_grep = {
-  layout_config = {
-    -- anchor = "N",
-    -- mirror = true,
-    -- height = 0.80,
-    width = 0.80,
+pickers = {
+  live_grep = {
+    layout_strategy = "vertical",
+    layout_config = {
+      -- anchor = "N",
+      preview_height = 0.65,
+      height = 0.90,
+      width = 0.80,
+    },
+    prompt_prefix = "   ",
+    theme = "dropdown",
   },
-  prompt_prefix = "   ",
-  theme = "dropdown",
+  find_files = {
+    layout_strategy = "vertical",
+    layout_config = {
+      preview_height = 0.65,
+      height = 0.90,
+      width = 0.80,
+    },
+    prompt_prefix = "   ",
+    theme = "dropdown",
+
+  }
 }
 config.pickers = pickers
 
