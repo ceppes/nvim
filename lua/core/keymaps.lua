@@ -93,3 +93,24 @@ keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "ch
 -- Goyo, distraction free
 -- map('n', '<leader>g', ':Goyo 100%<CR>')
 -- map('n', '<leader>G', ':Goyo!<CR>')
+
+keymap.set("n", "+", "<C-a>", { desc = "Increment"})
+keymap.set("n", "-", "<C-x>", { desc = "Decrement"})
+
+keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all"})
+
+-- Spli window
+keymap.set("n", "sh", ":split<CR>", opts)
+keymap.set("n", "sv", ":vsplit<CR>", opts)
+
+--move window
+keymap.set("n", "sh", "<C-w>h")
+keymap.set("n", "sj", "<C-w>j")
+keymap.set("n", "sk", "<C-w>k")
+keymap.set("n", "sl", "<C-w>l")
+
+-- resize window
+keymap.set("n", "<C-w><left>", "<C-w><")
+keymap.set("n", "<C-w><right>", "<C-w>>")
+keymap.set("n", "<C-w><up>", "<C-w>+")
+keymap.set("n", "<C-w><down>", "<C-w>-")
