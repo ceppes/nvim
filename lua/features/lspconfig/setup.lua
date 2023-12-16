@@ -1,10 +1,3 @@
-local lsp_ensure_installed = {
-  "lua_ls",
-  "pyright",
-  "yamlls",
-  "tsserver"
-}
-
 local protocol = require("vim.lsp.protocol")
 protocol.CompletionItemKind = {
   '', -- Text
@@ -35,6 +28,15 @@ protocol.CompletionItemKind = {
 }
 
 require('mason').setup({ ui = { border = 'rounded' } })
+
+local lsp_ensure_installed = {}
+local servers = require("features.lspconfig.servers")
+for server, config in pairs(servers) do
+  if config then
+    table.insert(lsp_ensure_installed, server)
+  end
+end
 require("mason-lspconfig").setup{ ensure_installed = lsp_ensure_installed }
+
 require("fidget").setup{} -- little progress bar for lsp loading
 

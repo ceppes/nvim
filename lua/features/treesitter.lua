@@ -35,7 +35,7 @@ local ensure_installed = {
   'http',
   require("features.languages.java").treesitter,
   'javascript',
-  'json',
+  require("features.languages.json").treesitter,
   'jsonc',
   'hcl',
   'latex',

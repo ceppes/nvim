@@ -1,8 +1,6 @@
 local M = {}
 
 function M.attach(client, bufnr)
-  M.keymaps()
-  M.diagnostic_keymaps()
   require("features.lsp.diagnostics").setup()
 
   vim.api.nvim_buf_set_var(bufnr, "lsp_attached", true)
@@ -14,7 +12,6 @@ function M.attach(client, bufnr)
         vim.api.nvim_buf_set_var(bufnr, "nvim_navic_attached", true)
     end
   end
-
 
   vim.opt.winbar = "%f > %{%v:lua.require'nvim-navic'.get_location()%}"
 

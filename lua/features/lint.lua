@@ -10,13 +10,19 @@ M = {
   end
 }
 
-local lint_ensure_installed = {
-  'pylint',
-  'markdownlint',
-  'prettier'
-}
 
 function M.setup()
+  local lint_ensure_installed = {
+    'markdownlint',
+  }
+  local servers = require("features.lspconfig.servers")
+  for server, config in pairs(servers) do
+    local lint = config.linter
+    if lint then
+      table.insert(lint_ensure_installed, lint)
+    end
+  end
+
   require('mason-null-ls').setup({ ensure_installed = lint_ensure_installed })
 
   local null_ls = require("null-ls")

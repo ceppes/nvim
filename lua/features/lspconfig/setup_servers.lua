@@ -4,20 +4,14 @@ if not lsp_status_ok then
 end
 vim.lsp.set_log_level("debug")
 
-local servers = {
-  pyright = require('features.languages.python').lsp(),
-  lua_ls = require('features.languages.lua').lsp(),
-  yamlls = require('features.languages.yaml').lsp(),
-  tsserver = require('features.languages.typescript').lsp(),
-  cssls = require('features.languages.css').lsp(),
-  helm_ls = require('features.languages.helm').lsp(),
-}
 -- debug
 -- :lua vim.inspect(vim.lsp.get_active_clients()))
+local servers = require("features.lspconfig.servers")
 
 for server, config in pairs(servers) do
-  if config then
-    lspconfig[server].setup(config)
+  local lsp = config.lsp()
+  if lsp then
+    lspconfig[server].setup(lsp)
   end
 end
 
