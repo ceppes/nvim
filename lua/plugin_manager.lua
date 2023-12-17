@@ -18,17 +18,16 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- vim.cmd.packadd('packer.nvim')
---
--- local packer_helper = require('features.packer')
--- packer_helper.keymap()
-
---local lsputil = require("lspconfig.util")
--- vim.keymap.set
-
 local plugins = {
   require('core.colors'),
   require('features.whichkey'),
+  require('features.welcome'),
+  require('features.statusline'),
+  require('features.tab'),
+  require('features.git'),
+  require('features.comment'),
+  require('features.treesitter'),
+  require('features.indent'),
   require('features.telescope.pluginspec'),
   require('features.notify'),
   require('features.trouble'),
@@ -43,15 +42,8 @@ local plugins = {
   require('features.completion'),
   require('features.debugger'),
   require('features.lint'),
-  require('features.git'),
-  require('features.statusline'),
-  require('features.treesitter'),
-  require('features.comment'),
-  require('features.indent'),
   require('features.colorizer'),
   require('features.structure'),
-  require('features.tab'),
-  require('features.welcome'),
   require('features.session'),
   require('features.ui'),
   {
@@ -104,6 +96,7 @@ local plugins = {
   },
   {
     "windwp/nvim-ts-autotag",
+    dependencies = {"nvim-treesitter/nvim-treesitter"},
     config = function() require("nvim-ts-autotag").setup {} end
   },
  --  "onsails/lspkind.nvim",
@@ -138,11 +131,3 @@ local plugins = {
 require("lazy").setup(plugins)
 -- require("lazy").setup(plugins,opts)
 
--- local packer = require('packer')
--- packer.startup{
---   packer_helper.use(plugins),
---   config = {
---     snapshot = vim.env.HOME .. "/.dotfiles/nvim/snapshots/snapshot-main.json", -- Snapshot name to load at startup
---     snapshot_path = vim.env.HOME .. "/.dotfiles/nvim/snapshots/" -- Snapshot save path,
---   }
--- }

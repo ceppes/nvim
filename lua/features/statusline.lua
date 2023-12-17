@@ -2,11 +2,11 @@ local M = {}
 
 M = {
   'feline-nvim/feline.nvim',
+  dependencies = {"nvim-web-devicons"},
   config = function()
     require("features.statusline").setup()
   end
 }
-
 
 -- Colorscheme
 local gruvbox = {
@@ -24,7 +24,6 @@ local gruvbox = {
     white = '#ebdbb2',
     yellow = '#d79921',
 }
-
 
 local vi_mode_text = {
     n = "NORMAL",
@@ -147,7 +146,7 @@ local function composition()
         provider = function()
           local filename = vim.fn.expand('%:t')
           local extension = vim.fn.expand('%:e')
-          local icon  = require'nvim-web-devicons'.get_icon(filename, extension)
+          local icon  = require('nvim-web-devicons').get_icon(filename, extension)
           if icon == nil then
             icon = ''
           end

@@ -19,7 +19,7 @@ M = {
 local ensure_installed = {
   'bash',
   'c',
-  'comment',
+  -- 'comment',
   'cpp',
   require("features.languages.css").treesitter,
   'dockerfile',
@@ -30,7 +30,6 @@ local ensure_installed = {
   'gitignore',
   'go',
   'gomod',
-  -- 'help',
   'html',
   'http',
   require("features.languages.java").treesitter,
