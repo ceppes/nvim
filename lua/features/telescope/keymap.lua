@@ -30,6 +30,7 @@ vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = "T Keymaps"})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "T Help tag"})
 vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = "T Resume"})
 vim.keymap.set('n', '<leader>fp', builtin.pickers, { desc = "T Pickers"})
+vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = "T Diagnostic"})
 
 
 -- TODO google telescope.buitlin.grep_string
