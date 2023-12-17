@@ -2,6 +2,7 @@
 local M = {}
 
 M.lspbin = "json-lsp"
+M.lspbin = "vscode-json-language-server"
 M.treesitter = "json"
 
 function M.lsp()

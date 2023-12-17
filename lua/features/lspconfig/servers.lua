@@ -7,7 +7,7 @@ M = {
   tsserver = require('features.languages.typescript'),
   cssls = require('features.languages.css'),
   helm_ls = require('features.languages.helm'),
-  jsonls = require('features.languages.json'), -- not working
+  jsonls = require('features.languages.json'),
 }
 
 return M
