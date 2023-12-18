@@ -44,7 +44,7 @@ opt.cursorline = true                 -- Enable line highlight
 opt.cursorcolumn = true               -- Enable column highlight
 opt.signcolumn='auto:3'               -- Set 3 column for gitsigns and lsp
 opt.scrolloff = 8                     -- Keep lines above and below cursor
-opt.hlsearch = false                  -- No highlight in search
+opt.hlsearch = true                   -- Highlight in search
 opt.incsearch = true                  --
 -----------------------------------------------------------
 -- Tabs, indent
@@ -72,6 +72,10 @@ g.netrw_liststyle = 3
 -----------------------------------------------------------
 -- Startup
 -----------------------------------------------------------
+
+-- Fold
+opt.foldmethod = 'indent'             -- Fold on each indent
+
 
 -- Disable nvim intro
 opt.shortmess:append "sI"
@@ -102,44 +106,3 @@ local disabled_built_ins = {
 for _, plugin in pairs(disabled_built_ins) do
   g["loaded_" .. plugin] = 1
 end
-
------------------------------------------------------------
--- Autocommands
------------------------------------------------------------
-
--- Highlight on yank
-exec([[
-  augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=800}
-  augroup end
-]], false)
-
--- Remove whitespace on save
-cmd [[autocmd BufWritePre * :%s/\s\+$//e]]
-
--- Don't auto commenting new lines
-cmd [[autocmd BufEnter * set fo-=c fo-=r fo-=o]]
-
--- Remove line lenght marker for selected filetypes
-cmd [[
-  autocmd FileType text,markdown,html,xhtml,javascript setlocal cc=0
-]]
-
--- 2 spaces for selected filetypes
-cmd [[
-  autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
-]]
-
--- Fold
-opt.foldmethod = 'indent'             -- Fold on each indent
--- Set to 1 to only show mehtods levels
-cmd [[  autocmd FileType * setlocal foldlevel=1000 ]]
-cmd [[  autocmd FileType python setlocal foldlevel=1 ]]
-cmd [[  autocmd FileType java setlocal foldlevel=2 ]]
-
--- Remap some commands that I often get wrong
-vim.api.nvim_create_user_command('Qa', 'qa', { nargs = 0 })
-vim.api.nvim_create_user_command('Q', 'q', { nargs = 0 })
-vim.api.nvim_create_user_command('Wa', 'wa', { nargs = 0 })
-vim.api.nvim_create_user_command('Wq', 'wq', { nargs = 0 })
