@@ -29,7 +29,7 @@ local plugins = {
   require('features.treesitter'),
   require('features.indent'),
   require('features.telescope.pluginspec'),
-  require('features.notify'),
+  require('features.ui'),
   require('features.trouble'),
   {
     "folke/neodev.nvim",
@@ -45,7 +45,6 @@ local plugins = {
   require('features.colorizer'),
   require('features.structure'),
   require('features.session'),
-  require('features.ui'),
   {
     "nvim-neo-tree/neo-tree.nvim",
     -- branch = "v3.x",
