@@ -129,5 +129,6 @@ local plugins = {
 }
 
 require("lazy").setup(plugins)
+vim.keymap.set("n", "<leader>l", ":Lazy<CR>", { desc = "Open Lazy"})
 -- require("lazy").setup(plugins,opts)
 
