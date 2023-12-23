@@ -7,8 +7,10 @@ local M = {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     'j-hui/fidget.nvim',
+    "luckasRanarison/clear-action.nvim",
   },
   config = function ()
+    require("clear-action").setup()
     require("neodev").setup({})
     require('features.lspconfig.highlight')
     require('features.lspconfig.commands')
