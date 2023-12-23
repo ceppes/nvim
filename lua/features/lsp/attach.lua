@@ -13,7 +13,6 @@ function M.attach(client, bufnr)
     end
   end
 
-  vim.opt.winbar = "%f > %{%v:lua.require'nvim-navic'.get_location()%}"
 
 end
 

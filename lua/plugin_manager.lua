@@ -31,6 +31,7 @@ local plugins = {
   require('features.telescope.pluginspec'),
   require('features.ui'),
   require('features.trouble'),
+  require('features.winbar'),
   {
     "folke/neodev.nvim",
     config = function() require("neodev").setup({}) end,
