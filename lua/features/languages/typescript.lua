@@ -1,6 +1,7 @@
 local M = {}
 
-M.linter = ''
+M.linter = 'eslint_d'
+M.lsp_key = 'tsserver'
 M.lspbin = 'typescript-language-server'
 M.debugger = ''
 M.treesitter = 'typescript'

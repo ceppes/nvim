@@ -2,6 +2,7 @@
 
 local M = {}
 
+M.lsp_key = 'yamlls'
 M.lspbin = "yaml-language-server"
 M.treesitter = "yaml"
 

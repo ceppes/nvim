@@ -2,6 +2,8 @@ local M = {}
 
 M.lspbin = 'lua-language-server'
 M.treesitter = 'lua'
+M.lsp_key = 'lua_ls'
+M.formatter = 'stylua'
 
 function M.lsp()
   return require("features.lsp.server_config").config(

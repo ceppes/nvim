@@ -1,6 +1,6 @@
 local M = {}
 
-M.linter = ''
+M.lsp_key = 'helm_ls'
 M.lspbin = 'helm_ls'
 M.debugger = ''
 

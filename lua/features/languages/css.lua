@@ -1,6 +1,6 @@
 local M = {}
 
-M.linter = ''
+M.lsp_key = 'cssls'
 M.lspbin = 'vscode-css-language-server'
 M.debugger = ''
 M.treesitter = 'css'

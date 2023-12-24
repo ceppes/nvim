@@ -1,9 +1,11 @@
 local M = {}
 
 M.linter = 'pylint'
+M.lsp_key = 'pyright'
 M.lspbin = 'pyright-langserver'
 M.debugger = 'debugpy'
-M.treesitter = 'python'
+M.filetype = 'python'
+M.treesitter = M.filetype
 
 function M.lsp()
   local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')
