@@ -178,7 +178,7 @@ function M.setup()
             local val = {}
             local filename = vim.fn.expand('%:t')
             local extension = vim.fn.expand('%:e')
-            local icon, name  = require'nvim-web-devicons'.get_icon(filename, extension)
+            -- local icon, name  = require'nvim-web-devicons'.get_icon(filename, extension)
             -- if icon ~= nil then
               -- val.fg = vim.fn.synIDattr(vim.fn.hlID(name), 'fg')
             -- else
@@ -215,7 +215,6 @@ function M.setup()
           enabled = function()
             return navic.is_available()
           end
-
         }
       },
       line_percentage = {
@@ -301,6 +300,40 @@ function M.setup()
           }
         }
       },
+      nullls = {
+        name = {
+          left_sep = ' ',
+          hl = {
+            fg = clrs.blue
+          },
+          provider = function ()
+              return table.concat(require("features.null-ls").get_active_clients(), ", ")
+          end
+        }
+      },
+      lint = {
+        name = {
+          provider = function ()
+            return table.concat(require("features.lint").get_active_clients(), ", ")
+          end,
+          left_sep = ' ',
+          truncate_hide = true,
+          hl = {
+            fg = clrs.peach
+          },
+        }
+      },
+      format = {
+        name = {
+          provider = function ()
+            return table.concat(require("features.format").get_active_clients(), ", ")
+          end,
+          left_sep = ' ',
+          hl = {
+            fg = clrs.blue
+          },
+        }
+      },
       git = {
         branch = {
           left_sep = "",
@@ -378,9 +411,12 @@ function M.setup()
       composition().git.sep,
       -- composition().file.icon,
       composition().lsp.name,
+      -- composition().nullls.name,
+      composition().lint.name,
+      composition().format.name,
       composition().search_count,
       -- composition().file.format,
-      -- M.composition().file.size,
+      -- composition().file.size,
       composition().file.encoding,
       composition().file.os,
       -- composition().line_percentage,
