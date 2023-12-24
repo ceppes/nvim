@@ -32,7 +32,7 @@ require('mason').setup({ ui = { border = 'rounded' } })
 local lsp_ensure_installed = {}
 local servers = require("features.lspconfig.servers")
 for server, config in pairs(servers) do
-  if config then
+  if config.lsp then
     table.insert(lsp_ensure_installed, server)
   end
 end

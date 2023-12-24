@@ -21,7 +21,6 @@ local ensure_installed = {
   'c',
   -- 'comment',
   'cpp',
-  require("features.languages.css").treesitter,
   'dockerfile',
   'dot',
   'git_config',
@@ -32,24 +31,18 @@ local ensure_installed = {
   'gomod',
   'html',
   'http',
-  require("features.languages.java").treesitter,
   'javascript',
-  require("features.languages.json").treesitter,
   'jsonc',
   'hcl',
   'latex',
-  require("features.languages.lua").treesitter,
   'luadoc',
   'markdown',
-  require("features.languages.python").treesitter,
   'query', -- treesitter
   'regex',
   'scss',
   'sql',
   'terraform',
-  require("features.languages.typescript").treesitter,
   'vim',
-  require("features.languages.yaml").treesitter,
 }
 
 
@@ -57,6 +50,14 @@ function M.setup()
   local status_ok, nvim_treesitter = pcall(require, 'nvim-treesitter.configs')
   if not status_ok then
     return
+  end
+
+  local servers = require("features.lspconfig.servers")
+  for _, config in pairs(servers) do
+    if config.treesitter then
+      local treesitter = config.treesitter
+      table.insert(ensure_installed, treesitter)
+    end
   end
 
   nvim_treesitter.setup {
