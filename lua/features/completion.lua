@@ -1,27 +1,33 @@
 local M = {}
 
 M = {
-  'hrsh7th/nvim-cmp',
-  event = "InsertEnter",
-  dependencies = {
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-nvim-lsp-signature-help',
-    'hrsh7th/cmp-emoji',
-    --  Snipper : Use luasnip
+  {
+    'hrsh7th/nvim-cmp',
+    event = "InsertEnter",
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-emoji',
+      --  Snipper : Use luasnip
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/cmp-nvim-lua',
+      --'hrsh7th/cmp-cmdline',
+      --'hrsh7th/cmp-calc',
+      --'f3fora/cmp-spell',
+      "onsails/lspkind.nvim", -- vscodelike picto
+    },
+    config = function()
+      require("features.completion").setup()
+    end
+  },{
     'L3MON4D3/LuaSnip',
-    'saadparwaiz1/cmp_luasnip',
-    'hrsh7th/cmp-nvim-lua',
-    'rafamadriz/friendly-snippets',
-    --'hrsh7th/cmp-cmdline',
-    --'hrsh7th/cmp-calc',
-    --'f3fora/cmp-spell',
-    "onsails/lspkind.nvim", -- vscodelike picto
-  },
-  config = function()
-    require("features.completion").setup()
-  end
+    dependencies = {
+      'rafamadriz/friendly-snippets',
+    }
+  }
 }
 
 function M.setup()
@@ -37,8 +43,13 @@ function M.setup()
 
   -- doc: https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md
   -- snippets from https://github.com/honza/vim-snippets.git
-  require("luasnip.loaders.from_snipmate").lazy_load { paths = vim.fn.stdpath "config" .. "/lua/snippets" }
-  -- require("luasnip.loaders.from_vscode").lazy_load()
+
+  -- for friendly snippets
+  require("luasnip.loaders.from_vscode").lazy_load()
+
+  -- for custom snippets
+  -- require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snips" } })
+  require("luasnip.loaders.from_snipmate").lazy_load { lazy_paths = "~/.config" .. "/snippets/vim-snippets/snippets" }
   -- require("luasnip.loaders.from_lua").lazy_load { paths = vim.fn.stdpath "config" .. "/lua/snippets" }
 
   local lspkind_status_ok, lspkind = pcall(require, 'lspkind')
