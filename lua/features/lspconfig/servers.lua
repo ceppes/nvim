@@ -8,6 +8,9 @@ M = {
   cssls = require('features.languages.css'),
   helm_ls = require('features.languages.helm'),
   jsonls = require('features.languages.json'),
+  docker = require('features.languages.docker'),
+  markdown = require('features.languages.markdown'),
+  java = require('features.languages.java'),
 }
 
 return M
