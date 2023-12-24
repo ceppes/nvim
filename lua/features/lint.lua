@@ -1,36 +1,80 @@
 local M = {}
 
 M = {
-  'jose-elias-alvarez/null-ls.nvim',
+  'mfussenegger/nvim-lint',
   dependencies = {
-    "jayp0521/mason-null-ls.nvim",
+    'williamboman/mason.nvim',
+    "rshkarin/mason-nvim-lint",
   },
   config = function ()
     require("features.lint").setup()
   end
 }
 
+function M.get_active_clients()
+  -- Add linters (from nvim-lint)
+	local buf_ft = vim.bo.filetype
+  local buf_client_names = {}
+  local lint_s, lint = pcall(require, "lint")
 
-function M.setup()
-  local lint_ensure_installed = {
-    'markdownlint',
-  }
-  local servers = require("features.lspconfig.servers")
-  for server, config in pairs(servers) do
-    local lint = config.linter
-    if lint then
-      table.insert(lint_ensure_installed, lint)
+  if lint_s then
+
+    if lint.get_running() == nil then
+      return {"L̵t̵"}
+    end
+
+    for ft_k, ft_v in pairs(lint.linters_by_ft) do
+      if type(ft_v) == "table" then
+        for _, linter in ipairs(ft_v) do
+          if buf_ft == ft_k then
+            table.insert(buf_client_names, linter)
+          end
+        end
+      elseif type(ft_v) == "string" then
+        if buf_ft == ft_k then
+          table.insert(buf_client_names, ft_v)
+        end
+      end
     end
   end
+  return buf_client_names
+end
 
-  require('mason-null-ls').setup({ ensure_installed = lint_ensure_installed })
+function M.setup()
+  local lint_ensure_installed = {}
+  local lint_ft_linter = {}
 
-  local null_ls = require("null-ls")
-  null_ls.setup({
-    sources = {
-      null_ls.builtins.diagnostics.pylint,
-      null_ls.builtins.diagnostics.hadolint,
-    },
+  local servers = require("features.lspconfig.servers")
+  for _, config in pairs(servers) do
+    if config.linter then
+      table.insert(lint_ensure_installed, config.linter)
+    end
+    if config.linter and config.filetype then
+      lint_ft_linter[config.filetype] = {config.linter}
+    end
+  end
+  -- for k,v in pairs(lint_ft_linter) do
+  --   for i,j in pairs(v) do
+  --     print(k, v, i, j)
+  --   end
+  -- end
+
+    -- for i,j in pairs(lint_ensure_installed) do
+    --   print(i, j)
+    -- end
+
+  local lint_s, lint = pcall(require, "lint")
+  lint.linters_by_ft = lint_ft_linter
+
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
+    callback = function()
+      require("lint").try_lint()
+    end,
+  })
+
+  require('mason-nvim-lint').setup({
+    ensure_installed = lint_ensure_installed,
+    automatic_installation = true
   })
 end
 
