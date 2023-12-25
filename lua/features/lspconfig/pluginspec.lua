@@ -8,6 +8,7 @@ local M = {
     'williamboman/mason-lspconfig.nvim',
     'j-hui/fidget.nvim',
     "luckasRanarison/clear-action.nvim",
+    "smjonas/inc-rename.nvim",
   },
   config = function ()
     require("clear-action").setup()
@@ -19,6 +20,11 @@ local M = {
     require('features.lspconfig.setup_servers')
     require('features.lsp.keymaps').keymaps()
     require('features.lsp.keymaps').diagnostic_keymaps()
+
+    require("inc_rename").setup({
+      -- input_buffer_type = "dressing",
+    })
+
   end,
   ft = {
     -- "cs",
