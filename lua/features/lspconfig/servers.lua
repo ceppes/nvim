@@ -11,6 +11,7 @@ M = {
   docker = require('features.languages.docker'),
   markdown = require('features.languages.markdown'),
   java = require('features.languages.java'),
+  sh = require('features.languages.shell'),
 }
 
 return M
