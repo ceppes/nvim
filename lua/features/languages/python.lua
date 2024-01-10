@@ -124,13 +124,14 @@ function M.debugger()
       module = "pytest";
       args = function()
         local filter = vim.fn.input('Enter unittest args: ')
-        return {'-v', filter}
+        -- return {'-v', filter}
+        return {filter}
       end,
       -- pythonPath = function(config)
       --   return get_python_path(config.root_dir)
       -- end,
       -- args = {'test'}
-    -- program = "-m pytest ${file}";
+    program = "-m pytest ${file}";
     },
     {
       name = "Python: Attach",
