@@ -17,7 +17,6 @@ M = {
 }
 
 local ensure_installed = {
-  'bash',
   'c',
   -- 'comment',
   'cpp',
