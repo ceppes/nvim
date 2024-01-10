@@ -1,7 +1,7 @@
 local M = {}
 
 M = {
-  {
+    {
     'hrsh7th/nvim-cmp',
     event = "InsertEnter",
     dependencies = {
@@ -22,6 +22,20 @@ M = {
     },
     config = function()
       require("features.completion").setup()
+    end
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function()
+      require'lsp_signature'.setup({
+        bind = true, -- This is mandatory, otherwise border config won't get registered.
+        handler_opts = {
+          border = "rounded"
+        },
+        hint_prefix = "▶ ",
+      })
     end
   }
 }
