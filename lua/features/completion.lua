@@ -52,9 +52,12 @@ function M.setup()
     return
   end
 
+  -- from friendly-snippets
+  require("luasnip.loaders.from_vscode").lazy_load()
+
   -- doc: https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md
   -- snippets from https://github.com/honza/vim-snippets.git
-  require("luasnip.loaders.from_snipmate").lazy_load { paths = vim.fn.stdpath "config" .. "/lua/snippets" }
+  require("luasnip.loaders.from_snipmate").lazy_load { lazy_paths = "~/.config" .. "/snippets/vim-snippets/snippets" }
   -- require("luasnip.loaders.from_vscode").lazy_load()
   -- require("luasnip.loaders.from_lua").lazy_load { paths = vim.fn.stdpath "config" .. "/lua/snippets" }
 
