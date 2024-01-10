@@ -2,6 +2,10 @@ local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')
 if not lsp_status_ok then
   return
 end
+-- log path :
+-- v ~/.cache/nvim/lsp.log
+-- v ~/.local/state/nvim/dapui.log
+
 vim.lsp.set_log_level("debug")
 
 -- debug
