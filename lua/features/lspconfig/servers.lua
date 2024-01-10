@@ -12,6 +12,7 @@ M = {
   markdown = require('features.languages.markdown'),
   java = require('features.languages.java'),
   sh = require('features.languages.shell'),
+  gopls = require('features.languages.go'),
 }
 
 return M
