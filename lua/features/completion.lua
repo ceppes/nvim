@@ -14,6 +14,7 @@ M = {
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lua',
+      'rafamadriz/friendly-snippets',
       --'hrsh7th/cmp-cmdline',
       --'hrsh7th/cmp-calc',
       --'f3fora/cmp-spell',
@@ -22,13 +23,9 @@ M = {
     config = function()
       require("features.completion").setup()
     end
-  },{
-    'L3MON4D3/LuaSnip',
-    dependencies = {
-      'rafamadriz/friendly-snippets',
-    }
   }
 }
+
 
 function M.setup()
   local cmp_status_ok, cmp = pcall(require, 'cmp')
@@ -43,13 +40,8 @@ function M.setup()
 
   -- doc: https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md
   -- snippets from https://github.com/honza/vim-snippets.git
-
-  -- for friendly snippets
-  require("luasnip.loaders.from_vscode").lazy_load()
-
-  -- for custom snippets
-  -- require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snips" } })
-  require("luasnip.loaders.from_snipmate").lazy_load { lazy_paths = "~/.config" .. "/snippets/vim-snippets/snippets" }
+  require("luasnip.loaders.from_snipmate").lazy_load { paths = vim.fn.stdpath "config" .. "/lua/snippets" }
+  -- require("luasnip.loaders.from_vscode").lazy_load()
   -- require("luasnip.loaders.from_lua").lazy_load { paths = vim.fn.stdpath "config" .. "/lua/snippets" }
 
   local lspkind_status_ok, lspkind = pcall(require, 'lspkind')
