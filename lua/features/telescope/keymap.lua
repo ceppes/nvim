@@ -1,8 +1,7 @@
-require'which-key'.register({
-  f = {
-    name = "Find",
-  }
-}, {
+require'which-key'.register(
+{
+  f = { name = "Find", }
+},{
   mode = "n",
   prefix = "<leader>",
   buffer = nil,
@@ -11,9 +10,21 @@ require'which-key'.register({
   nowait = false,
 })
 
+require'which-key'.register(
+{
+  fh = { name = "hidden", }
+  }, {
+    mode = "n",
+    prefix = "<leader>",
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = false,
+})
+
 local builtin = require'telescope.builtin'
 
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {desc = 'T Find files'} )
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {desc = 'T Files'} )
 vim.keymap.set('n', '<leader>fhf', function ()
     builtin.find_files({hidden = true})
   end,
@@ -34,10 +45,11 @@ vim.keymap.set('n', '<leader>fs', function ()
   {desc = 'T Grep string'})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "T Buffers"})
 vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = "T Keymaps"})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "T Help tag"})
+vim.keymap.set('n', '<leader>ft', builtin.help_tags, { desc = "T Help tag"})
 vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = "T Resume"})
 vim.keymap.set('n', '<leader>fp', builtin.pickers, { desc = "T Pickers"})
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = "T Diagnostic"})
+
 
 
 -- TODO google telescope.buitlin.grep_string
