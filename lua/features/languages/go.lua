@@ -1,6 +1,7 @@
 local M = {}
 
 M.lspbin = 'gopls'
+M.lsp_key = 'gopls'
 
 function M.lsp()
   local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')
