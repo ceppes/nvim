@@ -1,18 +1,21 @@
 local M = {}
 
+-- cd ~/.local/share/nvim/mason/bin
+
 M = {
-  pyright = require('features.languages.python'),
-  lua_ls = require('features.languages.lua'),
-  yamlls = require('features.languages.yaml'),
-  tsserver = require('features.languages.typescript'),
-  cssls = require('features.languages.css'),
-  helm_ls = require('features.languages.helm'),
-  jsonls = require('features.languages.json'),
+  python = require('features.languages.python'),
+  lua = require('features.languages.lua'),
+  yaml = require('features.languages.yaml'),
+  typescript = require('features.languages.typescript'),
+  css = require('features.languages.css'),
+  helm = require('features.languages.helm'),
+  json = require('features.languages.json'),
   docker = require('features.languages.docker'),
   markdown = require('features.languages.markdown'),
   java = require('features.languages.java'),
-  sh = require('features.languages.shell'),
-  gopls = require('features.languages.go'),
+  shell = require('features.languages.shell'),
+  -- gopls = require('features.languages.go'),
+  -- swift = require('features.languages.swift'),
 }
 
 return M

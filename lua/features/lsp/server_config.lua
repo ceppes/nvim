@@ -3,10 +3,10 @@ local M = {}
 function M.config(bin, opts)
 
   if vim.fn.executable(bin) ~= 1 then
-    vim.notify("[LSP][Server config] [ERROR] " .. bin .. " bin not found")
+    vim.notify("[LSP][Server config] bin ❌ " .. bin .. " ")
     return false
   end
-  vim.notify("[LSP][Server config] [SUCCESS] " .. bin .. " bin found")
+  vim.notify("[LSP][Server config] bin ✅ " .. bin .. " ")
 
   local config = {
     capabilities = require("features.lsp.capabilities"),

@@ -29,14 +29,20 @@ protocol.CompletionItemKind = {
 
 require('mason').setup({ ui = { border = 'rounded' } })
 
-local lsp_ensure_installed = {}
+local lsp_ensure_installed = {
+
+}
 local servers = require("features.lspconfig.servers")
 for server, config in pairs(servers) do
-  if config.lsp then
-    table.insert(lsp_ensure_installed, server)
+  if config.lsp and config.lsp_key then
+    table.insert(lsp_ensure_installed, config.lsp_key)
+    -- print(config.lsp_key)
   end
 end
 require("mason-lspconfig").setup{ ensure_installed = lsp_ensure_installed }
 
 require("fidget").setup{} -- little progress bar for lsp loading
+
+
+
 

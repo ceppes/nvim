@@ -13,9 +13,9 @@ vim.lsp.set_log_level("debug")
 local servers = require("features.lspconfig.servers")
 
 for server, config in pairs(servers) do
-  if config.lsp then
+  if config.lsp and config.lsp_key then
     local lsp = config.lsp()
-    lspconfig[server].setup(lsp)
+    lspconfig[config.lsp_key].setup(lsp)
   end
 end
 
