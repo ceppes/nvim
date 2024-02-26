@@ -41,6 +41,7 @@ local ensure_installed = {
   'scss',
   'sql',
   'terraform',
+  'tsx',
   'vim',
 }
 
