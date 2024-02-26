@@ -20,7 +20,7 @@ function M.get_active_clients()
   if lint_s then
 
     if lint.get_running() == nil then
-      return {"L̵t̵"}
+      return {"No Lint"}
     end
 
     for ft_k, ft_v in pairs(lint.linters_by_ft) do

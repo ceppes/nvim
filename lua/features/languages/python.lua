@@ -6,6 +6,7 @@ M.lspbin = 'pyright-langserver'
 M.debugger = 'debugpy'
 M.filetype = 'python'
 M.treesitter = M.filetype
+M.formatter = { 'black', 'autopep8'}
 
 function M.lsp()
   local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')
