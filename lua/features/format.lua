@@ -46,7 +46,9 @@ function M.setup()
     local formatter_util = require("formatter.util")
     local default_formatters = require("formatter.defaults")
 
-    local formatter_ensure_installed = { 'prettierd', 'shfmt' }
+    local formatter_ensure_installed = {}
+    formatter_ensure_installed['prettierd'] = 1
+    formatter_ensure_installed['shfmt'] = 1
 
     local filetype = {
       javascript = { require("formatter.filetypes.javascript").prettierd },
@@ -64,39 +66,49 @@ function M.setup()
         require("formatter.filetypes.any").remove_trailing_whitespace
       }
     }
+    -- filetype = {}
 
     local servers = require("features.lspconfig.servers")
     for _, config in pairs(servers) do
 
       if config.formatter then
-        print(config.formatter, type(config.formatter))
+        -- print("formatter", config.formatter, type(config.formatter))
         if type(config.formatter) == "table" then
-          for _,j in pairs(formatter_ensure_installed) do
-            -- table.insert(formatter_ensure_installed, j)
-            print(j, type(j))
+          for _,j in pairs(config.formatter) do
+            formatter_ensure_installed[j] = j
+            -- print("j: ", j, type(j))
           end
         else
           formatter_ensure_installed[config.formatter] = config.formatter
         end
       end
 
-      if config.formatter and config.filetype then
-        filetype[config.filetype] = { require("formatter.filetypes.typescript").formatter}
-      end
-
+      -- if config.formatter and config.filetype then
+      --   if type(config.formatter) == "table" then
+      --     -- local current = {}
+      --     for _,j in pairs(config.formatter) do
+      --       table.insert(filetype[config.filetype],  require("formatter.filetypes.typescript").formatter)
+      --     end
+      --   else
+      --     filetype[config.filetype] = { require("formatter.filetypes.typescript").formatter}
+      --   end
+      -- end
+      --
     end
-
+    local formatter_ensure_installed2 = {}
     for i,j in pairs(formatter_ensure_installed) do
-      print("i: ", i, " j: ", j)
+      -- print("i: ", i, " j: ", j)
+      table.insert(formatter_ensure_installed2, i)
     end
     -- for i,j in pairs(filetype) do
     --   print("i: ", i, " j: ", j)
     -- end
-    -- for k,v in pairs(formatters) do
-    --   for i,j in pairs(v) do
-    --     print(k, v, i, j)
-    --   end
-    -- end
+    for i,j in pairs(filetype) do
+      print("i: ", i, " j: ", j)
+      for k,v in pairs(j) do
+        print("     k:", k,"v: ",  v)
+      end
+    end
 
     formatter.setup({
       logging = true,
