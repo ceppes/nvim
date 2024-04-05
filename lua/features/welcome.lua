@@ -121,12 +121,12 @@ function M.setup()
 
   local config = {
     layout = {
-    { type = "padding", val = headerPadding },
-    section.terminal,
+    -- { type = "padding", val = headerPadding },
+    -- section.terminal,
+    -- { type = "padding", val = 2 },
+    section.header,
     { type = "padding", val = 2 },
-    -- section.header,
-    { type = "padding", val = 2 },
-    -- section.buttons,
+    section.buttons,
     section.footer,
     },
     opts = {

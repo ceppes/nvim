@@ -10,7 +10,7 @@ function M.config(bin, opts)
 
   local config = {
     capabilities = require("features.lsp.capabilities"),
-    handler = require("features.lsp.handler").hover,
+    handler = require("features.lsp.handler"),
     on_attach = function(client, bufnr)
       require("features.lsp.attach").attach(client, bufnr)
     end
