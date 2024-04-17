@@ -1,14 +1,22 @@
 local M = {}
 
-M = {
-  'mfussenegger/nvim-lint',
-  dependencies = {
-    'williamboman/mason.nvim',
+M =
+{
+  {
+    'mfussenegger/nvim-lint',
+    dependencies = {
+      "williamboman/mason.nvim",
+    } ,
+    config = function ()
+      require("features.lint").setup()
+    end
+  },{
     "rshkarin/mason-nvim-lint",
-  },
-  config = function ()
-    require("features.lint").setup()
-  end
+    dependencies = {
+      "williamboman/mason.nvim",
+      "rshkarin/mason-nvim-lint",
+    },
+  }
 }
 
 function M.get_active_clients()

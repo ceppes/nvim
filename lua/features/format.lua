@@ -103,12 +103,13 @@ function M.setup()
     -- for i,j in pairs(filetype) do
     --   print("i: ", i, " j: ", j)
     -- end
-    for i,j in pairs(filetype) do
-      print("i: ", i, " j: ", j)
-      for k,v in pairs(j) do
-        print("     k:", k,"v: ",  v)
-      end
-    end
+
+    -- for i,j in pairs(filetype) do
+    --   print("i: ", i, " j: ", j)
+    --   for k,v in pairs(j) do
+    --     print("     k:", k,"v: ",  v)
+    --   end
+    -- end
 
     formatter.setup({
       logging = true,

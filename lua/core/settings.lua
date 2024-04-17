@@ -60,7 +60,7 @@ opt.smartindent = true                -- Autoindent new lines
 -----------------------------------------------------------
 opt.hidden = true                     -- Enable background buffers
 opt.history = 100                     -- Remember N lines in history
-opt.lazyredraw = true                 -- Faster scrolling
+opt.lazyredraw = false                -- true : Faster scrolling (temporary)
 opt.synmaxcol = 240                   -- Max column for syntax highlight
 opt.updatetime = 50                   -- ms to wait for trigger 'document_highlight'
 

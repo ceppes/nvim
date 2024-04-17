@@ -17,6 +17,11 @@ M = {
       presets = {
         lsp_doc_border = true,
         inc_rename = true
+      },
+      lsp = {
+        signature = {
+          enabled = false,
+        }
       }
     },
     dependencies = {
