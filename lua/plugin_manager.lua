@@ -59,6 +59,7 @@ local plugins = {
     },
     keys = {
       { "<leader>E", "<cmd>Neotree reveal toggle<cr>", desc = "NeoTree" },
+      { "<leader>EE", "<cmd>Neotree reveal float<cr>", desc = "NeoTree" },
     },
     config = function()
       require("neo-tree").setup({
@@ -77,7 +78,8 @@ local plugins = {
           "buffers",
           "git_status",
           "document_symbols"
-        }
+        },
+        buffers = { follow_current_file = { enabled = true } }
       })
     end,
   },
