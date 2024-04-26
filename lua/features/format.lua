@@ -60,7 +60,27 @@ function M.setup()
         require("formatter.filetypes.python").autopep8,
       },
       java = { require("formatter.filetypes.java").google_java_format },
-      sh = { require("formatter.filetypes.sh").shfmt },
+      sh = {
+        function ()
+          -- require("formatter.filetypes.sh").shfmt },
+          local shiftwidth = vim.opt.shiftwidth:get()
+          local expandtab = vim.opt.expandtab:get()
+
+          if not expandtab then
+            shiftwidth = 0
+          end
+          -- "-i", shiftwidth,
+          return {
+            exe = "shfmt",
+            args = {
+              "--diff",
+              "--indent",
+              "2",
+              "--case-indent"},
+            stdin = true,
+          }
+        end
+        },
       lua = { require("formatter.filetypes.lua").stylua },
       ["*"] = {
         require("formatter.filetypes.any").remove_trailing_whitespace
@@ -118,5 +138,4 @@ function M.setup()
 end
 
 return M
-
 
