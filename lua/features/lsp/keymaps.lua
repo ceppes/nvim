@@ -24,6 +24,8 @@ function M.keymaps()
   vim.keymap.set('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, optiones({desc = 'LSP List workspace folders'}))
   vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end, optiones({desc = 'LSP Code action'}))
   vim.keymap.set('n', '<leader>ftt', function() vim.lsp.buf.format() end, optiones({desc = 'LSP Format'}))
+  vim.keymap.set('n', '<leader>gf', '<cmd>lua vim.lsp.buf.format({async = true})<CR>')
+  vim.keymap.set('v', '<leader>gf', '<cmd>lua vim.lsp.buf.format({async = true})<CR>')
 
   vim.keymap.set('n', 'gTR', require('telescope.builtin').lsp_references, {desc = 'Telescope Lsp References'})
   vim.keymap.set('n', 'gTD', require('telescope.builtin').lsp_definitions, {desc = 'Telescope Lsp Definitions'})
