@@ -40,7 +40,6 @@ local plugins = {
     }
   },
   require('features.lspconfig.pluginspec'),
-  require('features.languages.java').plugin(),
   require('features.completion'),
   require('features.debugger'),
   -- require('features.null-ls'),

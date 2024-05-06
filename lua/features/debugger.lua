@@ -173,6 +173,7 @@ function M.setup()
 
   local servers = {
     python = require('features.languages.python').debugger(),
+    java = require('features.languages.java').debugger(),
   }
 
   for server, config in pairs(servers) do

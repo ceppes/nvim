@@ -3,7 +3,7 @@ local M = {
   dependencies = {
     "williamboman/nvim-lsp-installer",
     "SmiteshP/nvim-navic",
-    -- {'mfussenegger/nvim-jdtls', ft = 'java'},
+    {'mfussenegger/nvim-jdtls', ft = 'java'},
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     'j-hui/fidget.nvim',
