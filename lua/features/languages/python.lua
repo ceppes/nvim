@@ -8,6 +8,25 @@ M.filetype = 'python'
 M.treesitter = M.filetype
 M.formatter = { 'black', 'autopep8'}
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "python",
+  callback = function()
+    vim.bo.shiftwidth = 2
+    vim.bo.tabstop = 2
+    vim.opt_local.foldmethod='indent'
+    vim.opt_local.expandtab = true
+    M.keymaps()
+  end
+})
+
+function M.keymaps()
+  if vim.bo.filetype == 'python' then
+
+    vim.keymap.set("n", '<leader>go', "<cmd>PyrightOrganizeImports<CR>", {desc = "Organize Imports (Python)"})
+
+  end
+end
+
 function M.lsp()
   local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')
   if not lsp_status_ok then
