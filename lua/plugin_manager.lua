@@ -48,6 +48,7 @@ local plugins = {
   require('features.colorizer'),
   require('features.structure'),
   require('features.session'),
+  require('features.test'),
   {
     "nvim-neo-tree/neo-tree.nvim",
     -- branch = "v3.x",
