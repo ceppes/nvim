@@ -99,7 +99,13 @@ function M.setup()
   -- end
 
   dapui.setup({
-    icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
+    element_mappings = {},
+    force_buffers = true,
+    icons = {
+      expanded = "▾",
+      collapsed = "▸",
+      current_frame = "▸"
+    },
     mappings = {
       -- Use a table to apply multiple mappings
       expand = { "<CR>", "<2-LeftMouse>" },
@@ -123,7 +129,7 @@ function M.setup()
       {
         elements = {
           "scopes",
-          "repl",
+          "console",
         },
         size = 0.25, -- 25% of total lines
         position = "bottom",
@@ -134,9 +140,9 @@ function M.setup()
           "breakpoints",
           "stacks",
           "watches",
-          -- "console",
+          "repl",
         },
-        size = 40, -- 40 columns
+        size = 100, -- 40 columns
         position = "right",
       },
     },
