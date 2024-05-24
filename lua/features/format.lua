@@ -55,6 +55,7 @@ function M.setup()
       javascriptreact = { require("formatter.filetypes.javascriptreact").prettierd },
       typescript = { require("formatter.filetypes.typescript").prettierd },
       typescriptreact = { require("formatter.filetypes.typescript").prettierd },
+      xml = {require("formatter.filetypes.xml").xmlformat },
       python = {
         require("formatter.filetypes.python").black,
         require("formatter.filetypes.python").autopep8,
