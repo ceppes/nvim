@@ -29,6 +29,7 @@ function M.keymaps()
 
   vim.keymap.set('n', 'gTR', require('telescope.builtin').lsp_references, {desc = 'Telescope Lsp References'})
   vim.keymap.set('n', 'gTD', require('telescope.builtin').lsp_definitions, {desc = 'Telescope Lsp Definitions'})
+  vim.keymap.set('n', '<leader>le','<cmd>:!sh > ~/.local/state/nvim/lsp.log<CR>' , {desc = 'Empty lsp.log'})
 end
 
 function M.diagnostic_keymaps()
