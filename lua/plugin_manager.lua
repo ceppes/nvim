@@ -45,6 +45,7 @@ local plugins = {
   -- require('features.null-ls'),
   require('features.lint'),
   require('features.format'),
+  require('features.sonar'),
   require('features.colorizer'),
   require('features.structure'),
   require('features.session'),
