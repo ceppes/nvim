@@ -77,11 +77,11 @@ function M.debugger()
 
   dap.configurations.java = {
     {
-      name = "Debug Launch (2GB)";
+      name = "Debug Attach (5000)";
       type = 'java';
-      request = 'launch';
-      vmArgs = "" ..
-        "-Xmx2g"
+      request = 'attach';
+      hostname = "127.0.0.1";
+      port = 5000;
     },
     {
       name = "Debug Attach (8000)";
@@ -91,11 +91,11 @@ function M.debugger()
       port = 8000;
     },
     {
-      name = "Debug Attach (5000)";
+      name = "Debug Launch (2GB)";
       type = 'java';
-      request = 'attach';
-      hostname = "127.0.0.1";
-      port = 5000;
+      request = 'launch';
+      vmArgs = "" ..
+        "-Xmx2g"
     },
     {
       name = "My Custom Java Run Configuration",
