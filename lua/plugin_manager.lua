@@ -50,6 +50,7 @@ local plugins = {
   require('features.structure'),
   require('features.session'),
   require('features.test'),
+  require('features.http'),
   {
     "nvim-neo-tree/neo-tree.nvim",
     -- branch = "v3.x",
