@@ -195,17 +195,8 @@ function M.keymaps()
     return
   end
 
-  which_key.register({
-    d = {
-      name = "Debug",
-    }
-  }, {
-    mode = "n",
-    prefix = "<leader>",
-    buffer = nil,
-    silent = true,
-    noremap = true,
-    nowait = false,
+  require("which-key").add({
+    { "<leader>d", group = "Debug" },
   })
 
   -- require("config.dap.keymaps").setup()
@@ -237,18 +228,10 @@ function M.keymaps()
 
 
   -- Telescope dap conf
-  which_key.register({
-    dT = {
-      name = "Telescope",
-    }
-  }, {
-    mode = "n",
-    prefix = "<leader>",
-    buffer = nil,
-    silent = true,
-    noremap = true,
-    nowait = false,
+  require("which-key").add({
+    { "<leader>dT", group = "Telescope" },
   })
+
   require('telescope').load_extension('dap')
   -- vim.keymap.set('n', '<leader>dTc', require'telescope'.extensions.dap.configurations{}, {desc = "Telescope config" })
   vim.keymap.set('n', '<leader>dTc', "<cmd> lua require'telescope'.extensions.dap.configurations{}<cr>", {desc = "Telescope config" })

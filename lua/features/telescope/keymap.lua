@@ -1,25 +1,6 @@
-require'which-key'.register(
-{
-  f = { name = "Find", }
-},{
-  mode = "n",
-  prefix = "<leader>",
-  buffer = nil,
-  silent = true,
-  noremap = true,
-  nowait = false,
-})
-
-require'which-key'.register(
-{
-  fh = { name = "hidden", }
-  }, {
-    mode = "n",
-    prefix = "<leader>",
-    buffer = nil,
-    silent = true,
-    noremap = true,
-    nowait = false,
+require("which-key").add({
+  { "<leader>f", group = "Find" },
+  { "<leader>fh", group = "Hidden" },
 })
 
 local builtin = require'telescope.builtin'

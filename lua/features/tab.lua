@@ -46,17 +46,8 @@ function M.setup()
 end
 
 function M.keymaps()
-  require'which-key'.register({
-    t = {
-      name = "Tab",
-    }
-  }, {
-    mode = "n",
-    prefix = "<leader>",
-    buffer = nil,
-    silent = true,
-    noremap = true,
-    nowait = false,
+  require("which-key").add({
+    { "<leader>t", group = "Tab" },
   })
 
   vim.keymap.set('n', '<leader>tn', vim.cmd.tabnew, {desc = 'New tab'})

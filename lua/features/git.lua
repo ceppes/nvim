@@ -33,17 +33,8 @@ function M.setup()
 end
 
 function M.keymaps()
-  require'which-key'.register({
-    g = {
-      name = "Git",
-    }
-  }, {
-    mode = "n",
-    prefix = "<leader>",
-    buffer = nil,
-    silent = true,
-    noremap = true,
-    nowait = false,
+  require("which-key").add({
+    { "<leader>g", group = "Git" },
   })
 
   local lazygit = require'lazygit'
