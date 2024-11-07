@@ -7,8 +7,8 @@
 ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝
 --]]
 
-require('core.settings')
-require('core.keymaps')
-require('core.command')
-require('core.autocommand')
-require('plugin_manager')
+require("core.settings")
+require("core.keymaps")
+require("core.command")
+require("core.autocommand")
+require("plugin_manager")
