@@ -7,10 +7,6 @@ M = {
   dependencies = {
     'nvim-treesitter/playground'
   },
-  -- run = function()
-  --     local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-  --     ts_update()
-  -- end,
   config = function()
     require("features.treesitter").setup()
   end
@@ -18,7 +14,7 @@ M = {
 
 local ensure_installed = {
   'c',
-  -- 'comment',
+  'comment',
   'cpp',
   'dockerfile',
   'dot',
@@ -41,7 +37,6 @@ local ensure_installed = {
   'scss',
   'sql',
   'terraform',
-  'tsx',
   'vim',
 }
 
@@ -55,8 +50,8 @@ function M.setup()
   local servers = require("features.lspconfig.servers")
   for _, config in pairs(servers) do
     if config.treesitter then
-      local treesitter = config.treesitter
-      table.insert(ensure_installed, treesitter)
+      local treesitter_server_config = config.treesitter
+      table.insert(ensure_installed, treesitter_server_config)
     end
   end
 
@@ -67,6 +62,7 @@ function M.setup()
     -- Automatically install missing parsers when entering buffer
     -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
     auto_install = false, -- Run :TSUpdate
+    ignore_install = {},
     highlight = {
       -- `false` will disable the whole extension
       enable = true,
@@ -77,6 +73,7 @@ function M.setup()
       -- Instead of true it can also be a list of languages
       additional_vim_regex_highlighting = false,
     },
+    modules = {},
   }
 
   -- MDX
