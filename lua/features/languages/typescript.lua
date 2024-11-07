@@ -4,7 +4,7 @@ M.linter = 'eslint_d'
 M.lsp_key = 'ts_ls'
 M.lspbin = 'typescript-language-server'
 M.debugger = ''
-M.treesitter = 'typescript'
+M.treesitter = {'typescript', 'tsx'}
 
 function M.lsp()
   local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')
