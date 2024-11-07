@@ -59,8 +59,6 @@ keymap.set('n', '<leader>e', vim.cmd.Ex, { desc = "Access netrw" })
 -- Applications and Plugins shortcuts
 -----------------------------------------------------------
 
--- Trouble
-
 -- paste over currently selected text without yanking it
 keymap.set('v', '<leader>p', '"_dP', { desc = 'Over paste' })
 
@@ -85,7 +83,7 @@ keymap.set('n', 'n', 'nzzzv', { desc = "Next search inc with cursor in the middl
 keymap.set('n', 'N', 'Nzzzv', { desc = "Next search inc with cursor in the middle" })
 
 keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {desc = "Live replace word"})
-keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "chmod +x current_file" })
+keymap.set("n", "<leader>xx", "<cmd>!chmod +x %<CR>", { silent = true, desc = "chmod +x current_file" })
 
 -- Map Esc to kk
 --map('i', 'kk', '<Esc>')
