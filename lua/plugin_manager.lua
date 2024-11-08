@@ -96,7 +96,7 @@ local plugins = {
       vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, {desc = 'Undotree Toggle'})
     end
   },
-  --  -- Tools
+  -- Tools
   {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
@@ -111,18 +111,16 @@ local plugins = {
   -- Dim inactive portions
   "folke/twilight.nvim",
 
- --  -- better log highlight
-  'MTDL9/vim-log-highlighting',
- --
+  -- better log highlight
+  -- 'MTDL9/vim-log-highlighting',
+  { "fei6409/log-highlight.nvim", event = "BufRead *.log", opts = {} },
+
 
   -- NO MORE USED
   -- "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-
   --  "m4xshen/hardtime.nvim",
-
   -- Distraction free
   -- 'junegunn/goyo.vim',
-
   -- Markdown
   -- {
   --   "iamcco/markdown-preview.nvim",
