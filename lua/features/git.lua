@@ -7,7 +7,11 @@ M = {
     'kdheepak/lazygit.nvim',
     -- use 'airblade/vim-gitgutter'
   },{
-    "FabijanZulj/blame.nvim"
+    "FabijanZulj/blame.nvim",
+    lazy = false,
+    config = function()
+      require('blame').setup {}
+    end,
   },{
     'lewis6991/gitsigns.nvim', -- needed for feline status line
     config = function()
@@ -41,7 +45,7 @@ function M.keymaps()
   vim.keymap.set('n', '<leader>lg', lazygit.lazygit, {desc = "Lazygit"})
 
   -- Vim fugitive
-  vim.keymap.set('n', '<leader>gb', ':ToggleBlame<CR>', {desc = 'Git blame'})
+  vim.keymap.set('n', '<leader>gb', ':BlameToggle<CR>', {desc = 'Git blame'})
   vim.keymap.set('n', '<leader>gd', ':Gitsigns diffthis<CR>', {desc = 'Git diff this'})
 end
 
