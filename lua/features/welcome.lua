@@ -2,140 +2,105 @@ local M = {}
 
 M = {
   'goolord/alpha-nvim',
-  config = function()
-    require("features.welcome").setup()
-  end
-}
-
-local header_pacman = {
-    [[                                                                              ]],
-    [[                                    ██████                                    ]],
-    [[                                ████▒▒▒▒▒▒████                                ]],
-    [[                              ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                              ]],
-    [[                            ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                            ]],
-    [[                          ██▒▒▒▒▒▒▒▒    ▒▒▒▒▒▒▒▒                              ]],
-    [[                          ██▒▒▒▒▒▒  ▒▒▓▓▒▒▒▒▒▒  ▓▓▓▓                          ]],
-    [[                          ██▒▒▒▒▒▒  ▒▒▓▓▒▒▒▒▒▒  ▒▒▓▓                          ]],
-    [[                        ██▒▒▒▒▒▒▒▒▒▒    ▒▒▒▒▒▒▒▒    ██                        ]],
-    [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
-    [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
-    [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
-    [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
-    [[                        ██▒▒██▒▒▒▒▒▒██▒▒▒▒▒▒▒▒██▒▒▒▒██                        ]],
-    [[                        ████  ██▒▒██  ██▒▒▒▒██  ██▒▒██                        ]],
-    [[                        ██      ██      ████      ████                        ]],
-    [[                                                                              ]],
-    [[                                                                              ]]
-  }
-local header_neovim = {
-  "                                                     ",
-  "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
-  "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
-  "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
-  "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
-  "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
-  "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
-  "                                                     ",
-}
-
-function M.setup()
-  local alpha_status_ok, alpha = pcall(require, 'alpha')
-  if not alpha_status_ok then
-    return
-  end
-
-  local dashboard = require("alpha.themes.dashboard")
-  require("alpha.term")
-
-  local terminal = {
-    type = "terminal",
-    command = vim.fn.expand("$HOME") .. "/.config/nvim/lua/features/thisisfine.sh",
-    width = 46,
-    height = 25,
-    opts = {
-      redraw = true,
-      window_config = {}
+  event = "VimEnter",
+  enabled = true,
+  init = false,
+  opts = function()
+    local header_neovim = {
+      "                                                     ",
+      "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
+      "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
+      "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
+      "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
+      "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
+      "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
+      "                                                     ",
     }
-  }
 
-  local header = {
-      type = "text",
-      -- val = header_pacman,
-      val = header_neovim,
+    local header_terminal = {
+      type = "terminal",
+      command = vim.fn.expand("$HOME") .. "/.config/nvim/lua/features/thisisfine.sh",
+      width = 46,
+      height = 25,
       opts = {
-          position = "center",
-          hl = "Type",
-          -- wrap = "overflow";
-      },
-  }
+        redraw = true,
+        window_config = {}
+      }
+    }
 
-  local footer = {
-      type = "text",
-      val = function()
-        local platform = vim.fn.has "win32" == 1 and " " or " "
+    local dashboard = require("alpha.themes.dashboard")
+    dashboard.section.header.val = header_neovim
 
+    dashboard.section.buttons.val = {
+      dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
+      dashboard.button("f f", "  Find File", ":Telescope find_files<CR>"),
+      dashboard.button("r", "󰊄  Recently opened files", ":Telescope oldfiles<CR>"),
+      dashboard.button("f l", "󰈬  Find Word", ":Telescope live_grep<CR>"),
+      dashboard.button("l", " Load last session current dir", ":SessionManager load_current_dir_session<CR>"),
+      dashboard.button("u", "  Open Lazy", ":Lazy<CR>"),
+      dashboard.button("q", " Quit", ":qa!<CR>"),
+      -- dashboard.button("SPC f r", "  Frecency/MRU"),
+      -- dashboard.button("c", "  Configuration", ":e $MYVIMRC<CR>"),
+      -- dashboard.button("SPC f m", "  Jump to bookmarks"),
+    }
+
+    for _, button in ipairs(dashboard.section.buttons.val) do
+      button.opts.hl = "AlphaButtons"
+      button.opts.hl_shortcut = "AlphaShortcut"
+    end
+    dashboard.section.header.opts.hl = "AlphaHeader"
+    dashboard.section.buttons.opts.hl = "AlphaButtons"
+    dashboard.section.footer.opts.hl = "AlphaFooter"
+
+    dashboard.opts.layout[1].val = 0 -- First padding
+    return dashboard
+  end,
+
+  config = function(_, dashboard)
+    -- close Lazy and re-open when the dashboard is ready
+    if vim.o.filetype == "lazy" then
+      vim.cmd.close()
+      vim.api.nvim_create_autocmd("User", {
+        once = true,
+        pattern = "AlphaReady",
+        callback = function()
+          require("lazy").show()
+        end,
+      })
+    end
+
+    require("alpha").setup(dashboard.opts)
+
+    vim.api.nvim_create_autocmd("User", {
+      once = true,
+      pattern = "LazyVimStarted",
+      callback = function()
+        local stats = require("lazy").stats()
+        local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+        local plugins_count = "⚡ Neovim loaded "
+          .. stats.loaded
+          .. "/"
+          .. stats.count
+          .. " plugins in "
+          .. ms
+          .. "ms"
+
+        local platform = vim.fn.has("win32") == 1 and " Windows" or vim.fn.has("macunix") and " MacOs" or " Linux"
         local version = " " .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch
+        local datetime = os.date " %d-%m-%Y  %H:%M:%S"
 
-        local plugins_count = "   ?? Plugins"
-        if require("lazy").plugins() ~= nil then
-          plugins_count = "   " .. #vim.tbl_keys(require("lazy").plugins()) .. " Plugins"
-        end
-        local datetime = os.date "  %d-%m-%Y  %H:%M:%S"
+        dashboard.section.footer.val = plugins_count
+        .. "\n"
+        .. platform
+        .. "    "
+        .. version
+        .. "    "
+        .. datetime
 
-        return platform .. version .. plugins_count .. datetime
+        pcall(vim.cmd.AlphaRedraw)
       end,
-      opts = {
-          position = "center",
-          hl = "Number",
-      },
-  }
-
-  local buttons = {
-      type = "group",
-      val = {
-          dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-          dashboard.button("f f", "  Find File", ":Telescope find_files<CR>"),
-          dashboard.button("r", "󰊄  Recently opened files", ":Telescope oldfiles<CR>"),
-          dashboard.button("f l", "󰈬  Find Word", ":Telescope live_grep<CR>"),
-          dashboard.button("l", " Load last session current dir", ":SessionManager load_current_dir_session<CR>"),
-          dashboard.button("u", "  Open Lazy", ":Lazy<CR>"),
-          dashboard.button("q", " Quit", ":qa!<CR>"),
-          -- dashboard.button("SPC f r", "  Frecency/MRU"),
-          -- dashboard.button("c", "  Configuration", ":e $MYVIMRC<CR>"),
-          -- dashboard.button("SPC f m", "  Jump to bookmarks"),
-      },
-      opts = {
-          spacing = 1,
-      },
-  }
-
-  local section = {
-      terminal = terminal,
-      header = header,
-      buttons = buttons,
-      footer = footer,
-  }
-
-  local marginTopPercent = 0.225
-  local headerPadding = vim.fn.max {4, vim.fn.floor(vim.fn.winheight(0) * marginTopPercent)}
-
-  local config = {
-    layout = {
-    -- { type = "padding", val = headerPadding },
-    -- section.terminal,
-    -- { type = "padding", val = 2 },
-    section.header,
-    { type = "padding", val = 2 },
-    section.buttons,
-    section.footer,
-    },
-    opts = {
-      margin = 5,
-    }
-  }
-
-  alpha.setup(config)
-end
+    })
+  end,
+}
 
 return M
--- https://github.com/mobily/.nvim/blob/main/lua/lazy/plugins.lua
