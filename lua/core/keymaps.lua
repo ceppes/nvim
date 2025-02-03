@@ -53,7 +53,7 @@ keymap.set('n', '<C-l>', '<C-w>l')
 
 keymap.set('n', '<leader>q', ':qa!<CR>', { desc = "Close all windows and exit"})
 
-keymap.set('n', '<leader>e', vim.cmd.Ex, { desc = "Access netrw" })
+vim.keymap.set("n", "<leader>nn", vim.cmd.Ex, { desc = "File : Access netrw" })
 
 -----------------------------------------------------------
 -- Applications and Plugins shortcuts

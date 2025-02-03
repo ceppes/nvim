@@ -51,41 +51,7 @@ local plugins = {
   require('features.session'),
   require('features.test'),
   require('features.http'),
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    -- branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-    },
-    keys = {
-      { "<leader>E", "<cmd>Neotree reveal toggle<cr>", desc = "NeoTree" },
-      { "<leader>EE", "<cmd>Neotree reveal float<cr>", desc = "NeoTree" },
-    },
-    config = function()
-      require("neo-tree").setup({
-        source_selector = {
-          winbar = true,
-          status = false,
-          sources = {
-            { source = "filesystem"},
-            { source = "buffers"},
-            { source = "git_status"},
-            { source = "document_symbols"}
-          }
-        },
-        sources = {
-          "filesystem",
-          "buffers",
-          "git_status",
-          "document_symbols"
-        },
-        buffers = { follow_current_file = { enabled = true } }
-      })
-    end,
-  },
+  require('features.filetree'),
   {
     "towolf/vim-helm",
     -- ft = {"yaml"}
