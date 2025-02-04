@@ -48,7 +48,6 @@ local plugins = {
   require('features.colorizer'),
   require('features.structure'),
   require('features.session'),
-  require('features.test'),
   require('features.http'),
   require('features.filetree'),
   require('features.mini'),
