@@ -1,10 +1,20 @@
 local M = {}
 
 M.lspbin = 'lua-language-server'
-M.treesitter = 'lua'
+M.treesitter = {'lua', 'luadoc'}
 M.lsp_key = 'lua_ls'
 M.formatter = 'stylua'
 M.filetype = 'lua'
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = M.filetypes,
+  callback = function()
+    vim.bo.shiftwidth = 2
+    vim.bo.tabstop = 2
+    vim.opt_local.foldmethod='indent'
+    vim.opt_local.expandtab = true
+  end
+})
 
 function M.lsp()
   return require("features.lsp.server_config").config(
@@ -19,6 +29,7 @@ function M.lsp()
         diagnostics = {
           -- Get the language server to recognize the `vim` global
           globals = {'vim'},
+          -- disable = { 'missing-fields' },
         },
         workspace = {
           -- Make the server aware of Neovim runtime files
@@ -38,8 +49,5 @@ function M.lsp()
   })
 
 end
-
-
-
 
 return M

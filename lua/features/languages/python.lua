@@ -9,7 +9,7 @@ M.treesitter = M.filetype
 M.formatter = { 'black', 'autopep8'}
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "python",
+  pattern = M.filetype,
   callback = function()
     vim.bo.shiftwidth = 2
     vim.bo.tabstop = 2
@@ -64,7 +64,7 @@ function M.lsp()
     end
 
     -- Fallback to system Python.
-    local res = exepath('python3') or exepath('python') or 'python'
+    local res = vim.fn.exepath('python3') or vim.fn.exepath('python') or 'python'
     vim.notify("python path : ".. res)
     return res
   end

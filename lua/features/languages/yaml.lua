@@ -6,6 +6,17 @@ M.lsp_key = 'yamlls'
 M.lspbin = "yaml-language-server"
 M.treesitter = "yaml"
 M.lint = "yamllint"
+M.filetypes = "yaml"
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = M.filetypes,
+  callback = function()
+    vim.bo.shiftwidth = 2
+    vim.bo.tabstop = 2
+    vim.opt_local.foldmethod='indent'
+    vim.opt_local.expandtab = true
+  end
+})
 
 function M.lsp()
   local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')
