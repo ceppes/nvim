@@ -29,10 +29,7 @@ function M.setup()
   vim.api.nvim_set_hl(0, 'GitSignsTopdelete', { link = 'GitSignsDelete' })
   require("gitsigns").setup({
     current_line_blame = false, -- :Gitsigns toggle_current_line_blame
-    -- current_line_blame_opts = {
-    --   delay = 0,
-    -- },
-    sign_priority=0 -- for column
+    sign_priority = 0 -- for column
   })
 end
 

@@ -1,5 +1,6 @@
 local M = {}
 
+-- Lsp bin path from Mason :
 -- cd ~/.local/share/nvim/mason/bin
 
 M = {
@@ -12,8 +13,10 @@ M = {
   json = require('features.languages.json'),
   docker = require('features.languages.docker'),
   markdown = require('features.languages.markdown'),
-  -- java = require('features.languages.java'),
+  java = require('features.languages.java'),
   shell = require('features.languages.shell'),
+  xml = require('features.languages.xml'),
+  html = require('features.languages.html'),
   -- gopls = require('features.languages.go'),
   -- swift = require('features.languages.swift'),
 }

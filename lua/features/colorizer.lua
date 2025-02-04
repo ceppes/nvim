@@ -19,6 +19,7 @@ function M.setup()
     'html';
     'python';
     'lua';
+    'ts';
   })
 end
 

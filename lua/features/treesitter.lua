@@ -7,20 +7,23 @@ M = {
   dependencies = {
     'nvim-treesitter/playground'
   },
+  build = ':TSUpdate',
+  main = 'nvim-treesitter.configs', -- Sets main module to use for opts
   config = function()
     require("features.treesitter").setup()
   end
 }
 
 local ensure_installed = {
-  'c',
-  'comment',
-  'cpp',
-  'dockerfile',
-  'dot',
-  'git_config',
-  'git_rebase',
-  'gitcommit',
+'c',
+'comment',
+'cpp',
+'diff',
+'dockerfile',
+'dot',
+'git_config',
+'git_rebase',
+'gitcommit',
   'gitignore',
   'go',
   'gomod',
@@ -38,6 +41,7 @@ local ensure_installed = {
   'sql',
   'terraform',
   'vim',
+  'vimdoc',
 }
 
 
@@ -71,8 +75,13 @@ function M.setup()
       -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
       -- Using this option may slow down your editor, and you may see some duplicate highlights.
       -- Instead of true it can also be a list of languages
-      additional_vim_regex_highlighting = false,
+
+      -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
+      --  If you are experiencing weird indenting issues, add the language to
+      --  the list of additional_vim_regex_highlighting and disabled languages for indent.
+      additional_vim_regex_highlighting = { 'ruby' },
     },
+    indent = { enable = true, disable = { 'ruby' } },
     modules = {},
   }
 

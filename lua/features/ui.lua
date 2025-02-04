@@ -9,6 +9,7 @@ M = {
   },
   {
     'stevearc/dressing.nvim',
+    opts = {}
   },
   {
     "folke/noice.nvim",
@@ -38,12 +39,11 @@ M = {
 function M.setup()
   require("notify").setup({
     background_colour = "#000000",
-    timeout = 8000, --5000 default
+    timeout = 6000, --5000 default
   })
   vim.notify = require("notify")
   require("telescope").load_extension("notify")
 
-  require("dressing").setup({})
 end
 
 return M

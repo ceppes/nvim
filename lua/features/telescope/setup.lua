@@ -3,9 +3,7 @@ if not telescope_status_ok then
   return
 end
 
-local config = {}
-
-config = {
+local config = {
   defaults = {
     layout_strategy = "vertical",
     layout_config = {
@@ -17,8 +15,7 @@ config = {
   }
 }
 
-local pickers = {}
-pickers = {
+config.pickers = {
   live_grep = {
     layout_strategy = "vertical",
     layout_config = {
@@ -39,12 +36,14 @@ pickers = {
     },
     prompt_prefix = "   ",
     theme = "dropdown",
-
   }
 }
-config.pickers = pickers
 
 config.extensions = {
+  ['fzf'] = {},
+  ['ui-select'] = {
+    require('telescope.themes').get_dropdown(),
+  },
 }
 
 telescope.setup(config)

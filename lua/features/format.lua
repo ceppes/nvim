@@ -2,6 +2,7 @@ local M = {}
 
 M = {
   "mhartington/formatter.nvim",
+  -- Check stevearc/conform.nvim
   config = function()
     require("features.format").setup()
     require("features.format").keymaps()

@@ -1,12 +1,16 @@
 local M = {}
 
 M = {
-  'lukas-reineke/indent-blankline.nvim',
-  main = "ibl",
-  config = function()
-    require("features.indent").setup()
-    require("features.indent").commands()
-  end
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    main = "ibl",
+    config = function()
+      require("features.indent").setup()
+      require("features.indent").commands()
+    end
+  },{
+    'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  }
 }
 
 

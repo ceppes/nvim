@@ -3,19 +3,20 @@ local M = {
   dependencies = {
     "williamboman/nvim-lsp-installer",
     "SmiteshP/nvim-navic",
-    {'mfussenegger/nvim-jdtls', ft = 'java'},
-    'williamboman/mason.nvim',
+    { 'mfussenegger/nvim-jdtls', ft = 'java'},
+    { 'williamboman/mason.nvim', opts = {} },
     'williamboman/mason-lspconfig.nvim',
-    'j-hui/fidget.nvim',
-    "luckasRanarison/clear-action.nvim",
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    { 'j-hui/fidget.nvim', opts = {} },
+    {"luckasRanarison/clear-action.nvim", opts = {} },
     "smjonas/inc-rename.nvim",
+    'hrsh7th/cmp-nvim-lsp',
   },
   config = function ()
-    require("clear-action").setup()
     require("neodev").setup({})
     require('features.lspconfig.highlight')
     require('features.lspconfig.commands')
-    require('features.lspconfig.autocmds')
+    require('features.lspconfig.autocommand').autocommand()
     require('features.lspconfig.setup')
     require('features.lspconfig.setup_servers')
     require('features.lsp.keymaps').keymaps()
