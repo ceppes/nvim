@@ -14,19 +14,26 @@ cmd [[autocmd BufWritePre * :%s/\s\+$//e]]
 cmd [[autocmd BufEnter * set fo-=c fo-=r fo-=o]]
 
 -- Remove line lenght marker for selected filetypes
-cmd [[
-  autocmd FileType text,markdown,html,xhtml,javascript setlocal cc=0
-]]
+-- cmd [[
+--   autocmd FileType text,markdown,html,xhtml,javascript setlocal cc=0
+-- ]]
 
--- 2 spaces for selected filetypes
-cmd [[
-  autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
-]]
+-- 2 spaces by default
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "*",
+--   callback = function()
+--     vim.bo.shiftwidth = 2
+--     vim.bo.tabstop = 2
+--     vim.opt_local.foldmethod='indent'
+--     vim.opt_local.expandtab = true
+--   end
+-- })
 
 -- Set to 1 to only show mehtods levels
 cmd [[  autocmd FileType * setlocal foldlevel=1000 ]]
-cmd [[  autocmd FileType python setlocal foldlevel=1 ]]
-cmd [[  autocmd FileType java setlocal foldlevel=2 ]]
+-- cmd [[  autocmd FileType python setlocal foldlevel=1 ]]
+-- cmd [[  autocmd FileType java setlocal foldlevel=2 ]]
+-- cmd [[  autocmd FileType typescript setlocal foldlevel=3 ]]
 
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
@@ -34,18 +41,21 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   command = "checktime",
 })
 
--- Highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup("highlight_yank"),
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.highlight.on_yank()`
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank({
       higroup = "IncSearch",
-      timeout = 800
+      timeout = 600
     })
-  end,
+  end
 })
 
--- resize splits if window got resized
+-- Resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   group = augroup("resize_splits"),
   callback = function()
@@ -55,7 +65,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
--- go to last loc when opening a buffer
+-- Go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),
   callback = function(event)
@@ -73,7 +83,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
--- close some filetypes with <q>
+-- Close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
@@ -98,7 +108,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- wrap and check for spell in text filetypes
+-- Wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),
   pattern = { "gitcommit", "markdown" },

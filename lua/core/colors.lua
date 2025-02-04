@@ -1,7 +1,6 @@
 local M = {}
 
-M =
-{
+M = {
   {
     "ellisonleao/gruvbox.nvim",
   },{
@@ -15,8 +14,14 @@ M =
       require("core.colors").setup()
       require("core.colors").keymaps()
     end
+  },{
+    -- "altercation/vim-colors-solarized",
+    "shaunsingh/nord.nvim",
+    "shaunsingh/moonlight.nvim",
+    "shaunsingh/solarized.nvim",
   }
 }
+
 local default_color = "catppuccin-mocha"
 
 local function ColorIt(color)
