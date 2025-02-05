@@ -66,6 +66,7 @@ function M.keymaps()
       map('<leader>gf', function() vim.lsp.buf.format({async = true}) end, 'Format async')
 
       map('<leader>le','<cmd>:!sh > ~/.local/state/nvim/lsp.log<CR>' , 'Empty lsp.log')
+      map('<leader><leader>', function() vim.diagnostic.open_float(nil, { focus = false }) end, 'Open diag window' )
 
 
       local client = vim.lsp.get_client_by_id(event.data.client_id)
