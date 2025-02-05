@@ -100,7 +100,7 @@ function M.setup()
   end
 
   cmp.setup({
-    completion = { completeopt = 'menu,menuone,noinsert' },
+    completion = { completeopt = 'menu,menuone,noinsert,noselect' },
     preselect = cmp.PreselectMode.None,
     sources = {
       { name = "nvim_lsp", priority = 100 }, -- Keep LSP results on top.
@@ -108,7 +108,9 @@ function M.setup()
       { name = "path", priority = 50},
       { name = "emoji",
         option = {
-          insert = true } },
+          insert = true
+        }
+      },
       { name = 'nvim_lsp_signature_help' },
       { name = "spell" },
       { name = "treesitter" },
