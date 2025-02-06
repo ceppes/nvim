@@ -17,6 +17,7 @@ M = {
   shell = require('features.languages.shell'),
   xml = require('features.languages.xml'),
   html = require('features.languages.html'),
+  clangd = require('features.languages.cpp'),
   -- gopls = require('features.languages.go'),
   -- swift = require('features.languages.swift'),
 }
