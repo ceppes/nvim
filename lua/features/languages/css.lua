@@ -8,12 +8,22 @@ M.filetypes = {"css", "scss", "less"}
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = M.filetypes,
+  group = vim.api.nvim_create_augroup("Tab", {clear = true}),
   callback = function()
     vim.bo.shiftwidth = 2
     vim.bo.tabstop = 2
     vim.opt_local.foldmethod='indent'
     vim.opt_local.expandtab = true
   end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = M.filetypes,
+  group = vim.api.nvim_create_augroup("FixCssCommentString", {clear = true}),
+  callback = function ()
+    vim.bo.commentstring = "//  %s"
+    require('Comment.ft')(M.filetypes, '// %s')
+  end,
 })
 
 function M.lsp()
