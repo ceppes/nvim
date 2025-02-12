@@ -3,9 +3,28 @@ local M = {}
 M = {
   {
     'tpope/vim-fugitive',
+    keys = {
+      { '<leader>gb', ':BlameToggle<CR>', {desc = '[G]it [B]lame'} },
+      { '<leader>gd', ':Gitsigns diffthis<CR>', {desc = '[G]it [D]iff this'} }
+    }
   },{
     'kdheepak/lazygit.nvim',
-    -- use 'airblade/vim-gitgutter'
+    lazy = true,
+    cmd = {
+        "LazyGit",
+        "LazyGitConfig",
+        "LazyGitCurrentFile",
+        "LazyGitFilter",
+        "LazyGitFilterCurrentFile",
+    },
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+        { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    }
   },{
     "FabijanZulj/blame.nvim",
     lazy = false,
@@ -19,6 +38,7 @@ M = {
       require("features.git").keymaps()
     end
   }
+    -- use 'airblade/vim-gitgutter'
 }
 
 function M.setup()
@@ -37,13 +57,6 @@ function M.keymaps()
   require("which-key").add({
     { "<leader>g", group = "Git" },
   })
-
-  local lazygit = require'lazygit'
-  vim.keymap.set('n', '<leader>lg', lazygit.lazygit, {desc = "Lazygit"})
-
-  -- Vim fugitive
-  vim.keymap.set('n', '<leader>gb', ':BlameToggle<CR>', {desc = 'Git blame'})
-  vim.keymap.set('n', '<leader>gd', ':Gitsigns diffthis<CR>', {desc = 'Git diff this'})
 end
 
 
