@@ -10,7 +10,6 @@ M.filetypes = {"typescript", "typescriptreact", "typescript.tsx"}
 vim.api.nvim_create_autocmd("FileType", {
   pattern = M.filetypes,
   callback = function()
-    vim.notify("fold method yyy")
     vim.bo.shiftwidth = 2
     vim.bo.tabstop = 2
     vim.opt_local.foldmethod='indent'
