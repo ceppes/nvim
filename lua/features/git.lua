@@ -19,12 +19,16 @@ M = {
     },
     dependencies = {
         "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim",
     },
     -- setting the keybinding for LazyGit with 'keys' is recommended in
     -- order to load the plugin when the command is run for the first time
     keys = {
         { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-    }
+    },
+    config = function()
+      require("telescope").load_extension("lazygit")
+    end,
   },{
     "FabijanZulj/blame.nvim",
     lazy = false,
@@ -47,10 +51,12 @@ function M.setup()
   vim.api.nvim_set_hl(0, 'GitSignsChangedelete', { link = 'GitSignsChange' })
   vim.api.nvim_set_hl(0, 'GitSignsDelete', { link = 'GitSignsDelete' })
   vim.api.nvim_set_hl(0, 'GitSignsTopdelete', { link = 'GitSignsDelete' })
+
   require("gitsigns").setup({
     current_line_blame = false, -- :Gitsigns toggle_current_line_blame
     sign_priority = 0 -- for column
   })
+
 end
 
 function M.keymaps()

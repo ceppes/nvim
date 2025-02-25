@@ -118,7 +118,8 @@ vim.keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+-- NOTE: Conflict with Lazygit
+-- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Custom fold
 
