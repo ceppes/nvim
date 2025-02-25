@@ -15,6 +15,7 @@ function M.setup()
 
   colorizer.setup({
     'css';
+    'scss';
     'javascript';
     'html';
     'python';
