@@ -19,7 +19,7 @@ function M.setup()
       },
       virtual_text = {
         prefix = '●',
-        spacing = 2, --4
+        spacing = 2,
         severity_linit = "Warning"
       },
       signs = {
