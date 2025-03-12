@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = M.filetypes,
   group = vim.api.nvim_create_augroup("FixCssCommentString", {clear = true}),
   callback = function ()
-    vim.bo.commentstring = "//  %s"
+    vim.bo.commentstring = "// %s"
     require('Comment.ft')(M.filetypes, '// %s')
   end,
 })

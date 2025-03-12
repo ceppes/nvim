@@ -6,7 +6,7 @@ M.lsp_key = 'yamlls'
 M.lspbin = "yaml-language-server"
 M.treesitter = "yaml"
 M.lint = "yamllint"
-M.filetypes = "yaml"
+M.filetypes = {"yaml", "yml", "helm"}
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = M.filetypes,
@@ -16,6 +16,15 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.foldmethod='indent'
     vim.opt_local.expandtab = true
   end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = M.filetypes,
+  group = vim.api.nvim_create_augroup("FixYamlCommentString", {clear = true}),
+  callback = function ()
+    vim.bo.commentstring = "# %s"
+    require('Comment.ft')(M.filetypes, '# %s')
+  end,
 })
 
 function M.lsp()
