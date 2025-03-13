@@ -63,7 +63,7 @@ function M.keymaps()
       map('L', vim.lsp.buf.signature_help, 'Signature help')
 
       map('<leader>ftt', vim.lsp.buf.format, 'Format')
-      map('<leader>gf', function() vim.lsp.buf.format({async = true}) end, 'Format async')
+      map('<leader>gff', function() vim.lsp.buf.format({async = true}) end, 'Format async')
 
       map('<leader>le','<cmd>:!sh > ~/.local/state/nvim/lsp.log<CR>' , 'Empty lsp.log')
       map('<leader><leader>', function()

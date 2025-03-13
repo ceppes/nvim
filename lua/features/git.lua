@@ -41,8 +41,51 @@ M = {
       require("features.git").setup()
       require("features.git").keymaps()
     end
+  },{
+    'sindrets/diffview.nvim',
+    command = "DiffviewOpen",
+    config = function ()
+      local actions = require("diffview.actions")
+      require('diffview').setup({
+        keymaps = {
+          file_panel = {
+            -- Lazygit
+            ["s"] = false,
+            { "n", "<leader><leader>", actions.toggle_stage_entry, { desc = "Stage / unstage the selected entry" } },
+            ["S"] = false,
+            { "n", "<leader>a", actions.stage_all, { desc = "Stage all entries" } },
+          }
+        }
+      })
+
+      local function toggle_diffview(cmd)
+        if next(require("diffview.lib").views) == nil then
+          vim.cmd(cmd)
+        else
+          vim.cmd("DiffviewClose")
+        end
+      end
+
+      vim.keymap.set('n', "<leader>gd",
+        function()
+          toggle_diffview("DiffviewOpen")
+        end,
+        {desc = "Diff Index"})
+
+      vim.keymap.set('n', "<leader>gD",
+        function()
+          toggle_diffview("DiffviewOpen master..HEAD")
+        end,
+        {desc = "Diff master"})
+
+      vim.keymap.set('n', "<leader>gf",
+        function()
+          toggle_diffview("DiffviewFileHistory %")
+        end,
+        {desc = "Diffs for current File"})
+    end
   }
-    -- use 'airblade/vim-gitgutter'
+  -- use 'airblade/vim-gitgutter'
 }
 
 function M.setup()
