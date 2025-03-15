@@ -32,11 +32,11 @@ M = {
     dashboard.section.header.val = header_neovim
 
     dashboard.section.buttons.val = {
+      dashboard.button("l", " Load last session current dir", ":SessionManager load_current_dir_session<CR>"),
       dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
       dashboard.button("f f", "  Find File", ":Telescope find_files<CR>"),
       dashboard.button("r", "󰊄  Recently opened files", ":Telescope oldfiles<CR>"),
       dashboard.button("f l", "󰈬  Find Word", ":Telescope live_grep<CR>"),
-      dashboard.button("l", " Load last session current dir", ":SessionManager load_current_dir_session<CR>"),
       dashboard.button("u", "  Open Lazy", ":Lazy<CR>"),
       dashboard.button("q", " Quit", ":qa!<CR>"),
       -- dashboard.button("SPC f r", "  Frecency/MRU"),
