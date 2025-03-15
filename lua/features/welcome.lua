@@ -85,7 +85,14 @@ M = {
           .. ms
           .. "ms"
 
-        local platform = vim.fn.has("win32") == 1 and " Windows" or vim.fn.has("macunix") and " MacOs" or " Linux"
+        local platform = "No OS"
+        if vim.fn.has("win32") == 1 then
+          platform = " Windows"
+        elseif vim.fn.has("mac") == 1 then
+          platform = " MacOs"
+        elseif vim.fn.has("unix") == 1 then
+          platform = " Linux"
+        end
         local version = " " .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch
         local datetime = os.date " %d-%m-%Y  %H:%M:%S"
 
