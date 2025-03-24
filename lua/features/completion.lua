@@ -327,6 +327,7 @@ function M.setup()
      },
     format = lspkind_status_ok and lspkind.cmp_format(lspkind) or nil,
     formatting = {
+      fields = {'abbr', 'kind', 'menu'},
       format = lspkind.cmp_format({
         -- defines how annotations are shown
         -- default: symbol
@@ -340,7 +341,7 @@ function M.setup()
         -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
         before = function (entry, vim_item)
           -- set a name for each source
-          vim_item.menu = ({
+          local custom_menus = {
             buffer = "[Buffer]",
             emoji = "[Emoji]",
             nvim_lsp = "[LSP]",
@@ -350,7 +351,10 @@ function M.setup()
             nvim_lua = "[Neovim]",
             luasnip = "[LuaSnip]",
             nvim_lsp_signature_help = "[Nvim Lsp Signature Help]"
-          })[entry.source.name]
+          }
+          local source_name = custom_menus[entry.source.name] or string.format("[%s]", entry.source.name)
+          vim_item.menu = string.format("%s %s", source_name, vim_item.menu or "")
+
           return vim_item
         end
       })
