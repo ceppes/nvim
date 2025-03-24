@@ -7,6 +7,8 @@ local function optiones(options)
 end
 
 function M.keymaps()
+  vim.keymap.set('n', '<leader>le','<cmd>:!sh > ~/.local/state/nvim/lsp.log<CR>' , {desc = 'Empty lsp.log'})
+
   vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
     callback = function(event)
@@ -65,7 +67,6 @@ function M.keymaps()
       map('<leader>ftt', vim.lsp.buf.format, 'Format')
       map('<leader>gff', function() vim.lsp.buf.format({async = true}) end, 'Format async')
 
-      map('<leader>le','<cmd>:!sh > ~/.local/state/nvim/lsp.log<CR>' , 'Empty lsp.log')
       map('<leader><leader>', function()
         vim.diagnostic.open_float({
           suffix = function(d)
@@ -95,5 +96,6 @@ function M.diagnostic_keymaps()
   vim.keymap.set('n', ']d', vim.diagnostic.goto_next, optiones({desc = 'LSP Goto next'}))
   vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, optiones({desc = 'Open diagnostic [Q]uickfix list'}))
 end
+
 
 return M
