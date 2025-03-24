@@ -83,11 +83,28 @@ function M.setup()
           }
         end
         },
-      lua = { require("formatter.filetypes.lua").stylua },
+      lua = {
+        function ()
+          local util = require ("formatter.util")
+          return {
+            exe = "stylua",
+            args = {
+              "--search-parent-directories",
+              "--indent-type Spaces",
+              "--stdin-filepath",
+              util.escape_path(util.get_current_buffer_file_path()),
+              "--",
+              "-",
+            },
+            stdin = true,
+          }
+        end
+      },
       ["*"] = {
         require("formatter.filetypes.any").remove_trailing_whitespace
       }
     }
+
     -- filetype = {}
 
     local servers = require("features.lspconfig.servers")
