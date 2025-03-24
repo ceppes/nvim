@@ -11,14 +11,21 @@ M = {
              -- Ensure that sonarlint-language-server uses stdio channel
              '-stdio',
              '-analyzers',
-             -- paths to the analyzers you need, using those for python and java in this example
-             vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarpython.jar"),
-             vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarcfamily.jar"),
-             vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarjava.jar"),
-             -- vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarhtml.jar"),
-             -- vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarxml.jar"),
-             -- vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarjs.jar"),
-             -- vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonartext.jar"),
+             -- paths to the analyzers you need
+             vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarpython.jar"),
+             vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarcfamily.jar"),
+             vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarjava.jar"),
+             vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarhtml.jar"),
+            -- vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/csharpenterprise.jar "),
+            -- vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarcsharp.jar"),
+            -- vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonargo.jar "),
+            -- vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonariac.jar "),
+            -- vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarjavasymbolicexecution.jar "),
+            vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarjs.jar"),
+            -- vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarlintomnisharp.jar"),
+            -- vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarphp.jar "),
+            vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonartext.jar "),
+            vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarxml.jar "),
           }
        },
        filetypes = {
@@ -26,10 +33,10 @@ M = {
           'python',
           'cpp',
           'java',
-          -- 'html',
-          -- 'xml',
-          -- 'js'
-          -- 'text',
+          'html',
+          'js',
+          'text',
+          'xml',
        }
     })
 
