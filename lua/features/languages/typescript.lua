@@ -4,8 +4,8 @@ M.linter = 'eslint_d'
 M.lsp_key = 'ts_ls'
 M.lspbin = 'typescript-language-server'
 M.debugger = ''
-M.treesitter = {'typescript', 'tsx'}
-M.filetypes = {"typescript", "typescriptreact", "typescript.tsx"}
+M.treesitter = {'typescript', 'tsx', 'javascript'}
+M.filetypes = {"typescript", "typescriptreact", "typescript.tsx", 'javascript'}
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = M.filetypes,
