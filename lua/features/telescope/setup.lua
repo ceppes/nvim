@@ -10,8 +10,8 @@ local config = {
       vertical ={
         prompt_position = 'top',
         mirror = true,
-      }
-    }
+      },
+    },
   }
 }
 
@@ -20,22 +20,24 @@ config.pickers = {
     layout_strategy = "vertical",
     layout_config = {
       -- anchor = "N",
-      preview_height = 0.65,
       height = 0.90,
       width = 0.80,
+      -- if more than 0.5 and theme dropdown, result at the top are hidden
+      preview_height = 0.70,
     },
     prompt_prefix = "   ",
-    theme = "dropdown",
+    -- theme = "dropdown",
   },
   find_files = {
     layout_strategy = "vertical",
     layout_config = {
-      preview_height = 0.65,
       height = 0.90,
       width = 0.80,
+      -- if more than 0.5 and theme dropdown, result at the top are hidden
+      preview_height = 0.70,
     },
     prompt_prefix = "   ",
-    theme = "dropdown",
+    -- theme = "dropdown",
   }
 }
 
