@@ -23,7 +23,8 @@ vim.g.maplocalleader = " "
 -----------------------------------------------------------
 vim.opt.mouse = 'a'                       -- Enable mouse support
 vim.opt.swapfile = false                  -- Don't use swapfile
-vim.opt.completeopt = 'menuone,noselect'  -- Autocomplete options
+-- vim.opt.completeopt = 'menuone,noselect'  -- Autocomplete options
+vim.opt.completeopt = { "menu", "menuone", "noselect", "preview" } -- Autocomplete options
 vim.opt.backup = false                    -- No backup
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- Long history
 vim.opt.undofile = true                   -- Undo file
@@ -117,6 +118,10 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
+
+vim.opt.autoread = false -- Don't read a file when it was changed outside of nvim
+vim.opt.encoding = "UTF-8" -- Default encoding
+vim.opt.confirm = true -- Confirm before closing an unsaved buffer
 
 -----------------------------------------------------------
 -- Startup
