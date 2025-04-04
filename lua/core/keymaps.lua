@@ -24,12 +24,11 @@ vim.keymap.set("", "<right>", "<nop>")
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = "Clear search highlighting" })
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlighting" })
 
 vim.keymap.set("n", "<leader>q", ":qa!<CR>", { desc = "Close all windows and exit" })
 
 vim.keymap.set("n", "<leader>nn", vim.cmd.Ex, { desc = "File : Access netrw" })
-
 
 vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save" })
 vim.keymap.set("i", "<C-s>", "<ESC>:w<CR>a", { desc = "Save" })
@@ -47,10 +46,10 @@ vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<C-l>", "<C-w>l")
 
 -- Move window
-vim.keymap.set("n", "sh", "<C-w>h", {desc = "Move focus to the left window"})
-vim.keymap.set("n", "sj", "<C-w>j", {desc = "Move focus to the right window"})
-vim.keymap.set("n", "sk", "<C-w>k", {desc = "Move focus to the lower window"})
-vim.keymap.set("n", "sl", "<C-w>l", {desc = "Move focus to the upper window"})
+vim.keymap.set("n", "sh", "<C-w>h", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "sj", "<C-w>j", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "sk", "<C-w>k", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "sl", "<C-w>l", { desc = "Move focus to the upper window" })
 
 -- Split window
 vim.keymap.set("n", "sS", ":split<CR>", opts)
@@ -61,6 +60,12 @@ vim.keymap.set("n", "<C-w><left>", "<C-w><")
 vim.keymap.set("n", "<C-w><right>", "<C-w>>")
 vim.keymap.set("n", "<C-w><up>", "<C-w>+")
 vim.keymap.set("n", "<C-w><down>", "<C-w>-")
+
+-- Resize window
+vim.keymap.set("n", "<S-Up>", "<CMD>resize +2<CR>", { desc = "Increase window height", silent = true })
+vim.keymap.set("n", "<S-Down>", "<CMD>resize -2<CR>", { desc = "Decrease window height", silent = true })
+vim.keymap.set("n", "<S-Left>", "<CMD>vertical resize -2<CR>", { desc = "Decrease window width", silent = true })
+vim.keymap.set("n", "<S-Right>", "<CMD>vertical resize +2<CR>", { desc = "Increase window width", silent = true })
 
 -----------------------------------------------------------
 -- Applications and Plugins shortcuts
@@ -77,7 +82,7 @@ vim.keymap.set("n", "<leader>Y", 'gg"+yG', { desc = "Copy all file to system" })
 -- map('v', '<leader>d', '"_d')
 
 vim.keymap.set("n", "<leader>ft", function()
-	vim.lsp.buf.format()
+    vim.lsp.buf.format()
 end, { desc = "Format buffer" })
 
 vim.keymap.set("n", "<leader>jq", "<cmd>%!jq .<cr>", { desc = "Format json" })
@@ -96,15 +101,15 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- Map <leader>x in normal mode to run the Lua function
 vim.keymap.set("n", "<leader>xx", function()
-	-- Ask for confirmation using vim.fn.confirm
-	local answer = vim.fn.confirm("Make file executable?", "&Yes\n&No", 2)
-	if answer == 1 then
-		local file = vim.fn.expand("%:p")
-		os.execute("chmod +x " .. vim.fn.shellescape(file))
-		print("File made executable!")
-	else
-		print("Cancelled.")
-	end
+    -- Ask for confirmation using vim.fn.confirm
+    local answer = vim.fn.confirm("Make file executable?", "&Yes\n&No", 2)
+    if answer == 1 then
+        local file = vim.fn.expand("%:p")
+        os.execute("chmod +x " .. vim.fn.shellescape(file))
+        print("File made executable!")
+    else
+        print("Cancelled.")
+    end
 end, { noremap = true, silent = true, desc = "chmod +x current_file with confirmation" })
 
 vim.keymap.set("n", "+", "<C-a>", { desc = "Increment" })
