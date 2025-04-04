@@ -64,7 +64,7 @@ function M.keymaps()
       map('K', vim.lsp.buf.hover, 'Hover Documentation')
       map('L', vim.lsp.buf.signature_help, 'Signature help')
 
-      map('<leader>ftt', vim.lsp.buf.format, 'Format')
+      map('<leader>bT', vim.lsp.buf.format, '[B]uffer [F]ormat')
       map('<leader>gff', function() vim.lsp.buf.format({async = true}) end, 'Format async')
 
       map('<leader><leader>', function()

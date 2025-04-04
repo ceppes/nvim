@@ -39,7 +39,7 @@ function M.get_active_clients()
 end
 
 function M.keymaps()
-  vim.keymap.set('n', '<leader>f', ':Format<CR>', { desc = "Format" } )
+  vim.keymap.set('n', '<leader>bf', ':Format<CR>', { desc = "[B]uffer [F]ormat" } )
 end
 
 function M.setup()
