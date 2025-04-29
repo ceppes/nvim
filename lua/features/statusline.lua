@@ -3,7 +3,7 @@ local M = {}
 -- inspiration
 --  require('catppuccin.groups.integrations.feline')
 M = {
-  'freddiehaddad/feline.nvim',
+  'famiu/feline.nvim',
   dependencies = {
     "nvim-web-devicons"
   },

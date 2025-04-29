@@ -14,34 +14,34 @@ M = {
   end
 }
 
-local ensure_installed = {
-'c',
-'comment',
-'cpp',
-'diff',
-'dockerfile',
-'dot',
-'git_config',
-'git_rebase',
-'gitcommit',
-  'gitignore',
-  'go',
-  'gomod',
-  'html',
-  'http',
-  'javascript',
-  'jsonc',
-  'hcl',
-  'latex',
-  'luadoc',
-  'markdown',
-  'query', -- treesitter
-  'regex',
-  'scss',
-  'sql',
-  'terraform',
-  'vim',
-  'vimdoc',
+local ensure_installed_m = {
+  c = true,
+  comment = true,
+  cpp = true,
+  diff = true,
+  dockerfile = true,
+  dot = true,
+  git_config = true,
+  git_rebase = true,
+  gitcommit = true,
+  gitignore = true,
+  go = true,
+  gomod = true,
+  html = true,
+  http = true,
+  javascript = true,
+  jsonc = true,
+  hcl = true,
+  latex = true,
+  luadoc = true,
+  markdown= true,
+  query = true, -- treesitter
+  regex = true,
+  scss = true,
+  sql = true,
+  terraform = true,
+  vim = true,
+  vimdoc = true,
 }
 
 
@@ -52,11 +52,33 @@ function M.setup()
   end
 
   local servers = require("features.lspconfig.servers")
-  for _, config in pairs(servers) do
-    if config.treesitter then
-      local treesitter_server_config = config.treesitter
-      table.insert(ensure_installed, treesitter_server_config)
+  for _, serverName in pairs(servers) do
+    if serverName.treesitter then
+      local treesitter_server_config = serverName.treesitter
+      if type(treesitter_server_config) == "table" then
+        for _, config in pairs(treesitter_server_config) do
+          ensure_installed_m[config] = true
+        end
+      else
+        ensure_installed_m[treesitter_server_config] = true
+      end
     end
+  end
+
+
+  local ensure_installed = {}
+
+
+  for serverName, _ in ipairs(ensure_installed_m) do
+    table.insert(ensure_installed, tostring(serverName))
+    print(serverName)
+  end
+
+  for k, v in ipairs(ensure_installed_m) do
+    print(k .. v)
+  end
+  for k, v in ipairs(ensure_installed) do
+    print(k .. v)
   end
 
   nvim_treesitter.setup {

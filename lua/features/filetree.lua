@@ -10,8 +10,9 @@ M = {
     -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
   },
   keys = {
-    { "<leader>E", "<cmd>Neotree reveal toggle<cr>", desc = "File : NeoTree" },
-    { "<leader>e", "<cmd>Neotree reveal float<cr>", desc = "File : NeoTree float" },
+    { "<leader>e", "<cmd>Neotree reveal position=float<cr>", desc = "File : NeoTree" },
+    { "<leader>E", "<cmd>Neotree reveal position=left<cr>", desc = "File : NeoTree float" },
+    { "<leader>EE", "<cmd>Neotree reveal position=current<cr>", desc = "File : NeoTree float" },
   },
   config = function()
     require("neo-tree").setup({
