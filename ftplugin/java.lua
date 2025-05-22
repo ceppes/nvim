@@ -14,7 +14,7 @@ local workspace_dir = vim.env.HOME .. '/jdtls-workspace/' .. project_name
 -- local JDTLS_LOCATION = vim.fn.stdpath "data" .. "/lsp_servers/jdtls"
 local JDTLS_LOCATION = vim.env.HOME .. "/.local/share/nvim/mason/share/jdtls"
 print("JAVA setup")
--- /home/diego/.local/share/nvim/mason/packages/jdtls
+-- ~/.local/share/nvim/mason/packages/jdtls
 print("JDTLS_LOCATION" .. JDTLS_LOCATION)
 -- local JDA_LOCATION = require('mason-registry').get_package('java-debug-adapter'):get_install_path()
 local JDA_LOCATION = vim.env.HOME .. "/.local/share/nvim/mason/packages/java-debug-adapter"
