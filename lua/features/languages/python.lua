@@ -8,6 +8,16 @@ M.filetype = 'python'
 M.treesitter = M.filetype
 M.formatter = { 'black', 'autopep8'}
 
+-- Auto detection poetry env
+local handle = io.popen("poetry env info -p 2>/dev/null")
+local poetry_venv = handle and handle:read("*a"):gsub("%s+", "") or nil
+if handle then handle:close() end
+
+-- If env exist use venv pylint
+if poetry_venv and vim.fn.filereadable(poetry_venv .. "/bin/pylint") == 1 then
+  M.linter_cmd = poetry_venv .. "/bin/pylint"
+end
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = M.filetype,
   callback = function()

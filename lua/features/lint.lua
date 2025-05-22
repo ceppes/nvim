@@ -53,12 +53,18 @@ function M.setup()
   local lint_ft_linter = {}
 
   local servers = require("features.lspconfig.servers")
+  local lint = require("lint")
+
   for _, config in pairs(servers) do
     if config.linter then
       table.insert(lint_ensure_installed, config.linter)
     end
     if config.linter and config.filetype then
       lint_ft_linter[config.filetype] = {config.linter}
+
+      if config.linter_cmd and lint.linters[config.linter] then
+        lint.linters[config.linter].cmd = config.linter_cmd
+      end
     end
   end
   -- for k,v in pairs(lint_ft_linter) do
@@ -71,7 +77,6 @@ function M.setup()
     --   print(i, j)
     -- end
 
-  local lint_s, lint = pcall(require, "lint")
   lint.linters_by_ft = lint_ft_linter
 
   vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
@@ -87,8 +92,3 @@ function M.setup()
 end
 
 return M
-
-
-
-
-
