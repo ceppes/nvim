@@ -100,6 +100,7 @@ function M.setup()
           }
         end
       },
+      tex = { require("formatter.filetypes.tex").latexindent },
       ["*"] = {
         require("formatter.filetypes.any").remove_trailing_whitespace
       }
