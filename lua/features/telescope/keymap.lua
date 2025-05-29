@@ -9,6 +9,9 @@ vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" 
 vim.keymap.set("n", "<leader>fhf", function()
     builtin.find_files({ hidden = true })
 end, { desc = "[F]ind [H]iden [F]iles" })
+vim.keymap.set("n", "<leader>fif", function()
+    builtin.find_files({ no_ignore = true })
+end, { desc = "[F]ind [I]gnored [F]iles" })
 vim.keymap.set("n", "<leader>fl", builtin.live_grep, { desc = "[F]ind [L]ive grep" })
 vim.keymap.set("n", "<leader>fhl", function()
     builtin.live_grep({
