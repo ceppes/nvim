@@ -7,7 +7,7 @@ end
 
 -- Data directory - change it to your liking
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-local workspace_dir = vim.env.HOME .. '/jdtls-workspace/' .. project_name
+local workspace_dir = vim.env.HOME .. '/.cache/jdtls/workspace/' .. project_name
 -- local WORKSPACE_PATH = vim.env.HOME .. "/workspace/java/"
 
 -- Installation location of jdtls by nvim-lsp-installer
