@@ -19,6 +19,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.foldmethod='indent'
     vim.opt_local.expandtab = true
     M.keymaps()
+    M.commands()
 
   end
 })
@@ -46,6 +47,41 @@ function M.keymaps()
     end,
     {desc = "Run Test Nearest Method (Java)"})
   end
+end
+
+function M.commands()
+  vim.api.nvim_create_user_command("JdtlsGoogleIntellij", function()
+  require('jdtls').start_or_attach({
+    settings = {
+      java = {
+        format = {
+          settings = {
+            -- url = "file:" .. vim.fn.expand("~/.config/jdtls/formatters/eclipse-google.xml"),
+          --   url = "https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml",
+            url = "file:".. vim.fn.stdpath "config" .. "/lang-servers/intellij-java-google-style.xml",
+            profile = "GoogleStyle",
+          }
+        }
+      }
+    }
+  })
+  end, {})
+
+  vim.api.nvim_create_user_command("JdtlsGoogleEclipse", function()
+  require('jdtls').start_or_attach({
+    settings = {
+      java = {
+        format = {
+          settings = {
+            url = "file:".. vim.fn.stdpath "config" .. "/lang-servers/eclipse-java-google-style.xml",
+            -- https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml
+            profile = "GoogleStyle",
+          }
+        }
+      }
+    }
+  })
+  end, {})
 end
 
 function M.plugin()
