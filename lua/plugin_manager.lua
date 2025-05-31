@@ -51,7 +51,7 @@ local plugins = {
   require('features.http'),
   require('features.filetree'),
   require('features.mini'),
-  require('features.sql'),
+  require('features.sqlui'),
   {
     "towolf/vim-helm",
     -- ft = {"yaml"}

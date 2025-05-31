@@ -20,6 +20,7 @@ M = {
   clangd = require('features.languages.cpp'),
   -- gopls = require('features.languages.go'),
   -- swift = require('features.languages.swift'),
+  sql = require('features.languages.sql'),
 }
 
 return M
