@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.tabstop = 2
     vim.opt_local.foldmethod='indent'
     vim.opt_local.expandtab = true
+    vim.opt_local.tabstop = 2 -- 1 tab == 2 spaces
   end
 })
 
