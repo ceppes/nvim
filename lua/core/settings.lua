@@ -92,7 +92,7 @@ vim.opt.history = 100                     -- Remember N lines in history
 vim.opt.lazyredraw = false                -- true : Faster scrolling (temporary)
 vim.opt.synmaxcol = 240                   -- Max column for syntax highlight
 -- Decrease update time
-vim.opt.updatetime = 250                   -- ms to wait for trigger 'document_highlight'
+vim.opt.updatetime = 200                   -- ms to wait for trigger 'document_highlight'
 
 -- Decrease mapped sequence wait time
 vim.opt.timeoutlen = 300
