@@ -94,7 +94,7 @@ function M.lsp()
   return require("features.lsp.server_config").config(
     M.lspbin,
     {
-      root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
+      root_markers = lspconfig.util.root_pattern(unpack(python_root_files)),
       flags = {
         debounce_text_changes = 150,
       },
@@ -109,8 +109,8 @@ function M.lsp()
         }
       },
       before_init = function(_, config)
-        vim.notify("python path : " .. get_python_path(config.root_dir))
-        config.settings.python.pythonPath = get_python_path(config.root_dir)
+        vim.notify("python path : " .. get_python_path(config.root_markers))
+        config.settings.python.pythonPath = get_python_path(config.root_markers)
       end
     }
   )

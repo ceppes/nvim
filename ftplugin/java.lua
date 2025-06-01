@@ -40,8 +40,8 @@ vim.list_extend(bundles, vim.split(vim.fn.glob( vim.env.HOME .. "/.local/share/n
 -- vim.list_extend(bundles, vim.split(vim.fn.glob( JTEST_LOCATION .. "/extension/server/*.jar", 1), "\n"))
 
 local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
-local root_dir = require("jdtls.setup").find_root(root_markers)
-if root_dir == "" then
+local root_markers = require("jdtls.setup").find_root(root_markers)
+if root_markers == "" then
   return
 end
 
@@ -75,7 +75,7 @@ local config = {
 
   -- This is the default if not provided, you can remove it. Or adjust as needed.
   -- One dedicated LSP server & client will be started per unique root_dir
-  root_dir = root_dir,
+  root_markers = root_markers,
 
   -- Here you can configure eclipse.jdt.ls specific settings
   -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request

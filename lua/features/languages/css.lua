@@ -37,7 +37,7 @@ function M.lsp()
     {
       cmd = {"vscode-css-language-server", "--stdio"},
       filetypes = M.filetypes,
-      root_dir = lspconfig.util.root_pattern("package.json", ".git"),
+      root_markers = lspconfig.util.root_pattern("package.json", ".git"),
     }
   )
 end

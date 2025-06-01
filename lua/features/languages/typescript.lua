@@ -36,7 +36,7 @@ function M.lsp()
     {
       filetypes = M.filetypes,
       cmd = { M.lspbin, "--stdio"},
-      root_dir = lspconfig.util.root_pattern(unpack(root_files)),
+      root_markers = lspconfig.util.root_pattern(unpack(root_files)),
       settings = {
 	typescript = {
 	   inlayHints = {
