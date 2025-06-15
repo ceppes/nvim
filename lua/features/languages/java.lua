@@ -301,14 +301,6 @@ function M.debugger()
         return
     end
 
-    dap.adapters.python = {
-        type = "executable",
-        -- command = function(config)
-        --   return get_python_path(config.root_dir)
-        -- end;
-        args = { "-m", "debugpy.adapter" },
-    }
-
     dap.configurations.java = {
         {
             name = "Debug Attach (5000)",
