@@ -13,7 +13,7 @@ M = {
                     -- paths to the analyzers you need
                     vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarpython.jar"),
                     vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarcfamily.jar"),
-                    vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarjava.jar"),
+                    -- vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarjava.jar"),
                     vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarhtml.jar"),
                     -- vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/csharpenterprise.jar "),
                     -- vim.fn.expand("~/.local/share/nvim/mason/sonarlint-analyzers/sonarcsharp.jar"),
@@ -31,7 +31,7 @@ M = {
                 -- Tested and working
                 "python",
                 "cpp",
-                "java",
+                -- 'java',
                 "html",
                 "js",
                 "text",
