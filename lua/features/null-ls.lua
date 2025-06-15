@@ -51,6 +51,7 @@ function M.setup()
     require("mason-null-ls").setup({ ensure_installed = lint_ensure_installed })
 
     local null_ls = require("null-ls")
+
     local code_actions = null_ls.builtins.code_actions
     local diagnostics = null_ls.builtins.diagnostics
     local formatting = null_ls.builtins.formatting
@@ -58,7 +59,6 @@ function M.setup()
     null_ls.setup({
         sources = {
             diagnostics.hadolint,
-            diagnostics.pylint,
             formatting.black,
             formatting.stylua,
         },
