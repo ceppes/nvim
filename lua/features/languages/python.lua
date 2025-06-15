@@ -140,7 +140,14 @@ function M.debugger()
             --   return get_python_path(config.root_dir)
             -- end;
         },
-        {},
+        {
+            name = "Python: Launch",
+            type = "python",
+            request = "launch",
+            program = "${file}",
+            console = "integratedTerminal",
+            justMyCode = false,
+        },
         {
             name = "Python: Run pytest",
             type = "python", -- the type here established the link to the adapter definition: `dap.adapters.python`
@@ -163,7 +170,6 @@ function M.debugger()
             request = "attach",
             connect = {
                 port = 5678,
-                -- host = "localhost",
                 host = "127.0.0.1",
             },
         },
