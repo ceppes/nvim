@@ -76,7 +76,7 @@ function M.keymaps()
             map("<leader><leader>", function()
                 vim.diagnostic.open_float({
                     suffix = function(d)
-                        return (" (%s)"):format(d.source)
+                        return (" (%s)"):format(d.source .. " - " .. d.code)
                     end,
                 }, { focus = false })
             end, "Open diag window")
