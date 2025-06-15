@@ -82,7 +82,7 @@ vim.keymap.set("n", "<leader>Y", 'gg"+yG', { desc = "Copy all file to system" })
 -- map('v', '<leader>d', '"_d')
 
 vim.keymap.set("n", "<leader>ft", function()
-    vim.lsp.buf.format()
+	vim.lsp.buf.format()
 end, { desc = "Format buffer" })
 
 vim.keymap.set("n", "<leader>jq", "<cmd>%!jq .<cr>", { desc = "Format json" })
@@ -101,15 +101,15 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- Map <leader>x in normal mode to run the Lua function
 vim.keymap.set("n", "<leader>xx", function()
-    -- Ask for confirmation using vim.fn.confirm
-    local answer = vim.fn.confirm("Make file executable?", "&Yes\n&No", 2)
-    if answer == 1 then
-        local file = vim.fn.expand("%:p")
-        os.execute("chmod +x " .. vim.fn.shellescape(file))
-        print("File made executable!")
-    else
-        print("Cancelled.")
-    end
+	-- Ask for confirmation using vim.fn.confirm
+	local answer = vim.fn.confirm("Make file executable?", "&Yes\n&No", 2)
+	if answer == 1 then
+		local file = vim.fn.expand("%:p")
+		os.execute("chmod +x " .. vim.fn.shellescape(file))
+		print("File made executable!")
+	else
+		print("Cancelled.")
+	end
 end, { noremap = true, silent = true, desc = "chmod +x current_file with confirmation" })
 
 vim.keymap.set("n", "+", "<C-a>", { desc = "Increment" })

@@ -1,13 +1,13 @@
 -- All client
 vim.lsp.config("*", {
-    capabilities = {
-        textDocument = {
-            semanticTokens = {
-                multilineTokenSupport = true,
-            },
-        },
-    },
-    root_markers = { '.git' },
+	capabilities = {
+		textDocument = {
+			semanticTokens = {
+				multilineTokenSupport = true,
+			},
+		},
+	},
+	root_markers = { ".git" },
 })
 -- log path :
 -- v ~/.cache/nvim/lsp.log
@@ -21,16 +21,15 @@ local servers = require("features.lspconfig.servers")
 
 local log = ""
 for server, config in pairs(servers) do
-    if config.lsp and config.lsp_key then
-        local lsp = config.lsp()
+	if config.lsp and config.lsp_key then
+		local lsp = config.lsp()
 
-        vim.lsp.config(config.lsp_key, lsp)
+		vim.lsp.config(config.lsp_key, lsp)
 
-        if vim.fn.executable(config.lspbin) ~= 1 then
-            log = log .. "\n" .. "[LSP][Setup servers] ❌ " .. config.lsp_key .. ", bin : " .. config.lspbin .. " "
-        else
-            log = log .. "\n" .. "[LSP][Setup servers] ✅ " .. config.lsp_key .. ", bin : " .. config.lspbin .. " "
-        end
-    end
+		if vim.fn.executable(config.lspbin) ~= 1 then
+			log = log .. "\n" .. "[LSP][Setup servers] ❌ " .. config.lsp_key .. ", bin : " .. config.lspbin .. " "
+		else
+			log = log .. "\n" .. "[LSP][Setup servers] ✅ " .. config.lsp_key .. ", bin : " .. config.lspbin .. " "
+		end
+	end
 end
-
