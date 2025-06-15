@@ -84,10 +84,6 @@ local plugins = {
     -- Dim inactive portions
     "folke/twilight.nvim",
 
-    -- better log highlight
-    -- 'MTDL9/vim-log-highlighting',
-    { "fei6409/log-highlight.nvim", event = "BufRead *.log", opts = {} },
-
     -- NO MORE USED
     -- "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     --  "m4xshen/hardtime.nvim",
@@ -106,5 +102,5 @@ local plugins = {
 }
 
 require("lazy").setup(plugins)
+
 vim.keymap.set("n", "<leader>l", ":Lazy<CR>", { desc = "Open Lazy" })
--- require("lazy").setup(plugins,opts)
