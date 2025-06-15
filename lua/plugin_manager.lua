@@ -52,6 +52,7 @@ local plugins = {
     require("features.http"),
     require("features.filetree"),
     require("features.mini"),
+    require("features.ia"),
     require("features.languages.markdown").plugin(),
     require("features.languages.sql").plugin(),
     require("features.languages.log").plugin(),
