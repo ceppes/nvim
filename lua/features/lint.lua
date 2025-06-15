@@ -61,7 +61,7 @@ function M.setup()
         if config.linter and config.filetype then
             lint_ft_linter[config.filetype] = { config.linter }
 
-            if config.linter_cmd and lint.linters[config.linter] then
+            if config.linter_cmd and not config.linter_cmd:find("/") and lint.linters[config.linter] then
                 lint.linters[config.linter].cmd = config.linter_cmd
             end
         end
