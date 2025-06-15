@@ -21,6 +21,7 @@ M = {
     -- gopls = require('features.languages.go'),
     -- swift = require('features.languages.swift'),
     sql = require("features.languages.sql"),
+    vue = require("features.languages.vue"),
 }
 
 return M
