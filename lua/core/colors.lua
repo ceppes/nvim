@@ -1,54 +1,54 @@
 local M = {}
 
 M = {
-	{
-		"ellisonleao/gruvbox.nvim",
-	},
-	{
-		"folke/tokyonight.nvim",
-	},
-	{
-		"catppuccin/nvim",
-		as = "catppuccin",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
-		config = function()
-			require("core.colors").setup()
-			require("core.colors").keymaps()
-		end,
-	},
-	{
-		-- "altercation/vim-colors-solarized",
-		"shaunsingh/nord.nvim",
-		"shaunsingh/moonlight.nvim",
-		"shaunsingh/solarized.nvim",
-	},
+    {
+        "ellisonleao/gruvbox.nvim",
+    },
+    {
+        "folke/tokyonight.nvim",
+    },
+    {
+        "catppuccin/nvim",
+        as = "catppuccin",
+        lazy = false, -- make sure we load this during startup if it is your main colorscheme
+        priority = 1000, -- make sure to load this before all the other start plugins
+        config = function()
+            require("core.colors").setup()
+            require("core.colors").keymaps()
+        end,
+    },
+    {
+        -- "altercation/vim-colors-solarized",
+        "shaunsingh/nord.nvim",
+        "shaunsingh/moonlight.nvim",
+        "shaunsingh/solarized.nvim",
+    },
 }
 
 local default_color = "catppuccin-mocha"
 
 local function ColorIt(color)
-	color = color or default_color
-	vim.cmd.colorscheme(color)
+    color = color or default_color
+    vim.cmd.colorscheme(color)
 end
 
 function M.setup()
-	require("catppuccin").setup({
-		styles = {
-			comment = {}, -- For markdown checkbox highlight
-		},
-	})
+    require("catppuccin").setup({
+        styles = {
+            comment = {}, -- For markdown checkbox highlight
+        },
+    })
 
-	ColorIt()
-	vim.o.background = "dark"
+    ColorIt()
+    vim.o.background = "dark"
 end
 
 function M.keymaps()
-	-- local telescope_builtin_status_ok, telescope_builtin = pcall(require, 'telescope.builtin')
-	-- if not telescope_builtin_status_ok then
-	--   return
-	-- end
-	vim.keymap.set("n", "<leader>c", require("telescope.builtin").colorscheme, { desc = "T Colorscheme" })
+    -- local telescope_builtin_status_ok, telescope_builtin = pcall(require, 'telescope.builtin')
+    -- if not telescope_builtin_status_ok then
+    --   return
+    -- end
+    vim.keymap.set("n", "<leader>c", require("telescope.builtin").colorscheme, { desc = "T Colorscheme" })
 end
 
 return M
