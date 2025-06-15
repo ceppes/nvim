@@ -5,26 +5,34 @@ local dap_ensure_installed = {
 }
 
 M = {
-    "mfussenegger/nvim-dap",
-    -- opt = true,
-    -- event = "BufReadPre",
-    -- module = {
-    --   "dap"
-    -- },
-    dependencies = {
-        -- "Pocco81/DAPInstall.nvim",
-        "theHamsta/nvim-dap-virtual-text",
-        "rcarriga/nvim-dap-ui",
-        "mfussenegger/nvim-dap-python",
-        "nvim-telescope/telescope-dap.nvim",
-        -- { "leoluz/nvim-dap-go", module = "dap-go" },
-        -- { "jbyuki/one-small-step-for-vimkind", module = "osv" },
-        "jbyuki/one-small-step-for-vimkind",
+    {
+        "mfussenegger/nvim-dap",
+        -- opt = true,
+        -- event = "BufReadPre",
+        -- module = {
+        --   "dap"
+        -- },
+        dependencies = {
+            -- "Pocco81/DAPInstall.nvim",
+            "theHamsta/nvim-dap-virtual-text",
+            "mfussenegger/nvim-dap-python",
+            "nvim-telescope/telescope-dap.nvim",
+            -- { "leoluz/nvim-dap-go", module = "dap-go" },
+            -- { "jbyuki/one-small-step-for-vimkind", module = "osv" },
+            "jbyuki/one-small-step-for-vimkind",
+        },
+        config = function()
+            require("features.debugger").setup()
+            require("features.debugger").keymaps()
+        end,
     },
-    config = function()
-        require("features.debugger").setup()
-        require("features.debugger").keymaps()
-    end,
+    {
+        "rcarriga/nvim-dap-ui",
+        dependencies = {
+            "mfussenegger/nvim-dap",
+            "nvim-neotest/nvim-nio",
+        },
+    },
 }
 
 local dap_breakpoint = {
