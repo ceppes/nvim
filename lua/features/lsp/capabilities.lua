@@ -8,9 +8,16 @@ local M = {}
 --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
 --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-M = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-M.textDocument.completion.completionItem = {
+
+local status_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if status_cmp then
+  capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+end
+
+capabilities.textDocument.completion.completionItem = vim.tbl_deep_extend("force",
+  capabilities.textDocument.completion.completionItem or {},
+  {
     documentationFormat = { "markdown", "plaintext" },
     snippetSupport = true,
     preselectSupport = true,
@@ -20,12 +27,20 @@ M.textDocument.completion.completionItem = {
     commitCharactersSupport = true,
     tagSupport = { valueSet = { 1 } },
     resolveSupport = {
-        properties = {
-            "documentation",
-            "detail",
-            "additionalTextEdits",
-        },
+      properties = {
+        "documentation",
+        "detail",
+        "additionalTextEdits",
+      },
     },
+  }
+)
+
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
 }
+
+M.capabilities = capabilities
 
 return M
