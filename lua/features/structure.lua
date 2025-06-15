@@ -23,7 +23,7 @@ end
 function M.keymaps()
     local symbols_outline = require("symbols-outline")
     vim.keymap.set("n", "<leader>h", symbols_outline.toggle_outline, { desc = "Open Structure" })
-    vim.keymap.set("n", "<leader>i", ":Vista nvim_lsp<CR>", { desc = "Open Vista LSP" })
+    vim.keymap.set("n", "<leader>v", ":Vista nvim_lsp<CR>", { desc = "Open Vista LSP" })
 end
 
 return M
