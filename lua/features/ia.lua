@@ -151,17 +151,17 @@ M = {
         end
 
         -- Chat commands
-        vim.keymap.set({ "n", "i" }, "<leader>ic", "<cmd>GpChatNew<cr>", keymapOptions("New Chat"))
-        vim.keymap.set({ "n", "i" }, "<leader>it", "<cmd>GpChatToggle<cr>", keymapOptions("Toggle Chat"))
-        vim.keymap.set({ "n", "i" }, "<leader>if", "<cmd>GpChatFinder<cr>", keymapOptions("Chat Finder"))
+        vim.keymap.set({ "n" }, "<leader>ic", "<cmd>GpChatNew<cr>", keymapOptions("New Chat"))
+        vim.keymap.set({ "n" }, "<leader>it", "<cmd>GpChatToggle<cr>", keymapOptions("Toggle Chat"))
+        vim.keymap.set({ "n" }, "<leader>if", "<cmd>GpChatFinder<cr>", keymapOptions("Chat Finder"))
 
         vim.keymap.set("v", "<leader>ic", ":<C-u>'<,'>GpChatNew<cr>", keymapOptions("Visual Chat New"))
         vim.keymap.set("v", "<leader>ip", ":<C-u>'<,'>GpChatPaste<cr>", keymapOptions("Visual Chat Paste"))
         vim.keymap.set("v", "<leader>it", ":<C-u>'<,'>GpChatToggle<cr>", keymapOptions("Visual Toggle Chat"))
 
-        vim.keymap.set({ "n", "i" }, "<leader>i<C-x>", "<cmd>GpChatNew split<cr>", keymapOptions("New Chat split"))
-        vim.keymap.set({ "n", "i" }, "<leader>i<C-v>", "<cmd>GpChatNew vsplit<cr>", keymapOptions("New Chat vsplit"))
-        vim.keymap.set({ "n", "i" }, "<leader>i<C-t>", "<cmd>GpChatNew tabnew<cr>", keymapOptions("New Chat tabnew"))
+        vim.keymap.set({ "n" }, "<leader>i<C-x>", "<cmd>GpChatNew split<cr>", keymapOptions("New Chat split"))
+        vim.keymap.set({ "n" }, "<leader>i<C-v>", "<cmd>GpChatNew vsplit<cr>", keymapOptions("New Chat vsplit"))
+        vim.keymap.set({ "n" }, "<leader>i<C-t>", "<cmd>GpChatNew tabnew<cr>", keymapOptions("New Chat tabnew"))
 
         vim.keymap.set("v", "<leader>i<C-x>", ":<C-u>'<,'>GpChatNew split<cr>", keymapOptions("Visual Chat New split"))
         vim.keymap.set(
@@ -178,20 +178,20 @@ M = {
         )
 
         -- Prompt commands
-        vim.keymap.set({ "n", "i" }, "<leader>ir", "<cmd>GpRewrite<cr>", keymapOptions("Inline Rewrite"))
-        vim.keymap.set({ "n", "i" }, "<leader>ia", "<cmd>GpAppend<cr>", keymapOptions("Append (after)"))
-        vim.keymap.set({ "n", "i" }, "<leader>ib", "<cmd>GpPrepend<cr>", keymapOptions("Prepend (before)"))
+        vim.keymap.set({ "n" }, "<leader>ir", "<cmd>GpRewrite<cr>", keymapOptions("Inline Rewrite"))
+        vim.keymap.set({ "n" }, "<leader>ia", "<cmd>GpAppend<cr>", keymapOptions("Append (after)"))
+        vim.keymap.set({ "n" }, "<leader>ib", "<cmd>GpPrepend<cr>", keymapOptions("Prepend (before)"))
 
         vim.keymap.set("v", "<leader>ir", ":<C-u>'<,'>GpRewrite<cr>", keymapOptions("Visual Rewrite"))
         vim.keymap.set("v", "<leader>ia", ":<C-u>'<,'>GpAppend<cr>", keymapOptions("Visual Append (after)"))
         vim.keymap.set("v", "<leader>ib", ":<C-u>'<,'>GpPrepend<cr>", keymapOptions("Visual Prepend (before)"))
         vim.keymap.set("v", "<leader>ii", ":<C-u>'<,'>GpImplement<cr>", keymapOptions("Implement selection"))
 
-        vim.keymap.set({ "n", "i" }, "<leader>igp", "<cmd>GpPopup<cr>", keymapOptions("Popup"))
-        vim.keymap.set({ "n", "i" }, "<leader>ige", "<cmd>GpEnew<cr>", keymapOptions("GpEnew"))
-        vim.keymap.set({ "n", "i" }, "<leader>ign", "<cmd>GpNew<cr>", keymapOptions("GpNew"))
-        vim.keymap.set({ "n", "i" }, "<leader>igv", "<cmd>GpVnew<cr>", keymapOptions("GpVnew"))
-        vim.keymap.set({ "n", "i" }, "<leader>igt", "<cmd>GpTabnew<cr>", keymapOptions("GpTabnew"))
+        vim.keymap.set({ "n" }, "<leader>igp", "<cmd>GpPopup<cr>", keymapOptions("Popup"))
+        vim.keymap.set({ "n" }, "<leader>ige", "<cmd>GpEnew<cr>", keymapOptions("GpEnew"))
+        vim.keymap.set({ "n" }, "<leader>ign", "<cmd>GpNew<cr>", keymapOptions("GpNew"))
+        vim.keymap.set({ "n" }, "<leader>igv", "<cmd>GpVnew<cr>", keymapOptions("GpVnew"))
+        vim.keymap.set({ "n" }, "<leader>igt", "<cmd>GpTabnew<cr>", keymapOptions("GpTabnew"))
 
         vim.keymap.set("v", "<leader>igp", ":<C-u>'<,'>GpPopup<cr>", keymapOptions("Visual Popup"))
         vim.keymap.set("v", "<leader>ige", ":<C-u>'<,'>GpEnew<cr>", keymapOptions("Visual GpEnew"))
@@ -199,25 +199,25 @@ M = {
         vim.keymap.set("v", "<leader>igv", ":<C-u>'<,'>GpVnew<cr>", keymapOptions("Visual GpVnew"))
         vim.keymap.set("v", "<leader>igt", ":<C-u>'<,'>GpTabnew<cr>", keymapOptions("Visual GpTabnew"))
 
-        vim.keymap.set({ "n", "i" }, "<leader>ix", "<cmd>GpContext<cr>", keymapOptions("Toggle Context"))
+        vim.keymap.set({ "n" }, "<leader>ix", "<cmd>GpContext<cr>", keymapOptions("Toggle Context"))
         vim.keymap.set("v", "<leader>ix", ":<C-u>'<,'>GpContext<cr>", keymapOptions("Visual Toggle Context"))
 
-        vim.keymap.set({ "n", "i", "v", "x" }, "<leader>is", "<cmd>GpStop<cr>", keymapOptions("Stop"))
-        vim.keymap.set({ "n", "i", "v", "x" }, "<leader>in", "<cmd>GpNextAgent<cr>", keymapOptions("Next Agent"))
+        vim.keymap.set({ "n", "v", "x" }, "<leader>is", "<cmd>GpStop<cr>", keymapOptions("Stop"))
+        vim.keymap.set({ "n", "v", "x" }, "<leader>in", "<cmd>GpNextAgent<cr>", keymapOptions("Next Agent"))
 
         -- optional Whisper commands with prefix <leader>iw
-        vim.keymap.set({ "n", "i" }, "<leader>iww", "<cmd>GpWhisper<cr>", keymapOptions("Whisper"))
+        vim.keymap.set({ "n"}, "<leader>iww", "<cmd>GpWhisper<cr>", keymapOptions("Whisper"))
         vim.keymap.set("v", "<leader>iww", ":<C-u>'<,'>GpWhisper<cr>", keymapOptions("Visual Whisper"))
 
         vim.keymap.set(
-            { "n", "i" },
+            { "n"},
             "<leader>iwr",
             "<cmd>GpWhisperRewrite<cr>",
             keymapOptions("Whisper Inline Rewrite")
         )
-        vim.keymap.set({ "n", "i" }, "<leader>iwa", "<cmd>GpWhisperAppend<cr>", keymapOptions("Whisper Append (after)"))
+        vim.keymap.set({ "n"}, "<leader>iwa", "<cmd>GpWhisperAppend<cr>", keymapOptions("Whisper Append (after)"))
         vim.keymap.set(
-            { "n", "i" },
+            { "n"},
             "<leader>iwb",
             "<cmd>GpWhisperPrepend<cr>",
             keymapOptions("Whisper Prepend (before) ")
@@ -237,11 +237,11 @@ M = {
             keymapOptions("Visual Whisper Prepend (before)")
         )
 
-        vim.keymap.set({ "n", "i" }, "<leader>iwp", "<cmd>GpWhisperPopup<cr>", keymapOptions("Whisper Popup"))
-        vim.keymap.set({ "n", "i" }, "<leader>iwe", "<cmd>GpWhisperEnew<cr>", keymapOptions("Whisper Enew"))
-        vim.keymap.set({ "n", "i" }, "<leader>iwn", "<cmd>GpWhisperNew<cr>", keymapOptions("Whisper New"))
-        vim.keymap.set({ "n", "i" }, "<leader>iwv", "<cmd>GpWhisperVnew<cr>", keymapOptions("Whisper Vnew"))
-        vim.keymap.set({ "n", "i" }, "<leader>iwt", "<cmd>GpWhisperTabnew<cr>", keymapOptions("Whisper Tabnew"))
+        vim.keymap.set({ "n"}, "<leader>iwp", "<cmd>GpWhisperPopup<cr>", keymapOptions("Whisper Popup"))
+        vim.keymap.set({ "n"}, "<leader>iwe", "<cmd>GpWhisperEnew<cr>", keymapOptions("Whisper Enew"))
+        vim.keymap.set({ "n"}, "<leader>iwn", "<cmd>GpWhisperNew<cr>", keymapOptions("Whisper New"))
+        vim.keymap.set({ "n"}, "<leader>iwv", "<cmd>GpWhisperVnew<cr>", keymapOptions("Whisper Vnew"))
+        vim.keymap.set({ "n"}, "<leader>iwt", "<cmd>GpWhisperTabnew<cr>", keymapOptions("Whisper Tabnew"))
 
         vim.keymap.set("v", "<leader>iwp", ":<C-u>'<,'>GpWhisperPopup<cr>", keymapOptions("Visual Whisper Popup"))
         vim.keymap.set("v", "<leader>iwe", ":<C-u>'<,'>GpWhisperEnew<cr>", keymapOptions("Visual Whisper Enew"))
@@ -270,13 +270,6 @@ M = {
             },
 
             -- INSERT mode mappings
-            {
-                mode = { "i" },
-                nowait = true,
-                remap = false,
-                { "<leader>ig", group = "generate into new .." },
-                { "<leader>iw", group = "Whisper" },
-            },
         })
     end,
 }
