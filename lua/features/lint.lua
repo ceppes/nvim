@@ -56,23 +56,44 @@ function M.setup()
 
     for _, config in pairs(servers) do
         if config.linter then
-            table.insert(lint_ensure_installed, config.linter)
+            if type(config.linter) == "table" then
+                for _, linter in ipairs(config.linter) do
+                    table.insert(lint_ensure_installed, linter)
+                end
+            else
+                table.insert(lint_ensure_installed, config.linter)
+            end
         end
-        if config.linter and config.filetype then
-            lint_ft_linter[config.filetype] = { config.linter }
 
-            if config.linter_cmd and not config.linter_cmd:find("/") and lint.linters[config.linter] then
-                lint.linters[config.linter].cmd = config.linter_cmd
+        if config.linter and config.filetype then
+            local linters = type(config.linter) == "table" and config.linter or { config.linter }
+            lint_ft_linter[config.filetype] = linters
+
+            for _, linter in ipairs(linters) do
+                if config.linter_cmd and not config.linter_cmd:find("/") and lint.linters[linter] then
+                    lint.linters[linter].cmd = config.linter_cmd
+                end
             end
         end
     end
+
+    local unique = {}
+    for _, linter in ipairs(lint_ensure_installed) do
+        unique[linter] = true
+    end
+
+    local lint_unique = {}
+    for linter, _ in pairs(unique) do
+        table.insert(lint_unique, linter)
+    end
+
     -- for k,v in pairs(lint_ft_linter) do
     --   for i,j in pairs(v) do
     --     print(k, v, i, j)
     --   end
     -- end
 
-    -- for i,j in pairs(lint_ensure_installed) do
+    -- for i,j in pairs(lint_unique) do
     --   print(i, j)
     -- end
 
@@ -85,7 +106,7 @@ function M.setup()
     })
 
     require("mason-nvim-lint").setup({
-        ensure_installed = lint_ensure_installed,
+        ensure_installed = lint_unique,
         automatic_installation = true,
     })
 end
