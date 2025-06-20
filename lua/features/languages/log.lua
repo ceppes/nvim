@@ -1,9 +1,9 @@
 local M = {}
 
-M.filetype = "log"
+M.filetypes = "log"
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = M.filetype,
+    pattern = M.filetypes,
     callback = function()
         vim.opt.linebreak = false
     end,

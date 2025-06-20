@@ -6,7 +6,7 @@ M.lsp_key = "vue_ls"
 M.lspbin = "vue-language-server"
 M.debugger = ""
 M.treesitter = { "vue", "typescript", "javascript" }
-M.filetype = { "vue", "typescript", "javascript" }
+M.filetypes = { "vue", "typescript", "javascript" }
 
 function M.lsp()
     local lsp_status_ok, lspconfig = pcall(require, "lspconfig")

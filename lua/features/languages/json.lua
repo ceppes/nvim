@@ -5,10 +5,10 @@ M.lspbin = "json-lsp"
 M.lspbin = "vscode-json-language-server"
 M.treesitter = "json"
 M.linter = "jsonlint"
-M.filetype = "json"
+M.filetypes = "json"
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = M.filetype,
+    pattern = M.filetypes,
     callback = function()
         vim.bo.formatexpr = ""
         vim.bo.formatprg = "jq"

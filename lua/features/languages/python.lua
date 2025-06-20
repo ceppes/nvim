@@ -4,8 +4,8 @@ M.linter = "pylint"
 M.lsp_key = "pyright"
 M.lspbin = "pyright-langserver"
 M.debugger = "debugpy"
-M.filetype = "python"
-M.treesitter = M.filetype
+M.filetypes = "python"
+M.treesitter = M.filetypes
 M.formatter = { "black", "autopep8", "isort" }
 
 -- Auto detection poetry env
@@ -21,7 +21,7 @@ if poetry_venv and vim.fn.filereadable(poetry_venv .. "/bin/pylint") == 1 then
 end
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = M.filetype,
+    pattern = M.filetypes,
     callback = function()
         vim.bo.shiftwidth = 2
         vim.bo.tabstop = 2

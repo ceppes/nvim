@@ -1,12 +1,12 @@
 local M = {}
 
 M.linter = "shellcheck"
-M.filetype = "sh"
+M.filetypes = "sh"
 M.treesitter = "bash"
 M.formatter = "shfmt"
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "sh",
+    pattern = M.filetypes,
     callback = function()
         vim.opt_local.shiftwidth = 2
         vim.opt_local.tabstop = 2

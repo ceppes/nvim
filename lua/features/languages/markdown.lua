@@ -1,7 +1,7 @@
 local M = {}
 
 M.linter = "markdownlint"
-M.filetype = { "markdown" }
+M.filetypes = { "markdown" }
 M.treesitter = { "markdown", "markdown_inline" }
 
 

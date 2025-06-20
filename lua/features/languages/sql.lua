@@ -1,6 +1,6 @@
 local M = {}
 
-M.filetype = "sql"
+M.filetypes = "sql"
 M.treesitter = "sql"
 
 function M.plugin()

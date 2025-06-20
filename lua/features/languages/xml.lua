@@ -1,10 +1,10 @@
 local M = {}
 
-M.filetype = { "xml" }
+M.filetypes = { "xml" }
 M.formatter = { "xmlformat" }
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = M.filetype,
+    pattern = M.filetypes,
     callback = function()
         vim.bo.shiftwidth = 2
         vim.bo.tabstop = 2

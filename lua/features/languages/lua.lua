@@ -4,7 +4,7 @@ M.lspbin = "lua-language-server"
 M.treesitter = { "lua", "luadoc" }
 M.lsp_key = "lua_ls"
 M.formatter = "stylua"
-M.filetype = "lua"
+M.filetypes = "lua"
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = M.filetypes,

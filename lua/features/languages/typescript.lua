@@ -5,18 +5,16 @@ M.lsp_key = "ts_ls"
 M.lspbin = "typescript-language-server"
 M.debugger = ""
 M.treesitter = { "typescript", "tsx", "javascript" }
-M.filetype = { "typescript", "typescriptreact", "typescript.tsx", "javascript" }
+M.filetypes = { "typescript", "typescriptreact", "javascript" }
 M.formatter = { "prettierd", "prettier"}
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = M.filetype,
+    pattern = M.filetypes,
     callback = function()
         vim.bo.shiftwidth = 2
         vim.bo.tabstop = 2
         vim.opt_local.foldmethod = "indent"
         vim.opt_local.expandtab = true
-        -- vim.opt_local.foldmethod='expr'
-        -- vim.opt_local.foldexpr=vim.treesitter.foldexpr()
     end,
 })
 
@@ -33,7 +31,7 @@ function M.lsp()
     }
 
     return require("features.lsp.server_config").config({
-        filetypes = M.filetype,
+        filetypes = M.filetypes,
         cmd = { M.lspbin, "--stdio" },
         root_markers = lspconfig.util.root_pattern(unpack(root_files)),
         settings = {
@@ -59,20 +57,6 @@ function M.lsp()
                     includeInlayEnumMemberValueHints = true,
                 },
             },
-            -- init_options = {
-            --   hostInfo = "neovim",
-            --   preferences = {
-            --     quotePreference = "double",
-            --     includeCompletionsWithSnippetText = true,
-            --     generateReturnInDocTemplate = true,
-            --     includeInlayParameterNameHints = "all",
-            --     includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-            --     includeInlayFunctionParameterTypeHints = true,
-            --     includeInlayVariableTypeHints = true,
-            --     includeInlayPropertyDeclarationTypeHints = true,
-            --     includeInlayFunctionLikeReturnTypeHints = true,
-            --     includeInlayEnumMemberValueHints = true,
-            --        }
         },
     })
 end
