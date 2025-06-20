@@ -244,6 +244,7 @@ function M.setup()
             { name = "nvim-lsp-document-symbol" },
             { name = "dotenv" },
             { name = "npm" },
+            {name = "render-markdown"}
         }),
         snippet = {
             expand = function(args)
