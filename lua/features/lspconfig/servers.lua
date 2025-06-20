@@ -20,6 +20,7 @@ M = {
     clangd = require("features.languages.cpp"),
     sql = require("features.languages.sql"),
     vue = require("features.languages.vue"),
+    tailwindcss = require("features.languages.tailwindcss"),
     -- gopls = require('features.languages.go'),
     -- swift = require('features.languages.swift'),
 }
