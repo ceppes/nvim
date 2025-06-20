@@ -89,7 +89,7 @@ function M.lsp()
         ".git",
     }
 
-    return require("features.lsp.server_config").config(M.lspbin, {
+    return require("features.lsp.server_config").config({
         root_markers = lspconfig.util.root_pattern(unpack(python_root_files)),
         flags = {
             debounce_text_changes = 150,

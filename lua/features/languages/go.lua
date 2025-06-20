@@ -9,7 +9,7 @@ function M.lsp()
         return
     end
 
-    return require("features.lsp.server_config").config(M.lspbin, {
+    return require("features.lsp.server_config").config({
         { "go", "gomod", "gowork", "gotmpl" },
     })
 end

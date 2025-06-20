@@ -18,10 +18,10 @@ M = {
     xml = require("features.languages.xml"),
     html = require("features.languages.html"),
     clangd = require("features.languages.cpp"),
-    -- gopls = require('features.languages.go'),
-    -- swift = require('features.languages.swift'),
     sql = require("features.languages.sql"),
     vue = require("features.languages.vue"),
+    -- gopls = require('features.languages.go'),
+    -- swift = require('features.languages.swift'),
 }
 
 return M

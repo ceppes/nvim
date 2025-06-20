@@ -5,10 +5,10 @@ M.lsp_key = "ts_ls"
 M.lspbin = "typescript-language-server"
 M.debugger = ""
 M.treesitter = { "typescript", "tsx", "javascript" }
-M.filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript" }
+M.filetype = { "typescript", "typescriptreact", "typescript.tsx", "javascript" }
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = M.filetypes,
+    pattern = M.filetype,
     callback = function()
         vim.bo.shiftwidth = 2
         vim.bo.tabstop = 2
@@ -31,8 +31,8 @@ function M.lsp()
         ".git",
     }
 
-    return require("features.lsp.server_config").config(M.lspbin, {
-        filetypes = M.filetypes,
+    return require("features.lsp.server_config").config({
+        filetypes = M.filetype,
         cmd = { M.lspbin, "--stdio" },
         root_markers = lspconfig.util.root_pattern(unpack(root_files)),
         settings = {

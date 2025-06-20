@@ -1,6 +1,6 @@
 local M = {}
 
-function M.config(bin, opts)
+function M.config(opts)
     local config = {
         capabilities = require("features.lsp.capabilities"),
         handler = require("features.lsp.handler"),

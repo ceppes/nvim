@@ -5,7 +5,7 @@ local M = {}
 M.lsp_key = "yamlls"
 M.lspbin = "yaml-language-server"
 M.treesitter = "yaml"
-M.lint = "yamllint"
+M.linter = "yamllint"
 M.filetypes = { "yaml", "yml", "helm" }
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -34,7 +34,7 @@ function M.lsp()
         return
     end
 
-    return require("features.lsp.server_config").config(M.lspbin, {
+    return require("features.lsp.server_config").config({
         cmd = { "yaml-language-server", "--stdio" },
         filetypes = { "yaml", "yaml.docker-compose", "yml" },
         root_markers = lspconfig.util.root_pattern("*.yaml"),

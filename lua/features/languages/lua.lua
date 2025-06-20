@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 function M.lsp()
-    return require("features.lsp.server_config").config(M.lspbin, {
+    return require("features.lsp.server_config").config({
         settings = {
             Lua = {
                 runtime = {

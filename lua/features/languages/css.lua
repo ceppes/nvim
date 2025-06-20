@@ -2,12 +2,11 @@ local M = {}
 
 M.lsp_key = "cssls"
 M.lspbin = "vscode-css-language-server"
-M.debugger = ""
 M.treesitter = "css"
-M.filetypes = { "css", "scss", "less" }
+M.filetype = { "css", "scss", "less" }
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = M.filetypes,
+    pattern = M.filetype,
     group = vim.api.nvim_create_augroup("Tab", { clear = true }),
     callback = function()
         vim.bo.shiftwidth = 2
@@ -18,11 +17,11 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = M.filetypes,
+    pattern = M.filetype,
     group = vim.api.nvim_create_augroup("FixCssCommentString", { clear = true }),
     callback = function()
         vim.bo.commentstring = "// %s"
-        require("Comment.ft")(M.filetypes, "// %s")
+        require("Comment.ft")(M.filetype, "// %s")
     end,
 })
 
@@ -32,9 +31,9 @@ function M.lsp()
         return
     end
 
-    return require("features.lsp.server_config").config(M.lspbin, {
+    return require("features.lsp.server_config").config({
         cmd = { "vscode-css-language-server", "--stdio" },
-        filetypes = M.filetypes,
+        filetypes = M.filetype,
         root_markers = lspconfig.util.root_pattern("package.json", ".git"),
     })
 end

@@ -4,7 +4,7 @@ M.lsp_key = "jsonls"
 M.lspbin = "json-lsp"
 M.lspbin = "vscode-json-language-server"
 M.treesitter = "json"
-M.lint = "jsonlint"
+M.linter = "jsonlint"
 M.filetype = "json"
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 function M.lsp()
-    return require("features.lsp.server_config").config(M.lspbin, {
+    return require("features.lsp.server_config").config({
         filetypes = {
             "json",
             "jsonc",

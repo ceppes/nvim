@@ -2,7 +2,6 @@ local M = {}
 
 M.lsp_key = "helm_ls"
 M.lspbin = "helm_ls"
-M.debugger = ""
 
 function M.lsp()
     local lsp_status_ok, lspconfig = pcall(require, "lspconfig")
@@ -10,7 +9,7 @@ function M.lsp()
         return
     end
 
-    return require("features.lsp.server_config").config(M.lspbin, {
+    return require("features.lsp.server_config").config({
         cmd = { "helm_ls", "serve" },
         filetypes = { "helm", "yaml", "yml" },
         root_markers = function(fname)

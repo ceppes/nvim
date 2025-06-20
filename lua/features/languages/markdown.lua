@@ -1,7 +1,7 @@
 local M = {}
 
 M.linter = "markdownlint"
-M.filetype = "markdown"
+M.filetype = { "markdown" }
 M.treesitter = { "markdown", "markdown_inline" }
 
 vim.api.nvim_create_autocmd("FileType", {

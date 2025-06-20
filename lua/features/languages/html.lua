@@ -1,9 +1,9 @@
 local M = {}
 
-M.filetypes = { "html", "xhtml" }
+M.filetype = { "html", "xhtml" }
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = M.filetypes,
+    pattern = M.filetype,
     callback = function()
         vim.bo.shiftwidth = 2
         vim.bo.tabstop = 2
