@@ -6,6 +6,7 @@ M.lspbin = "typescript-language-server"
 M.debugger = ""
 M.treesitter = { "typescript", "tsx", "javascript" }
 M.filetype = { "typescript", "typescriptreact", "typescript.tsx", "javascript" }
+M.formatter = { "prettierd", "prettier"}
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = M.filetype,

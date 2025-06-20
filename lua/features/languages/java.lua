@@ -3,6 +3,7 @@
 local M = {}
 
 M.treesitter = "java"
+M.formatter = "google_java_format"
 -- M.lspbin = 'jdtls'
 -- M.lsp_key = 'jdtls'
 

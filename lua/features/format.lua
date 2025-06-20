@@ -1,40 +1,33 @@
 local M = {}
 
 M = {
-    "mhartington/formatter.nvim",
-    -- Check stevearc/conform.nvim
+    "stevearc/conform.nvim",
     config = function()
         require("features.format").setup()
         require("features.format").keymaps()
+        require("features.format").command()
     end,
 }
 
 function M.get_active_clients()
-    -- Add formatters (from formatter.nvim)
-    local buf_ft = vim.bo.filetype
-    local buf_client_names_unique = {}
-
-    local formatter_s, _ = pcall(require, "formatter")
-    if formatter_s then
-        local formatter_util = require("formatter.util")
-
-        if #formatter_util.get_available_formatters_for_ft(buf_ft) == 0 then
-            return { "No FMT" }
-        end
-
-        for _, j in ipairs(formatter_util.get_available_formatters_for_ft(buf_ft)) do
-            for k, formatter_name in pairs(j) do
-                if k == "exe" then
-                    buf_client_names_unique[formatter_name] = formatter_name
-                end
-            end
-        end
-    end
-
     local buf_client_names = {}
-    for _, v in pairs(buf_client_names_unique) do
-        table.insert(buf_client_names, v)
+
+    local conform_s, conform = pcall(require, "conform")
+    if not conform_s then
+        vim.notify("Failed to load the 'conform' module. Formatter will not be available.", vim.log.levels.ERROR)
+        return
     end
+
+    local l_fo = conform.list_formatters()
+    if #l_fo == 0 then
+        return { "No FMT" }
+    end
+
+    for _, j in ipairs(l_fo) do
+        table.insert(buf_client_names, j.command)
+    end
+    -- vim.print(buf_client_names)
+
     return buf_client_names
 end
 
@@ -43,118 +36,93 @@ function M.keymaps()
 end
 
 function M.setup()
-    local formatter = require("formatter")
-    local formatter_util = require("formatter.util")
-    local default_formatters = require("formatter.defaults")
-
-    local formatter_ensure_installed = {}
-    formatter_ensure_installed["prettierd"] = 1
-    formatter_ensure_installed["shfmt"] = 1
-
-    local filetype = {
-        javascript = { require("formatter.filetypes.javascript").prettierd },
-        javascriptreact = { require("formatter.filetypes.javascriptreact").prettierd },
-        typescript = { require("formatter.filetypes.typescript").prettierd },
-        typescriptreact = { require("formatter.filetypes.typescript").prettierd },
-        xml = { require("formatter.filetypes.xml").xmlformat },
-        python = {
-            require("formatter.filetypes.python").black,
-            require("formatter.filetypes.python").autopep8,
-        },
-        java = { require("formatter.filetypes.java").google_java_format },
-        sh = {
-            function()
-                -- require("formatter.filetypes.sh").shfmt },
-                local shiftwidth = vim.opt.shiftwidth:get()
-                local expandtab = vim.opt.expandtab:get()
-
-                if not expandtab then
-                    shiftwidth = 0
-                end
-                -- "-i", shiftwidth,
-                return {
-                    exe = "shfmt",
-                    args = {
-                        "--diff",
-                        "--indent",
-                        "2",
-                        "--case-indent",
-                    },
-                    stdin = true,
-                }
-            end,
-        },
-        lua = {
-            function()
-                local util = require("formatter.util")
-                return {
-                    exe = "stylua",
-                    args = {
-                        "--search-parent-directories",
-                        "--indent-type Spaces",
-                        "--stdin-filepath",
-                        util.escape_path(util.get_current_buffer_file_path()),
-                        "--",
-                        "-",
-                    },
-                    stdin = true,
-                }
-            end,
-        },
-        tex = { require("formatter.filetypes.tex").latexindent },
-        ["*"] = {
-            require("formatter.filetypes.any").remove_trailing_whitespace,
-        },
-    }
-
-    -- filetype = {}
+    local format_ensure_installed = {}
+    local format_ensure_installed_unique = {}
+    local format_by_ft = {}
 
     local servers = require("features.lspconfig.servers")
+
     for _, config in pairs(servers) do
         if config.formatter then
-            -- print("formatter", config.formatter, type(config.formatter))
             if type(config.formatter) == "table" then
-                for _, j in pairs(config.formatter) do
-                    formatter_ensure_installed[j] = j
-                    -- print("j: ", j, type(j))
+                for _, formatter in ipairs(config.formatter) do
+                    format_ensure_installed_unique[formatter] = true
                 end
             else
-                formatter_ensure_installed[config.formatter] = config.formatter
+                format_ensure_installed_unique[config.formatter] = true
             end
         end
 
-        -- if config.formatter and config.filetype then
-        --   if type(config.formatter) == "table" then
-        --     -- local current = {}
-        --     for _,j in pairs(config.formatter) do
-        --       table.insert(filetype[config.filetype],  require("formatter.filetypes.typescript").formatter)
-        --     end
-        --   else
-        --     filetype[config.filetype] = { require("formatter.filetypes.typescript").formatter}
-        --   end
-        -- end
-        --
-    end
-    local formatter_ensure_installed2 = {}
-    for i, j in pairs(formatter_ensure_installed) do
-        -- print("i: ", i, " j: ", j)
-        table.insert(formatter_ensure_installed2, i)
-    end
-    -- for i,j in pairs(filetype) do
-    --   print("i: ", i, " j: ", j)
-    -- end
+        -- Check if linter and filetype definitions exist in the config
+        if config.formatter and config.filetypes then
+            -- Ensure linter is encapsulated in a table
+            local formatters = type(config.formatter) == "table" and config.formatter or { config.formatter }
 
-    -- for i,j in pairs(filetype) do
-    --   print("i: ", i, " j: ", j)
-    --   for k,v in pairs(j) do
-    --     print("     k:", k,"v: ",  v)
-    --   end
-    -- end
+            -- Process filetype list, assuming it can be a single string or a table of filetypes
+            local filetypes = type(config.filetypes) == "table" and config.filetypes or { config.filetypes }
 
-    formatter.setup({
-        logging = true,
-        filetype = filetype,
+            for _, filetype in ipairs(filetypes) do
+                -- Initialize linter list for the filetype if it doesn't exist
+                if not format_by_ft[filetype] then
+                    format_by_ft[filetype] = {}
+                end
+
+                -- Add unique linters for each filetype
+                for _, formatter in ipairs(formatters) do
+                    if not vim.tbl_contains(format_by_ft[filetype], formatter) then
+                        table.insert(format_by_ft[filetype], formatter)
+                    end
+                end
+            end
+        end
+
+        if type(config.format) == "function" and config.formatter then
+            config.format()
+        end
+    end
+
+    for formatter, _ in pairs(format_ensure_installed_unique) do
+        table.insert(format_ensure_installed, formatter)
+    end
+
+    table.insert(format_by_ft, {
+        -- Use the "*" filetype to run formatters on all filetypes.
+        ["*"] = { "codespell" },
+        -- Use the "_" filetype to run formatters on filetypes that don't
+        -- have other formatters configured.
+        ["_"] = { "trim_whitespace" },
     })
+
+    -- vim.print(format_by_ft)
+    -- vim.print(format_ensure_installed)
+
+    require("conform").setup({
+        formatters_by_ft = format_by_ft,
+        format_on_save = {
+            -- These options will be passed to conform.format()
+            timeout_ms = 500,
+            lsp_format = "fallback",
+        },
+    })
+
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*",
+        callback = function(args)
+            require("conform").format({ bufnr = args.buf })
+        end,
+    })
+
+    --
+    -- require("mason-nvim-lint").setup({
+    --     ensure_installed = format_ensure_installed_unique,
+    --     automatic_installation = true,
+    -- })
+end
+
+function M.command()
+    vim.api.nvim_create_user_command("FormatInfo", function()
+        vim.print(require("conform").list_all_formatters())
+    end, { nargs = 0, desc = "Formatter info" })
 end
 
 return M

@@ -6,7 +6,7 @@ M.lspbin = "pyright-langserver"
 M.debugger = "debugpy"
 M.filetype = "python"
 M.treesitter = M.filetype
-M.formatter = { "black", "autopep8" }
+M.formatter = { "black", "autopep8", "isort" }
 
 -- Auto detection poetry env
 local handle = io.popen("poetry env info -p 2>/dev/null")

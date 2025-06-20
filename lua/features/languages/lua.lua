@@ -47,4 +47,10 @@ function M.lsp()
     })
 end
 
+function M.format()
+    require("conform").formatters.stylua = {
+        prepend_args = {"--indent-type", "Spaces"},
+    }
+end
+
 return M

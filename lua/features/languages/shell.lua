@@ -15,7 +15,21 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- test
--- :verbose set tabstop?
+function M.format()
+    require("conform").formatters.shfmt = {
+      inherit = false,
+      command = "shfmt",
+      args = function ()
+        local shiftwidth = vim.opt.shiftwidth:get()
+        local expandtab = vim.opt.expandtab:get()
+
+        if not expandtab then
+            shiftwidth = 0
+        end
+
+        return {"--diff", "--indent", "2", "--case-indent", "-filename", "$FILENAME" }
+      end
+    }
+end
 
 return M
