@@ -11,6 +11,12 @@ local M = {
         { "luckasRanarison/clear-action.nvim", opts = {} },
         "smjonas/inc-rename.nvim",
         "hrsh7th/cmp-nvim-lsp",
+        "SmiteshP/nvim-navbuddy",
+        dependencies = {
+            "SmiteshP/nvim-navic",
+            "MunifTanjim/nui.nvim",
+        },
+        opts = { lsp = { auto_attach = true } },
     },
     config = function()
         require("neodev").setup({})
