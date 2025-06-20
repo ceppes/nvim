@@ -9,7 +9,6 @@
 -- Neovim API aliases
 -----------------------------------------------------------
 local cmd = vim.cmd -- Execute Vim commands
-local exec = vim.api.nvim_exec -- Execute Vimscript
 local g = vim.g -- Global variables
 local opt = vim.opt -- Set options (global/buffer/windows-scoped)
 
@@ -23,7 +22,7 @@ vim.g.maplocalleader = " "
 vim.opt.mouse = "a" -- Enable mouse support
 vim.opt.swapfile = false -- Don't use swapfile
 -- vim.opt.completeopt = 'menuone,noselect'  -- Autocomplete options
-vim.opt.completeopt = { "menu", "menuone", "noselect", "preview" } -- Autocomplete options
+vim.opt.completeopt = "menu,menuone,noselect,preview" -- Autocomplete options
 vim.opt.backup = false -- No backup
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- Long history
 vim.opt.undofile = true -- Undo file
