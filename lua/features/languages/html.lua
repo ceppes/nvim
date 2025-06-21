@@ -1,6 +1,7 @@
 local M = {}
 
 M.filetypes = { "html", "xhtml" }
+M.treesitter = { "html" }
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = M.filetypes,

@@ -2,7 +2,7 @@ local M = {}
 
 M.lsp_key = "cssls"
 M.lspbin = "vscode-css-language-server"
-M.treesitter = "css"
+M.treesitter = { "css", "scss" }
 M.filetypes = { "css", "scss", "less" }
 
 vim.api.nvim_create_autocmd("FileType", {
