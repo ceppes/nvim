@@ -66,7 +66,6 @@ local M = {
 }
 
 function M.setup()
-    vim.print("setup")
     local protocol = require("vim.lsp.protocol")
     protocol.CompletionItemKind = {
         "", -- Text
@@ -98,6 +97,8 @@ function M.setup()
 
     require("mason").setup({ ui = { border = "rounded" } })
 
+    local servers = require("features.lspconfig.servers")
+
     require("mason-lspconfig").setup({
         handlers = {
             function(server_name)
@@ -117,7 +118,6 @@ function M.setup()
         "sonarlint-language-server",
     }
 
-    local servers = require("features.lspconfig.servers")
     for server, config in pairs(servers) do
         if config.lsp and config.lsp_key then
             table.insert(lsp_ensure_installed, config.lsp_key)
