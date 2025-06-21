@@ -3,7 +3,8 @@
 local M = {}
 
 M.treesitter = "java"
-M.formatter = "google_java_format"
+M.formatter = "google-java-format"
+M.filetypes = { "java" }
 -- M.lspbin = 'jdtls'
 -- M.lsp_key = 'jdtls'
 
@@ -342,6 +343,14 @@ function M.debugger()
             -- modulePaths = {},
             vmArgs = "" .. "-Xmx2g ",
         },
+    }
+end
+
+function M.format()
+    require("conform").formatters["google-java-format"] = {
+        inherit = false,
+        command = "google-java-format",
+        args = { "--aosp", "--skip-sorting-imports", "$FILENAME" },
     }
 end
 
