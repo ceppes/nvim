@@ -3,6 +3,7 @@ local M = {}
 M.linter = { "eslint_d" }
 M.formatter = { "prettier" }
 M.lsp_key = "vue_ls"
+M.lsp_key = "volar"
 M.lspbin = "vue-language-server"
 M.treesitter = { "vue", "typescript", "javascript" }
 M.filetypes = { "vue", "typescript", "javascript" }
@@ -22,4 +23,5 @@ function M.lsp()
         },
     })
 end
+
 return M
