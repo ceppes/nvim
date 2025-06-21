@@ -50,24 +50,12 @@ function M.get_active_clients()
 end
 
 function M.setup()
-    local lint_ensure_installed = {}
-    local lint_ensure_installed_unique = {}
     local linter_by_ft = {}
 
     local servers = require("features.lspconfig.servers")
     local lint = require("lint")
 
     for _, config in pairs(servers) do
-        if config.linter then
-            if type(config.linter) == "table" then
-                for _, linter in ipairs(config.linter) do
-                    lint_ensure_installed_unique[linter] = true
-                end
-            else
-                lint_ensure_installed_unique[config.linter] = true
-            end
-        end
-
         -- Check if linter and filetype definitions exist in the config
         if config.linter and config.filetypes then
             -- Ensure linter is encapsulated in a table
@@ -97,12 +85,7 @@ function M.setup()
         end
     end
 
-    for linter, _ in pairs(lint_ensure_installed_unique) do
-        table.insert(lint_ensure_installed, linter)
-    end
-
     -- vim.print(linter_by_ft)
-    -- vim.print(lint_ensure_installed)
 
     lint.linters_by_ft = linter_by_ft
 
@@ -113,9 +96,33 @@ function M.setup()
     })
 
     require("mason-nvim-lint").setup({
-        ensure_installed = lint_ensure_installed_unique,
         automatic_installation = true,
     })
+end
+
+function M.ensure_installed()
+    local lint_ensure_installed = {}
+    local lint_ensure_installed_unique = {}
+
+    local servers = require("features.lspconfig.servers")
+
+    for _, config in pairs(servers) do
+        if config.linter then
+            if type(config.linter) == "table" then
+                for _, linter in ipairs(config.linter) do
+                    lint_ensure_installed_unique[linter] = true
+                end
+            else
+                lint_ensure_installed_unique[config.linter] = true
+            end
+        end
+    end
+
+    for linter, _ in pairs(lint_ensure_installed_unique) do
+        table.insert(lint_ensure_installed, linter)
+    end
+
+    return lint_ensure_installed
 end
 
 return M

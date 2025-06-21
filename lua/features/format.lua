@@ -36,23 +36,11 @@ function M.keymaps()
 end
 
 function M.setup()
-    local format_ensure_installed = {}
-    local format_ensure_installed_unique = {}
     local format_by_ft = {}
 
     local servers = require("features.lspconfig.servers")
 
     for _, config in pairs(servers) do
-        if config.formatter then
-            if type(config.formatter) == "table" then
-                for _, formatter in ipairs(config.formatter) do
-                    format_ensure_installed_unique[formatter] = true
-                end
-            else
-                format_ensure_installed_unique[config.formatter] = true
-            end
-        end
-
         -- Check if linter and filetype definitions exist in the config
         if config.formatter and config.filetypes then
             -- Ensure linter is encapsulated in a table
@@ -81,10 +69,6 @@ function M.setup()
         end
     end
 
-    for formatter, _ in pairs(format_ensure_installed_unique) do
-        table.insert(format_ensure_installed, formatter)
-    end
-
     table.insert(format_by_ft, {
         -- Use the "*" filetype to run formatters on all filetypes.
         ["*"] = { "codespell" },
@@ -94,7 +78,6 @@ function M.setup()
     })
 
     -- vim.print(format_by_ft)
-    -- vim.print(format_ensure_installed)
 
     require("conform").setup({
         formatters_by_ft = format_by_ft,
@@ -111,12 +94,31 @@ function M.setup()
             require("conform").format({ bufnr = args.buf })
         end,
     })
+end
 
-    --
-    -- require("mason-nvim-lint").setup({
-    --     ensure_installed = format_ensure_installed_unique,
-    --     automatic_installation = true,
-    -- })
+function M.ensure_installed()
+    local format_ensure_installed = {}
+    local format_ensure_installed_unique = {}
+
+    local servers = require("features.lspconfig.servers")
+
+    for _, config in pairs(servers) do
+        if config.formatter then
+            if type(config.formatter) == "table" then
+                for _, formatter in ipairs(config.formatter) do
+                    format_ensure_installed_unique[formatter] = true
+                end
+            else
+                format_ensure_installed_unique[config.formatter] = true
+            end
+        end
+    end
+
+    for formatter, _ in pairs(format_ensure_installed_unique) do
+        table.insert(format_ensure_installed, formatter)
+    end
+
+    return format_ensure_installed
 end
 
 function M.command()

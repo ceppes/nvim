@@ -1,7 +1,7 @@
 local M = {}
 
 M.filetypes = { "xml" }
-M.formatter = { "xmlformat" }
+M.formatter = { "xmlformatter" }
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = M.filetypes,

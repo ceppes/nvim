@@ -112,6 +112,36 @@ function M.setup()
         },
     })
 
+    local lsp_ensure_installed = {
+        "jdtls",
+        "sonarlint-language-server",
+    }
+
+    local servers = require("features.lspconfig.servers")
+    for server, config in pairs(servers) do
+        if config.lsp and config.lsp_key then
+            table.insert(lsp_ensure_installed, config.lsp_key)
+        end
+    end
+
+    local ensure_installed = lsp_ensure_installed
+
+    vim.list_extend(ensure_installed, require("features.lint").ensure_installed())
+    vim.list_extend(ensure_installed, require("features.format").ensure_installed())
+    vim.list_extend(ensure_installed, require("features.debugger").ensure_installed())
+
+    -- vim.print(ensure_installed)
+
+    require("mason-tool-installer").setup({
+        ensure_installed = ensure_installed,
+        auto_update = false,
+        run_on_start = true,
+        integrations = {
+            ["masson-lspconfig"] = true,
+            -- ['masson-null-ls'] = true,
+            -- ['masson-nvim-dap'] = true,
+        },
+    })
 end
 
 return M

@@ -111,7 +111,7 @@ function M.lsp()
     })
 end
 
-function M.debugger()
+function M.debug()
     local dap_status_ok, dap = pcall(require, "dap")
     if not dap_status_ok then
         return

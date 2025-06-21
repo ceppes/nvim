@@ -4,7 +4,6 @@ M.linter = { "eslint_d" }
 M.formatter = { "prettier" }
 M.lsp_key = "vue_ls"
 M.lspbin = "vue-language-server"
-M.debugger = ""
 M.treesitter = { "vue", "typescript", "javascript" }
 M.filetypes = { "vue", "typescript", "javascript" }
 
@@ -18,7 +17,6 @@ function M.lsp()
         filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
         init_options = {
             vue = {
-                -- disable hybrid mode
                 hybridMode = false,
             },
         },

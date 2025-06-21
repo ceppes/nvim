@@ -3,15 +3,14 @@ local M = {}
 M.lsp_key = ""
 M.lspbin = ""
 M.debugger = ""
-M.treesitter = {""}
-M.filetypes = { ""}
-M.linter = {""}
+M.treesitter = { "" }
+M.filetypes = { "" }
+M.linter = { "" }
 M.formatter = { "" }
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = M.filetypes,
-    callback = function()
-    end,
+    callback = function() end,
 })
 
 function M.lsp()
@@ -21,21 +20,19 @@ function M.lsp()
     end
 
     return require("features.lsp.server_config").config({
-        cmd = {  },
+        cmd = {},
         filetypes = M.filetypes,
         root_markers = lspconfig.util.root_pattern(),
     })
 end
 
-function M.plugin()
-end
-
+function M.plugin() end
 
 function M.keymaps()
     vim.keymap.set("n", "<leader>", function() end, { desc = "" })
 end
 
-function M.debugger()
+function M.debug()
     local dap_status_ok, dap = pcall(require, "dap")
     if not dap_status_ok then
         return
@@ -43,11 +40,9 @@ function M.debugger()
 
     dap.adapters.language = {
         type = "executable",
-        command = function(config)
-        end,
-        args = {  },
+        command = function(config) end,
+        args = {},
     }
-
 
     dap.configurations.language = {
         {
@@ -58,5 +53,7 @@ function M.debugger()
         },
     }
 end
+
+function M.format() end
 
 return M

@@ -1,9 +1,5 @@
 local M = {}
 
-local dap_ensure_installed = {
-    "debugpy",
-}
-
 M = {
     {
         "mfussenegger/nvim-dap",
@@ -185,8 +181,8 @@ function M.setup()
     })
 
     local servers = {
-        python = require("features.languages.python").debugger(),
-        java = require("features.languages.java").debugger(),
+        python = require("features.languages.python").debug(),
+        java = require("features.languages.java").debug(),
     }
 
     for server, config in pairs(servers) do
@@ -299,6 +295,31 @@ function M.keymaps()
         "<cmd> lua require'telescope'.extensions.dap.commands{}<cr>",
         { desc = "Telescope commands" }
     )
+end
+
+function M.ensure_installed()
+    local debug_ensure_installed = {}
+    local debug_ensure_installed_unique = {}
+
+    local servers = require("features.lspconfig.servers")
+
+    for _, config in pairs(servers) do
+        if config.debugger then
+            if type(config.debugger) == "table" then
+                for _, debugger in ipairs(config.debugger) do
+                    debug_ensure_installed_unique[debugger] = true
+                end
+            else
+                debug_ensure_installed_unique[config.debugger] = true
+            end
+        end
+    end
+
+    for linter, _ in pairs(debug_ensure_installed_unique) do
+        table.insert(debug_ensure_installed, linter)
+    end
+
+    return debug_ensure_installed
 end
 
 return M

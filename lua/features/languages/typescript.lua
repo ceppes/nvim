@@ -3,10 +3,9 @@ local M = {}
 M.linter = "eslint_d"
 M.lsp_key = "ts_ls"
 M.lspbin = "typescript-language-server"
-M.debugger = ""
 M.treesitter = { "typescript", "tsx", "javascript" }
 M.filetypes = { "typescript", "typescriptreact", "javascript" }
-M.formatter = { "prettierd", "prettier"}
+M.formatter = { "prettierd", "prettier" }
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = M.filetypes,

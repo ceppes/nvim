@@ -5,6 +5,8 @@ local M = {}
 M.treesitter = "java"
 M.formatter = "google-java-format"
 M.filetypes = { "java" }
+M.debugger = { "java-debug-adapter", "java-test" }
+
 -- M.lspbin = 'jdtls'
 -- M.lsp_key = 'jdtls'
 
@@ -297,7 +299,7 @@ function M.plugin()
     }
 end
 
-function M.debugger()
+function M.debug()
     local dap_status_ok, dap = pcall(require, "dap")
     if not dap_status_ok then
         return
