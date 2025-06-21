@@ -269,7 +269,6 @@ M = {
                 { "<leader>iw", group = "Whisper" },
             },
 
-            -- INSERT mode mappings
         })
     end,
 }
