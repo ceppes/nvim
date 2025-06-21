@@ -2,6 +2,7 @@ local M
 
 M = {
     "robitx/gp.nvim",
+    cmd = { "GpChatNew", "GpExplain", "GpCommand" },
     config = function()
         local conf = {
             providers = {
@@ -206,22 +207,12 @@ M = {
         vim.keymap.set({ "n", "v", "x" }, "<leader>in", "<cmd>GpNextAgent<cr>", keymapOptions("Next Agent"))
 
         -- optional Whisper commands with prefix <leader>iw
-        vim.keymap.set({ "n"}, "<leader>iww", "<cmd>GpWhisper<cr>", keymapOptions("Whisper"))
+        vim.keymap.set({ "n" }, "<leader>iww", "<cmd>GpWhisper<cr>", keymapOptions("Whisper"))
         vim.keymap.set("v", "<leader>iww", ":<C-u>'<,'>GpWhisper<cr>", keymapOptions("Visual Whisper"))
 
-        vim.keymap.set(
-            { "n"},
-            "<leader>iwr",
-            "<cmd>GpWhisperRewrite<cr>",
-            keymapOptions("Whisper Inline Rewrite")
-        )
-        vim.keymap.set({ "n"}, "<leader>iwa", "<cmd>GpWhisperAppend<cr>", keymapOptions("Whisper Append (after)"))
-        vim.keymap.set(
-            { "n"},
-            "<leader>iwb",
-            "<cmd>GpWhisperPrepend<cr>",
-            keymapOptions("Whisper Prepend (before) ")
-        )
+        vim.keymap.set({ "n" }, "<leader>iwr", "<cmd>GpWhisperRewrite<cr>", keymapOptions("Whisper Inline Rewrite"))
+        vim.keymap.set({ "n" }, "<leader>iwa", "<cmd>GpWhisperAppend<cr>", keymapOptions("Whisper Append (after)"))
+        vim.keymap.set({ "n" }, "<leader>iwb", "<cmd>GpWhisperPrepend<cr>", keymapOptions("Whisper Prepend (before) "))
 
         vim.keymap.set("v", "<leader>iwr", ":<C-u>'<,'>GpWhisperRewrite<cr>", keymapOptions("Visual Whisper Rewrite"))
         vim.keymap.set(
@@ -237,11 +228,11 @@ M = {
             keymapOptions("Visual Whisper Prepend (before)")
         )
 
-        vim.keymap.set({ "n"}, "<leader>iwp", "<cmd>GpWhisperPopup<cr>", keymapOptions("Whisper Popup"))
-        vim.keymap.set({ "n"}, "<leader>iwe", "<cmd>GpWhisperEnew<cr>", keymapOptions("Whisper Enew"))
-        vim.keymap.set({ "n"}, "<leader>iwn", "<cmd>GpWhisperNew<cr>", keymapOptions("Whisper New"))
-        vim.keymap.set({ "n"}, "<leader>iwv", "<cmd>GpWhisperVnew<cr>", keymapOptions("Whisper Vnew"))
-        vim.keymap.set({ "n"}, "<leader>iwt", "<cmd>GpWhisperTabnew<cr>", keymapOptions("Whisper Tabnew"))
+        vim.keymap.set({ "n" }, "<leader>iwp", "<cmd>GpWhisperPopup<cr>", keymapOptions("Whisper Popup"))
+        vim.keymap.set({ "n" }, "<leader>iwe", "<cmd>GpWhisperEnew<cr>", keymapOptions("Whisper Enew"))
+        vim.keymap.set({ "n" }, "<leader>iwn", "<cmd>GpWhisperNew<cr>", keymapOptions("Whisper New"))
+        vim.keymap.set({ "n" }, "<leader>iwv", "<cmd>GpWhisperVnew<cr>", keymapOptions("Whisper Vnew"))
+        vim.keymap.set({ "n" }, "<leader>iwt", "<cmd>GpWhisperTabnew<cr>", keymapOptions("Whisper Tabnew"))
 
         vim.keymap.set("v", "<leader>iwp", ":<C-u>'<,'>GpWhisperPopup<cr>", keymapOptions("Visual Whisper Popup"))
         vim.keymap.set("v", "<leader>iwe", ":<C-u>'<,'>GpWhisperEnew<cr>", keymapOptions("Visual Whisper Enew"))
@@ -268,7 +259,6 @@ M = {
                 { "<leader>ig", group = "generate into new .." },
                 { "<leader>iw", group = "Whisper" },
             },
-
         })
     end,
 }

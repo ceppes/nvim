@@ -14,14 +14,8 @@ function M.setup()
     end
 
     colorizer.setup({
-        "css",
-        "scss",
-        "javascript",
-        "html",
-        "python",
-        "lua",
-        "ts",
-    })
+        "*",
+    }, { mode = "foreground" })
 end
 
 return M

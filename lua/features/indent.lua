@@ -3,6 +3,7 @@ local M = {}
 M = {
     {
         "lukas-reineke/indent-blankline.nvim",
+        event = "BufReadPre",
         main = "ibl",
         config = function()
             require("features.indent").setup()

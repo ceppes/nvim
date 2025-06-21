@@ -3,30 +3,43 @@ local M = {}
 M = {
     {
         "mfussenegger/nvim-dap",
-        -- opt = true,
-        -- event = "BufReadPre",
-        -- module = {
-        --   "dap"
-        -- },
         dependencies = {
-            -- "Pocco81/DAPInstall.nvim",
             "theHamsta/nvim-dap-virtual-text",
             "mfussenegger/nvim-dap-python",
             "nvim-telescope/telescope-dap.nvim",
+            "jbyuki/one-small-step-for-vimkind",
+            -- "Pocco81/DAPInstall.nvim",
             -- { "leoluz/nvim-dap-go", module = "dap-go" },
             -- { "jbyuki/one-small-step-for-vimkind", module = "osv" },
-            "jbyuki/one-small-step-for-vimkind",
         },
         config = function()
             require("features.debugger").setup()
             require("features.debugger").keymaps()
         end,
+        keys = {
+            {
+                "<leader>dc",
+                function()
+                    require("dap").continue()
+                end,
+                desc = "DAP Continue",
+            },
+        },
     },
     {
         "rcarriga/nvim-dap-ui",
         dependencies = {
             "mfussenegger/nvim-dap",
             "nvim-neotest/nvim-nio",
+        },
+        keys = {
+            {
+                "<leader>dU",
+                function()
+                    require("dapui").toggle()
+                end,
+                desc = "Toggle DAP UI",
+            },
         },
     },
 }

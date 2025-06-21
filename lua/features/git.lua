@@ -40,6 +40,7 @@ M = {
     },
     {
         "lewis6991/gitsigns.nvim", -- needed for feline status line
+        event = "BufReadPre",
         config = function()
             require("features.git").setup()
             require("features.git").keymaps()
@@ -47,7 +48,7 @@ M = {
     },
     {
         "sindrets/diffview.nvim",
-        command = "DiffviewOpen",
+        cmd = "DiffviewOpen",
         config = function()
             local actions = require("diffview.actions")
             require("diffview").setup({

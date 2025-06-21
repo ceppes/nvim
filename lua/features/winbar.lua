@@ -2,6 +2,7 @@ local M = {}
 
 M = {
     "SmiteshP/nvim-navic",
+    lazy = true,
     dependencies = {
         "neovim/nvim-lspconfig",
         "nvim-tree/nvim-web-devicons", -- optional dependency

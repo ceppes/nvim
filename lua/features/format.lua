@@ -2,6 +2,7 @@ local M = {}
 
 M = {
     "stevearc/conform.nvim",
+    event = "BufWritePre",
     config = function()
         require("features.format").setup()
         require("features.format").keymaps()

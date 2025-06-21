@@ -7,7 +7,7 @@ M = {
     },
     {
         "simrat39/symbols-outline.nvim",
-        -- cmd = "SymbolsOutline",
+        cmd = "SymbolsOutline",
         config = function()
             require("features.structure").setup()
             require("features.structure").keymaps()

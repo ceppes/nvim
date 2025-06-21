@@ -4,8 +4,10 @@ local M = {}
 --  require('catppuccin.groups.integrations.feline')
 M = {
     "famiu/feline.nvim",
+    event = "BufReadPre",
     dependencies = {
         "nvim-web-devicons",
+        { "SmiteshP/nvim-navic" },
     },
     config = function()
         require("features.statusline").setup()

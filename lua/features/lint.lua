@@ -3,6 +3,7 @@ local M = {}
 M = {
     {
         "mfussenegger/nvim-lint",
+        event = { "BufWritePre" },
         dependencies = {
             "williamboman/mason.nvim",
         },

@@ -3,6 +3,7 @@ local M = {}
 M = {
     {
         "rcarriga/nvim-notify",
+        lazy = true,
         config = function()
             require("features.ui").setup()
         end,
@@ -42,6 +43,7 @@ function M.setup()
         timeout = 6000, --5000 default
     })
     vim.notify = require("notify")
+
     require("telescope").load_extension("notify")
 end
 

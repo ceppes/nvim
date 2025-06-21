@@ -2,14 +2,6 @@ local M = {}
 
 M = {
     {
-        "vhyrro/luarocks.nvim",
-        priority = 1000,
-        config = true,
-        opts = {
-            rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" },
-        },
-    },
-    {
         "rest-nvim/rest.nvim",
         -- https://github.com/rest-nvim/rest.nvim/tree/main/spec/examples
         -- https://www.jetbrains.com/help/idea/exploring-http-syntax.html
@@ -22,6 +14,13 @@ M = {
                     opts.ensure_installed = opts.ensure_installed or {}
                     table.insert(opts.ensure_installed, "http")
                 end,
+            },
+            {
+                "vhyrro/luarocks.nvim",
+                config = true,
+                opts = {
+                    rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" },
+                },
             },
         },
         config = function()

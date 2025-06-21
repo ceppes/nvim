@@ -4,8 +4,20 @@ local M = {}
 
 M = {
     "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-        "nvim-treesitter/playground",
+        {
+            "nvim-treesitter/playground",
+            cmd = "TSPlaygroundToggle",
+        },
+        {
+            "windwp/nvim-ts-autotag",
+            lazy = true,
+            dependencies = { "nvim-treesitter/nvim-treesitter" },
+            config = function()
+                require("nvim-ts-autotag").setup({})
+            end,
+        },
     },
     build = ":TSUpdate",
     main = "nvim-treesitter.configs", -- Sets main module to use for opts

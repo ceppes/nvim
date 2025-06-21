@@ -32,6 +32,7 @@ local plugins = {
     require("features.winbar"),
     {
         "folke/neodev.nvim",
+        event = "BufReadPre",
         config = function()
             require("neodev").setup({})
         end,
@@ -71,13 +72,6 @@ local plugins = {
         "windwp/nvim-autopairs",
         config = function()
             require("nvim-autopairs").setup({})
-        end,
-    },
-    {
-        "windwp/nvim-ts-autotag",
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
-        config = function()
-            require("nvim-ts-autotag").setup({})
         end,
     },
     --  "onsails/lspkind.nvim",
