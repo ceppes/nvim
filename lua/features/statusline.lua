@@ -309,17 +309,6 @@ function M.setup()
                     },
                 },
             },
-            nullls = {
-                name = {
-                    left_sep = " ",
-                    hl = {
-                        fg = clrs.blue,
-                    },
-                    provider = function()
-                        return table.concat(require("features.null-ls").get_active_clients(), ", ")
-                    end,
-                },
-            },
             lint = {
                 name = {
                     provider = function()
