@@ -1,19 +1,10 @@
--- Java lsp config
---require'lspconfig'.jdtls.setup{}
 local M = {}
 
+M.lsp_key = { "jdtls" }
 M.treesitter = "java"
 M.formatter = "google-java-format"
 M.filetypes = { "java" }
 M.debugger = { "java-debug-adapter", "java-test" }
-
--- M.lspbin = 'jdtls'
--- M.lsp_key = 'jdtls'
-
---TODO check installation automatic
--- jdtls
--- java-debug-adapter
--- java-test
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "java",
