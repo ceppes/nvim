@@ -361,6 +361,10 @@ function M.get_active_clients()
         end
     end
 
+    if debug_by_ft[buf_ft] == nil then
+        return { "" }
+    end
+
     return debug_by_ft[buf_ft]
 end
 
