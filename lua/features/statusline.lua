@@ -339,7 +339,18 @@ function M.setup()
                     end,
                     left_sep = " ",
                     hl = {
-                        fg = clrs.blue,
+                        fg = clrs.maroon,
+                    },
+                },
+            },
+            debug = {
+                name = {
+                    provider = function()
+                        return table.concat(require("features.debugger").get_active_clients(), ", ")
+                    end,
+                    left_sep = " ",
+                    hl = {
+                        fg = clrs.red,
                     },
                 },
             },
@@ -425,6 +436,7 @@ function M.setup()
                 -- composition().nullls.name,
                 composition().lint.name,
                 composition().format.name,
+                composition().debug.name,
                 composition().search_count,
                 -- composition().file.format,
                 -- composition().file.size,

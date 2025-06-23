@@ -90,7 +90,7 @@ local function require_check()
 end
 
 function M.setup()
-    local dap, dapui, dap_virtual_text = require_check()
+    local dap, dapui, dap_virtual_text, which_key = require_check()
     if not dap or not dapui or not dap_virtual_text then
         return
     end
@@ -333,6 +333,35 @@ function M.ensure_installed()
     end
 
     return debug_ensure_installed
+end
+
+function M.get_active_clients()
+    local buf_ft = vim.bo.filetype
+    local debug_by_ft = {}
+
+    local servers = require("features.lspconfig.servers")
+
+    for _, config in pairs(servers) do
+        if config.debugger and config.filetypes then
+            local debuggers = type(config.debugger) == "table" and config.debugger or { config.debugger }
+
+            local filetypes = type(config.filetypes) == "table" and config.filetypes or { config.filetypes }
+
+            for _, filetype in ipairs(filetypes) do
+                if not debug_by_ft[filetype] then
+                    debug_by_ft[filetype] = {}
+                end
+
+                for _, debugger in ipairs(debuggers) do
+                    if not vim.tbl_contains(debug_by_ft[filetype], debugger) then
+                        table.insert(debug_by_ft[filetype], debugger)
+                    end
+                end
+            end
+        end
+    end
+
+    return debug_by_ft[buf_ft]
 end
 
 return M
