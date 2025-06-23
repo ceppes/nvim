@@ -3,8 +3,14 @@ local M = {
     dependencies = {
         "williamboman/nvim-lsp-installer",
         "SmiteshP/nvim-navic",
-        { "mfussenegger/nvim-jdtls", ft = "java" },
-        { "williamboman/mason.nvim", opts = {} },
+        {
+            "mfussenegger/nvim-jdtls",
+            ft = "java",
+        },
+        {
+            "williamboman/mason.nvim",
+            opts = {},
+        },
         "williamboman/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         { "j-hui/fidget.nvim", opts = {} },
@@ -16,7 +22,11 @@ local M = {
             "SmiteshP/nvim-navic",
             "MunifTanjim/nui.nvim",
         },
-        opts = { lsp = { auto_attach = true } },
+        opts = {
+            lsp = {
+                auto_attach = true,
+            },
+        },
     },
     config = function()
         require("neodev").setup({})
@@ -113,18 +123,21 @@ function M.setup()
         },
     })
 
-    local lsp_ensure_installed = {
+    local ensure_installed = {
+        -- Lsp
         "jdtls",
         "sonarlint-language-server",
+        "jq",
+
+        -- Linter
+        "codespell",
     }
 
     for server, config in pairs(servers) do
         if config.lsp and config.lsp_key then
-            table.insert(lsp_ensure_installed, config.lsp_key)
+            table.insert(ensure_installed, config.lsp_key)
         end
     end
-
-    local ensure_installed = lsp_ensure_installed
 
     vim.list_extend(ensure_installed, require("features.lint").ensure_installed())
     vim.list_extend(ensure_installed, require("features.format").ensure_installed())
