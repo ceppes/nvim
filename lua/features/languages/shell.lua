@@ -1,7 +1,7 @@
 local M = {}
 
 M.linter = "shellcheck"
-M.filetypes = "sh"
+M.filetypes = { "bash", "sh" }
 M.treesitter = "bash"
 M.formatter = "shfmt"
 
@@ -17,18 +17,18 @@ vim.api.nvim_create_autocmd("FileType", {
 
 function M.format()
     require("conform").formatters.shfmt = {
-      inherit = false,
-      command = "shfmt",
-      args = function ()
-        local shiftwidth = vim.opt.shiftwidth:get()
-        local expandtab = vim.opt.expandtab:get()
+        inherit = false,
+        command = "shfmt",
+        args = function()
+            local shiftwidth = vim.opt.shiftwidth:get()
+            local expandtab = vim.opt.expandtab:get()
 
-        if not expandtab then
-            shiftwidth = 0
-        end
+            if not expandtab then
+                shiftwidth = 0
+            end
 
-        return {"--diff", "--indent", "2", "--case-indent", "-filename", "$FILENAME" }
-      end
+            return { "--diff", "--indent", "2", "--case-indent", "-filename", "$FILENAME" }
+        end,
     }
 end
 
