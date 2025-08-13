@@ -43,6 +43,7 @@ local plugins = {
     require("features.lspconfig.pluginspec"),
     require("features.completion"),
     require("features.debugger"),
+    require("features.test"),
     -- require('features.null-ls'),
     require("features.lint"),
     require("features.format"),
