@@ -73,11 +73,12 @@ M = {
 }
 
 function M.setup()
-    vim.api.nvim_set_hl(0, "GitSignsAdd", { link = "GitSignsAdd" })
-    vim.api.nvim_set_hl(0, "GitSignsChange", { link = "GitSignsChange" })
-    vim.api.nvim_set_hl(0, "GitSignsChangedelete", { link = "GitSignsChange" })
-    vim.api.nvim_set_hl(0, "GitSignsDelete", { link = "GitSignsDelete" })
-    vim.api.nvim_set_hl(0, "GitSignsTopdelete", { link = "GitSignsDelete" })
+    -- Catppuccin Mocha colors for better visibility
+    vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#a6e3a1", bold = true })          -- Green
+    vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#f9e2af", bold = true })       -- Yellow
+    vim.api.nvim_set_hl(0, "GitSignsChangedelete", { fg = "#fab387", bold = true }) -- Peach
+    vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#f38ba8", bold = true })       -- Red
+    vim.api.nvim_set_hl(0, "GitSignsTopdelete", { fg = "#f38ba8", bold = true })    -- Red
 
     require("gitsigns").setup({
         current_line_blame = false, -- :Gitsigns toggle_current_line_blame
