@@ -2,7 +2,7 @@ local M
 
 M = {
     "robitx/gp.nvim",
-    cmd = { "GpChatNew", "GpExplain", "GpCommand" },
+    event = "VeryLazy",
     config = function()
         local conf = {
             providers = {
