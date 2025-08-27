@@ -298,6 +298,15 @@ function M.debug()
 
     dap.configurations.java = {
         {
+            name = "Debug Attach (Custom Port)",
+            type = "java",
+            request = "attach",
+            hostname = "127.0.0.1",
+            port = function()
+                return vim.fn.input("Port: ")
+            end,
+        },
+        {
             name = "Debug Attach (5000)",
             type = "java",
             request = "attach",
