@@ -57,7 +57,7 @@ M = {
     },
     {
         "ray-x/lsp_signature.nvim",
-        event = "VeryLazy",
+        event = "InsertEnter",
         opts = {},
         config = function()
             require("lsp_signature").setup({
@@ -67,6 +67,14 @@ M = {
                 },
                 hint_prefix = "▶ ",
             })
+
+            vim.keymap.set({ "n" }, "<C-k>", function()
+                require("lsp_signature").toggle_float_win()
+            end, { silent = true, noremap = true, desc = "toggle signature" })
+
+            vim.keymap.set({ "n" }, "<Leader>k", function()
+                vim.lsp.buf.signature_help()
+            end, { silent = true, noremap = true, desc = "toggle signature" })
         end,
     },
 }
@@ -244,7 +252,7 @@ function M.setup()
             { name = "nvim-lsp-document-symbol" },
             { name = "dotenv" },
             { name = "npm" },
-            {name = "render-markdown"}
+            { name = "render-markdown" },
         }),
         snippet = {
             expand = function(args)
