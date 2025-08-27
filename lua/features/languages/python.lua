@@ -4,9 +4,9 @@ M.linter = "pylint"
 M.lsp_key = "pyright"
 M.lspbin = "pyright-langserver"
 M.debugger = "debugpy"
-M.filetypes = "python"
+M.filetypes = { "python" }
 M.treesitter = M.filetypes
-M.formatter = { "black", "autopep8", "isort" }
+M.formatter = { "isort", "black", "autopep8" }
 
 -- Auto detection poetry env
 local handle = io.popen("poetry env info -p 2>/dev/null")
@@ -18,6 +18,7 @@ end
 -- If env exist use venv pylint
 if poetry_venv and vim.fn.filereadable(poetry_venv .. "/bin/pylint") == 1 then
     M.linter_cmd = poetry_venv .. "/bin/pylint"
+    vim.print("linter cmd : " .. M.linter_cmd)
 end
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -90,7 +91,8 @@ function M.lsp()
     }
 
     return require("features.lsp.server_config").config({
-        root_markers = lspconfig.util.root_pattern(unpack(python_root_files)),
+        cmd = { "pyright-langserver", "--stdio" },
+        root_markers = python_root_files,
         flags = {
             debounce_text_changes = 150,
         },
@@ -105,8 +107,9 @@ function M.lsp()
             },
         },
         before_init = function(_, config)
-            vim.notify("python path : " .. get_python_path(config.root_markers))
-            config.settings.python.pythonPath = get_python_path(config.root_markers)
+            local workspace_path = vim.fn.getcwd()  -- Use current working directory
+            vim.notify("python path : " .. get_python_path(workspace_path))
+            config.settings.python.pythonPath = get_python_path(workspace_path)
         end,
     })
 end
