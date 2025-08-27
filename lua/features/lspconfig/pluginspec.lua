@@ -29,7 +29,6 @@ local M = {
         },
     },
     config = function()
-        require("neodev").setup({})
         require("features.lspconfig.highlight")
         require("features.lspconfig.commands")
         require("features.lspconfig.autocommand").autocommand()
@@ -123,6 +122,10 @@ function M.setup()
         },
     })
 
+    local ensure_to_not_install = {
+        "pylint",
+    }
+
     local ensure_installed = {
         -- Lsp
         "jdtls",
@@ -142,6 +145,15 @@ function M.setup()
     vim.list_extend(ensure_installed, require("features.lint").ensure_installed())
     vim.list_extend(ensure_installed, require("features.format").ensure_installed())
     vim.list_extend(ensure_installed, require("features.debugger").ensure_installed())
+
+    ensure_installed = vim.tbl_filter(function(item)
+        for _, not_install in ipairs(ensure_to_not_install) do
+            if item == not_install then
+                return false
+            end
+        end
+        return true
+    end, ensure_installed)
 
     -- vim.print(ensure_installed)
 
