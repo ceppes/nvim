@@ -24,12 +24,15 @@ for _, config in pairs(servers) do
     if type(config.lsp) == "function" and config.lsp_key then
         local lsp = config.lsp()
 
-        vim.lsp.config(config.lsp_key, lsp)
-
-        if vim.fn.executable(config.lspbin) ~= 1 then
-            log = log .. "\n" .. "[LSP][Setup servers] ❌ " .. config.lsp_key .. ", bin : " .. config.lspbin .. " "
-        else
-            log = log .. "\n" .. "[LSP][Setup servers] ✅ " .. config.lsp_key .. ", bin : " .. config.lspbin .. " "
+        if type(lsp) == "table" then
+            vim.lsp.config(config.lsp_key, lsp)
+            vim.lsp.enable(config.lsp_key)
         end
+
+        -- if vim.fn.executable(config.lspbin) ~= 1 then
+        --     vim.print("[LSP][Setup servers] ❌ " .. config.lsp_key .. ", bin : " .. config.lspbin)
+        -- else
+        --     vim.print("[LSP][Setup servers] ✅ " .. config.lsp_key .. ", bin : " .. config.lspbin)
+        -- end
     end
 end

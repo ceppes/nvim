@@ -69,7 +69,7 @@ local M = {
         "typescript",
         "typescript.tsx",
         "typescriptreact",
-        -- "vue",
+        "vue",
         "xml",
         "yaml",
     },
