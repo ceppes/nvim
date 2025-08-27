@@ -32,9 +32,12 @@ function M.lsp()
     end
 
     return require("features.lsp.server_config").config({
-        cmd = { "vscode-css-language-server", "--stdio" },
+        cmd = { M.lspbin, "--stdio" },
         filetypes = M.filetypes,
         root_markers = lspconfig.util.root_pattern("package.json", ".git"),
+        init_options = {
+            provideFormatter = true,
+        },
     })
 end
 
