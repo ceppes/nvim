@@ -7,6 +7,12 @@ local function optiones(options)
 end
 
 function M.keymaps()
+    -- Suppress position encoding warnings
+    local original_make_range_params = vim.lsp.util.make_range_params
+    vim.lsp.util.make_range_params = function(window, position_encoding)
+        return original_make_range_params(window, position_encoding or 'utf-16')
+    end
+
     vim.keymap.set("n", "<leader>le", "<cmd>:!sh > ~/.local/state/nvim/lsp.log<CR>", { desc = "Empty lsp.log" })
 
     vim.api.nvim_create_autocmd("LspAttach", {
