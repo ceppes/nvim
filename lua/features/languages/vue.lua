@@ -1,12 +1,10 @@
 local M = {}
 
-M.linter = { "eslint_d" }
 M.formatter = { "prettier" }
 M.lsp_key = "vue_ls"
-M.lsp_key = "volar"
 M.lspbin = "vue-language-server"
 M.treesitter = { "vue", "typescript", "javascript" }
-M.filetypes = { "vue", "typescript", "javascript" }
+M.filetypes = { "vue" }
 
 function M.lsp()
     local lsp_status_ok, lspconfig = pcall(require, "lspconfig")
@@ -15,12 +13,22 @@ function M.lsp()
     end
 
     return require("features.lsp.server_config").config({
-        filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+        filetypes = M.filetypes,
         init_options = {
             vue = {
-                hybridMode = false,
+                hybridMode = true,
             },
+            typescript = {
+                tsdk = vim.fn.stdpath("data") .. "/mason/packages/typescript-language-server/node_modules/typescript/lib",
+            }
         },
+        on_init = function(client, initialize_result)
+            if client.server_capabilities then
+                client.server_capabilities.documentFormattingProvider = false
+                client.server_capabilities.documentRangeFormattingProvider = false
+            end
+        end,
+        settings = {},
     })
 end
 

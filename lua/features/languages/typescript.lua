@@ -1,10 +1,9 @@
 local M = {}
 
-M.linter = "eslint_d"
 M.lsp_key = "ts_ls"
 M.lspbin = "typescript-language-server"
 M.treesitter = { "typescript", "tsx", "javascript" }
-M.filetypes = { "typescript", "typescriptreact", "javascript" }
+M.filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" }
 M.formatter = { "prettierd", "prettier" }
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -35,6 +34,9 @@ function M.lsp()
         root_markers = lspconfig.util.root_pattern(unpack(root_files)),
         settings = {
             typescript = {
+                tsserver = {
+                    useSyntaxServer = false,
+                },
                 inlayHints = {
                     includeInlayParameterNameHints = "literal",
                     includeInlayParameterNameHintsWhenArgumentMatchesName = false,
@@ -54,6 +56,15 @@ function M.lsp()
                     includeInlayPropertyDeclarationTypeHints = true,
                     includeInlayFunctionLikeReturnTypeHints = true,
                     includeInlayEnumMemberValueHints = true,
+        },
+        init_options = {
+            plugins = {
+                {
+                    name = "@vue/typescript-plugin",
+                    location = vim.fn.stdpath("data") .. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+                    languages = { "vue" },
+                    configNamespace = "typescript",
+                    enableForWorkspaceTypeScriptVersions = true,
                 },
             },
         },
