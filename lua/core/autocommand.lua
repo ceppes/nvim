@@ -29,8 +29,16 @@ cmd([[autocmd BufEnter * set fo-=c fo-=r fo-=o]])
 --   end
 -- })
 
--- Set to 1 to only show mehtods levels
-cmd([[  autocmd FileType * setlocal foldlevel=1000 ]])
+-- Set to 1000 to show all levels (except Java which handles its own folding)
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "*",
+    callback = function()
+        -- Skip Java files - they handle their own folding in languages/java.lua
+        if vim.bo.filetype ~= "java" then
+            vim.opt_local.foldlevel = 1000
+        end
+    end,
+})
 -- cmd [[  autocmd FileType python setlocal foldlevel=1 ]]
 -- cmd [[  autocmd FileType java setlocal foldlevel=2 ]]
 -- cmd [[  autocmd FileType typescript setlocal foldlevel=3 ]]

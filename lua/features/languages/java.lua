@@ -11,8 +11,16 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.bo.shiftwidth = 4
         vim.bo.tabstop = 4
-        vim.opt_local.foldmethod = "indent"
         vim.opt_local.expandtab = true
+
+        -- Javadoc folding configuration
+        -- Use marker folding with /** */ as fold markers for Javadoc comments
+        -- This allows manual folding/unfolding with zo/zc when cursor is on Javadoc
+        vim.opt_local.foldmethod = "marker"
+        vim.opt_local.foldmarker = "/**,*/"
+        vim.opt_local.foldenable = true
+        vim.opt_local.foldlevel = 0  -- Fold everything by default, including Javadocs
+
         M.keymaps()
         M.commands()
         M.java()
