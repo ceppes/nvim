@@ -105,6 +105,7 @@ function M.setup()
             additional_vim_regex_highlighting = { "ruby" },
         },
         indent = { enable = true, disable = { "ruby" } },
+        fold = { enable = true },
         modules = {},
     })
 

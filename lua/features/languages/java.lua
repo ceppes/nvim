@@ -1,6 +1,8 @@
 local M = {}
 
 M.lsp_key = { "jdtls" }
+
+
 M.treesitter = "java"
 M.formatter = "google-java-format"
 M.filetypes = { "java" }
@@ -13,13 +15,14 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.tabstop = 4
         vim.opt_local.expandtab = true
 
-        -- Javadoc folding configuration
-        -- Use marker folding with /** */ as fold markers for Javadoc comments
-        -- This allows manual folding/unfolding with zo/zc when cursor is on Javadoc
-        vim.opt_local.foldmethod = "marker"
-        vim.opt_local.foldmarker = "/**,*/"
+        -- TreeSitter folding - simple and reliable
+        vim.opt_local.foldmethod = "expr"
+        vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
         vim.opt_local.foldenable = true
-        vim.opt_local.foldlevel = 0  -- Fold everything by default, including Javadocs
+        vim.opt_local.foldlevel = 1  -- Fold method bodies by default
+        vim.opt_local.foldnestmax = 3  -- Limit fold nesting
+
+
 
         M.keymaps()
         M.commands()
@@ -363,5 +366,6 @@ function M.format()
         args = { "--aosp", "--skip-sorting-imports", "$FILENAME" },
     }
 end
+
 
 return M
