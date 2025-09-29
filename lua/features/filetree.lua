@@ -20,11 +20,11 @@ M = {
         local default_config = require("neo-tree.defaults")
         local file_renderer = vim.deepcopy(default_config.renderers.file)
 
-        -- Find the position of file_size and insert line_count before it
-        local content = file_renderer[3].content
-        for i, component in ipairs(content) do
+        -- Find the position of file_size and insert line_count before it for files
+        local file_content = file_renderer[3].content
+        for i, component in ipairs(file_content) do
             if component[1] == "file_size" then
-                table.insert(content, i, { "line_count", zindex = 10, align = "right" })
+                table.insert(file_content, i, { "line_count", zindex = 10, align = "right" })
                 break
             end
         end
@@ -32,6 +32,42 @@ M = {
         require("neo-tree").setup({
             filesystem = {
                 components = {
+                    name = function(config, node, state)
+                        local original_name = require("neo-tree.sources.filesystem.components").name
+                        local name_result = original_name(config, node, state)
+
+                        if node.type == "directory" then
+                            local path = node:get_id()
+                            local success, count = pcall(function()
+                                local handle = vim.loop.fs_scandir(path)
+                                if not handle then return "?" end
+                                local total = 0
+                                while true do
+                                    local name = vim.loop.fs_scandir_next(handle)
+                                    if not name then break end
+                                    if name ~= "." and name ~= ".." then
+                                        total = total + 1
+                                    end
+                                end
+                                return tostring(total)
+                            end)
+                            local count_text = ""
+                            if success then
+                                local num_count = tonumber(count)
+                                if num_count > 1 then
+                                    count_text = " (" .. count .. ")"
+                                end
+                            else
+                                count_text = " (?)"
+                            end
+                            return {
+                                text = name_result.text .. count_text,
+                                highlight = name_result.highlight,
+                            }
+                        else
+                            return name_result
+                        end
+                    end,
                     line_count = function(config, node, state)
                         if node.type == "file" then
                             local path = node:get_id()
