@@ -15,8 +15,65 @@ M = {
         { "<leader>EE", "<cmd>Neotree reveal position=current<cr>", desc = "File : NeoTree float" },
     },
     config = function()
+
+        -- Get the default renderers and modify them
+        local default_config = require("neo-tree.defaults")
+        local file_renderer = vim.deepcopy(default_config.renderers.file)
+
+        -- Find the position of file_size and insert line_count before it
+        local content = file_renderer[3].content
+        for i, component in ipairs(content) do
+            if component[1] == "file_size" then
+                table.insert(content, i, { "line_count", zindex = 10, align = "right" })
+                break
+            end
+        end
+
         require("neo-tree").setup({
             filesystem = {
+                components = {
+                    line_count = function(config, node, state)
+                        if node.type == "file" then
+                            local path = node:get_id()
+                            local success, lines = pcall(function()
+                                local file = io.open(path, "r")
+                                if not file then return "?" end
+                                local count = 0
+                                for _ in file:lines() do
+                                    count = count + 1
+                                end
+                                file:close()
+                                return tostring(count)
+                            end)
+                            -- Fixed width formatting - pad to 8 characters (for up to 9999l)
+                            local line_text = success and " " .. string.format("%4s", lines) .. " l" or "    ?l"
+
+                            -- Color based on line count
+                            local highlight = "NeoTreeDimText"
+                            if success then
+                                local line_count = tonumber(lines)
+                                if line_count >= 1000 then
+                                    highlight = "DiagnosticError"  -- Red for 1000+ lines
+                                elseif line_count >= 500 then
+                                    highlight = "DiagnosticWarn"   -- Yellow for 500+ lines
+                                end
+                            end
+
+                            return {
+                                text = line_text,
+                                highlight = highlight,
+                            }
+                        else
+                            return {
+                                text = "     ",  -- 5 spaces to maintain alignment
+                                highlight = "NeoTreeDimText",
+                            }
+                        end
+                    end,
+                },
+                renderers = {
+                    file = file_renderer,
+                },
                 filtered_items = {
                     visible = true, -- This is what you want: If you set this to `true`, all "hide" just mean "dimmed out"
                     hide_dotfiles = false,
