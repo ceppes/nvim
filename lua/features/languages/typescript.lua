@@ -47,15 +47,6 @@ function M.lsp()
                     includeInlayEnumMemberValueHints = true,
                 },
             },
-            javascript = {
-                inlayHints = {
-                    includeInlayParameterNameHints = "all",
-                    includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                    includeInlayFunctionParameterTypeHints = true,
-                    includeInlayVariableTypeHints = true,
-                    includeInlayPropertyDeclarationTypeHints = true,
-                    includeInlayFunctionLikeReturnTypeHints = true,
-                    includeInlayEnumMemberValueHints = true,
         },
         init_options = {
             plugins = {
