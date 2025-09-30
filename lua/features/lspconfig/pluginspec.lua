@@ -4,10 +4,6 @@ local M = {
         "williamboman/nvim-lsp-installer",
         "SmiteshP/nvim-navic",
         {
-            "mfussenegger/nvim-jdtls",
-            ft = "java",
-        },
-        {
             "williamboman/mason.nvim",
             opts = {},
         },
@@ -108,27 +104,13 @@ function M.setup()
 
     local servers = require("features.lspconfig.servers")
 
-    require("mason-lspconfig").setup({
-        handlers = {
-            function(server_name)
-                local server = servers[server_name] or {}
-                -- This handles overriding only values explicitly passed
-                -- by the server configuration above. Useful when disabling
-                -- certain features of an LSP (for example, turning off formatting for ts_ls)
-                server.capabilities =
-                    vim.tbl_deep_extend("force", {}, require("features.lsp.capabilities"), server.capabilities or {})
-                require("lspconfig")[server_name].setup(server)
-            end,
-        },
-    })
-
     local ensure_to_not_install = {
         "pylint",
     }
 
     local ensure_installed = {
         -- Lsp
-        "jdtls",
+        "jdtls", -- Install but don't auto-configure (handled by nvim-jdtls plugin)
         "sonarlint-language-server",
         "jq",
 

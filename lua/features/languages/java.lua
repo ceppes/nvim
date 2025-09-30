@@ -75,10 +75,9 @@ function M.java()
     )
     -- TODO
     -- vim.list_extend(bundles, vim.split(vim.fn.glob( JTEST_LOCATION .. "/extension/server/*.jar", 1), "\n"))
-
-    local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
-    local root_markers = require("jdtls.setup").find_root(root_markers)
-    if root_markers == "" then
+    local root_markers = { "mvnw", "gradlew", "pom.xml", "build.gradle" }
+    local root_dir = require("jdtls.setup").find_root(root_markers)
+    if root_dir == "" then
         return
     end
 
@@ -116,7 +115,7 @@ function M.java()
 
         -- This is the default if not provided, you can remove it. Or adjust as needed.
         -- One dedicated LSP server & client will be started per unique root_dir
-        root_markers = root_markers,
+        root_dir = root_dir,
 
         -- Here you can configure eclipse.jdt.ls specific settings
         -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
@@ -254,52 +253,9 @@ function M.keymaps()
 end
 
 function M.commands()
-    vim.api.nvim_create_user_command("JdtlsGoogleIntellij", function()
-        require("jdtls").start_or_attach({
-            settings = {
-                java = {
-                    format = {
-                        settings = {
-                            -- url = "file:" .. vim.fn.expand("~/.config/jdtls/formatters/eclipse-google.xml"),
-                            --   url = "https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml",
-                            url = "file:" .. vim.fn.stdpath("config") .. "/lang-servers/intellij-java-google-style.xml",
-                            profile = "GoogleStyle",
-                        },
-                    },
-                },
-            },
-        })
-    end, {})
-
-    vim.api.nvim_create_user_command("JdtlsGoogleEclipse", function()
-        require("jdtls").start_or_attach({
-            settings = {
-                java = {
-                    format = {
-                        settings = {
-                            url = "file:" .. vim.fn.stdpath("config") .. "/lang-servers/eclipse-java-google-style.xml",
-                            -- https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml
-                            profile = "GoogleStyle",
-                        },
-                    },
-                },
-            },
-        })
-    end, {})
 end
 
-function M.plugin()
-    return {
-        -- https://github.com/mfussenegger/nvim-jdtls
-        "mfussenegger/nvim-jdtls",
-        ft = "java", -- Enable only on .java file extensions
-        config = function()
-            M.keymaps()
-            M.setup()
-            -- M.setup2()
-        end,
-    }
-end
+
 
 function M.debug()
     local dap_status_ok, dap = pcall(require, "dap")
