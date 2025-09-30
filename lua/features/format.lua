@@ -33,7 +33,10 @@ function M.get_active_clients()
 end
 
 function M.keymaps()
-    vim.keymap.set("n", "<leader>bf", ":Format<CR>", { desc = "[B]uffer [F]ormat" })
+    vim.keymap.set("n", "<leader>bf", function()
+        local buf = vim.api.nvim_get_current_buf()
+        require("conform").format({ bufnr = buf })
+    end, { desc = "[B]uffer [F]ormat" })
 end
 
 function M.setup()
@@ -82,19 +85,9 @@ function M.setup()
 
     require("conform").setup({
         formatters_by_ft = format_by_ft,
-        format_on_save = {
-            -- These options will be passed to conform.format()
-            timeout_ms = 500,
-            lsp_format = "fallback",
-        },
+        format_on_save = false,
     })
 
-    vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*",
-        callback = function(args)
-            require("conform").format({ bufnr = args.buf })
-        end,
-    })
 end
 
 function M.ensure_installed()
