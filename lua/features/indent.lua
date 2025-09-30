@@ -58,15 +58,6 @@ function M.commands()
         end
     end, { nargs = 0, desc = "Turn on indent signs" })
 
-    vim.api.nvim_create_user_command("CopyModeOff", function()
-        copy_mode_turn_off()
-        M.copyMode = false
-    end, { nargs = 0, desc = "Turn on indent signs" })
-
-    vim.api.nvim_create_user_command("CopyModeOn", function()
-        copy_mode_turn_on()
-        M.copyMode = true
-    end, { nargs = 0, desc = "Turn off indent signs" })
 end
 
 return M
