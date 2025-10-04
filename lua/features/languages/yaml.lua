@@ -37,7 +37,7 @@ function M.lsp()
     return require("features.lsp.server_config").config({
         cmd = { "yaml-language-server", "--stdio" },
         filetypes = { "yaml", "yaml.docker-compose", "yml" },
-        root_markers = lspconfig.util.root_pattern("*.yaml"),
+        root_markers = { "*.yaml", ".git" },
         settings = {
             yaml = {
                 schemaStore = {
