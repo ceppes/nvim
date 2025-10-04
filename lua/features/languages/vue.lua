@@ -28,7 +28,38 @@ function M.lsp()
                 client.server_capabilities.documentRangeFormattingProvider = false
             end
         end,
-        settings = {},
+        settings = {
+            vue = {
+                inlayHints = {
+                    missingProps = true,
+                    optionsWrapper = true,
+                },
+            },
+            typescript = {
+                inlayHints = {
+                    enumMemberValues = { enabled = true },
+                    functionLikeReturnTypes = { enabled = true },
+                    parameterNames = { enabled = "literals" },
+                    parameterTypes = { enabled = true },
+                    propertyDeclarationTypes = { enabled = true },
+                    variableTypes = { enabled = false },
+                },
+                suggest = {
+                    completeFunctionCalls = true,
+                },
+                -- Stricter diagnostics for Vue files
+                reportStyleChecksAsWarnings = false,
+                strict = true,
+                noImplicitAny = true,
+                strictNullChecks = true,
+                strictFunctionTypes = true,
+                noImplicitThis = true,
+                useUnknownInCatchVariables = true,
+                exactOptionalPropertyTypes = true,
+                noUncheckedIndexedAccess = true,
+                noPropertyAccessFromIndexSignature = true,
+            },
+        },
     })
 end
 
