@@ -17,4 +17,20 @@ function M.format()
     }
 end
 
+function M.lsp()
+    return require("features.lsp.server_config").config({})
+end
+
+function M.plugin()
+    return {
+        "lervag/vimtex",
+        lazy = false,
+        init = function()
+            vim.g.vimtex_view_method = "skim"
+            vim.g.vimtex_compiler_method = "latexmk"
+        end,
+        ft = "tex",
+    }
+end
+
 return M
