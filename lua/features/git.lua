@@ -69,16 +69,21 @@ M = {
             })
         end,
     },
+    {
+        "esmuellert/vscode-diff.nvim",
+        dependencies = { "MunifTanjim/nui.nvim" },
+        cmd = "CodeDiff",
+    },
     -- use 'airblade/vim-gitgutter'
 }
 
 function M.setup()
     -- Catppuccin Mocha colors for better visibility
-    vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#a6e3a1", bold = true })          -- Green
-    vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#f9e2af", bold = true })       -- Yellow
+    vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#a6e3a1", bold = true }) -- Green
+    vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#f9e2af", bold = true }) -- Yellow
     vim.api.nvim_set_hl(0, "GitSignsChangedelete", { fg = "#fab387", bold = true }) -- Peach
-    vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#f38ba8", bold = true })       -- Red
-    vim.api.nvim_set_hl(0, "GitSignsTopdelete", { fg = "#f38ba8", bold = true })    -- Red
+    vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#f38ba8", bold = true }) -- Red
+    vim.api.nvim_set_hl(0, "GitSignsTopdelete", { fg = "#f38ba8", bold = true }) -- Red
 
     require("gitsigns").setup({
         current_line_blame = false, -- :Gitsigns toggle_current_line_blame
@@ -110,6 +115,10 @@ function M.keymaps()
     vim.keymap.set("n", "<leader>gf", function()
         toggle_diffview("DiffviewFileHistory %")
     end, { desc = "Diffs for current File" })
+
+    vim.keymap.set("n", "<leader>gdd", function()
+        vim.cmd("CodeDiff file HEAD")
+    end, { desc = "Diff Index" })
 end
 
 return M
