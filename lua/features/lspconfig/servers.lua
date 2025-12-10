@@ -24,6 +24,7 @@ M = {
     vue_ls = require("features.languages.vue"),
     -- gopls = require('features.languages.go'),
     -- swift = require('features.languages.swift'),
+    rust_analyzer = require("features.languages.rust"),
 }
 
 return M
