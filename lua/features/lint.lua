@@ -78,8 +78,20 @@ function M.setup()
                     end
 
                     -- Optionally, configure the linter command if necessary
-                    if config.linter_cmd and not config.linter_cmd:find("/") and lint.linters[linter] then
+                    if config.linter_cmd and lint.linters[linter] then
                         lint.linters[linter].cmd = config.linter_cmd
+                    end
+
+                    -- Configure linter args if provided
+                    if config.linter_args and lint.linters[linter] then
+                        local base_args = lint.linters[linter].args or {}
+                        local custom_args = type(config.linter_args) == "function" and config.linter_args() or config.linter_args
+
+                        -- Prepend custom args to base args
+                        lint.linters[linter].args = function()
+                            local args = vim.list_extend(vim.deepcopy(custom_args), type(base_args) == "function" and base_args() or base_args)
+                            return args
+                        end
                     end
                 end
             end

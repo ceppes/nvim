@@ -19,6 +19,15 @@ end
 if poetry_venv and vim.fn.filereadable(poetry_venv .. "/bin/pylint") == 1 then
     M.linter_cmd = poetry_venv .. "/bin/pylint"
     vim.print("linter cmd : " .. M.linter_cmd)
+
+    -- Configure pylint to use the poetry venv's Python and add project root to PYTHONPATH
+    M.linter_args = function()
+        local workspace = vim.fn.getcwd()
+        return {
+            "--init-hook",
+            string.format("import sys; sys.path.insert(0, '%s')", workspace)
+        }
+    end
 end
 
 vim.api.nvim_create_autocmd("FileType", {
