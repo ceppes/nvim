@@ -38,6 +38,7 @@ M = { -- Collection of various small independent plugins/modules
 -- | Jane | 30 | LA |
 --
 -- SQL INSERT test (select lines below and use ga, then s,<Enter>):
+-- SQL INSERT test (select lines below and use ga, then ,,<Enter>):
 -- INSERT INTO users (id, name, email, created_at) VALUES (1, 'John', 'john@email.com', '2023-01-01');
 -- INSERT INTO users (id, name, email, created_at) VALUES (25, 'Jane Smith', 'jane.smith@example.org', '2023-02-15');
 -- INSERT INTO users (id, name, email, created_at) VALUES (100, 'Bob', 'bob@test.com', '2023-03-20');
