@@ -1,5 +1,8 @@
 local M = {}
 
+-- local analyzers_path = vim.fn.stdpath("data") .. "/mason/packages/sonarlint-language-server/extension/analyzers/"
+local analyzers_path = vim.fn.stdpath("data") .. "/mason/share/sonarlint-analyzers/"
+
 M = {
     "https://gitlab.com/schrieveslaach/sonarlint.nvim",
     config = function()
@@ -7,36 +10,41 @@ M = {
             server = {
                 cmd = {
                     "sonarlint-language-server",
-                    -- Ensure that sonarlint-language-server uses stdio channel
                     "-stdio",
                     "-analyzers",
-                    -- paths to the analyzers you need
-                    vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarpython.jar"),
-                    vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarcfamily.jar"),
-                    vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarjava.jar"),
-                    vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarhtml.jar"),
-                    -- vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/csharpenterprise.jar "),
-                    -- vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarcsharp.jar"),
-                    -- vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonargo.jar "),
-                    -- vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonariac.jar "),
-                    -- vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarjavasymbolicexecution.jar "),
-                    vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarjs.jar"),
-                    -- vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarlintomnisharp.jar"),
-                    -- vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarphp.jar "),
-                    vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonartext.jar "),
-                    vim.fn.expand("~/.local/share/nvim/mason/share/sonarlint-analyzers/sonarxml.jar "),
-
+                    analyzers_path .. "sonarpython.jar",
+                    analyzers_path .. "sonarcfamily.jar",
+                    analyzers_path .. "sonarjava.jar",
+                    analyzers_path .. "sonarhtml.jar",
+                    -- analyzers_path .. "csharpenterprise.jar ",
+                    -- analyzers_path .. "sonarcsharp.jar",
+                    -- analyzers_path .. "sonargo.jar ",
+                    -- analyzers_path .. "sonariac.jar ",
+                    -- analyzers_path .. "sonarjavasymbolicexecution.jar ",
+                    analyzers_path .. "sonarjs.jar",
+                    -- analyzers_path .. "sonarlintomnisharp.jar",
+                    -- analyzers_path .. "sonarphp.jar ",
+                    analyzers_path .. "sonartext.jar ",
+                    analyzers_path .. "sonarxml.jar ",
                 },
             },
             filetypes = {
-                -- Tested and working
-                "python",
+                -- "c",
                 "cpp",
-                'java',
-                "html",
-                "js",
+                -- "css",
+                -- "docker",
+                -- "go",
+                -- "html",
+                "java",  -- SonarLint is VERY popular for Spring Boot projects
+                "javascript",
+                "javascriptreact",
+                -- "php",
+                "python",
                 "text",
+                -- "typescript",
+                -- "typescriptreact",
                 "xml",
+                -- "yaml.docker-compose",
             },
         })
     end,
