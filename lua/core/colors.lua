@@ -48,7 +48,7 @@ function M.keymaps()
     -- if not telescope_builtin_status_ok then
     --   return
     -- end
-    vim.keymap.set("n", "<leader>c", require("telescope.builtin").colorscheme, { desc = "T Colorscheme" })
+    vim.keymap.set("n", "<leader>cs", require("telescope.builtin").colorscheme, { desc = "T Colorscheme" })
 end
 
 return M
