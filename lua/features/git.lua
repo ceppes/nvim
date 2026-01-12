@@ -3,6 +3,7 @@ local M = {}
 M = {
     {
         "tpope/vim-fugitive",
+        cmd = { "Git", "Gwrite", "Gread", "Gdiffsplit" },
         keys = {
             { "<leader>gb", ":BlameToggle<CR>", { desc = "[G]it [B]lame" } },
             { "<leader>gd", ":Gitsigns diffthis<CR>", { desc = "[G]it [D]iff this" } },
@@ -116,9 +117,13 @@ function M.keymaps()
         toggle_diffview("DiffviewFileHistory %")
     end, { desc = "Diffs for current File" })
 
-    vim.keymap.set("n", "<leader>gdd", function()
+    vim.keymap.set("n", "<leader>cd", function()
         vim.cmd("CodeDiff file HEAD")
-    end, { desc = "Diff Index" })
+    end, { desc = "CodeDiff" })
+
+    -- Stage current file
+    vim.keymap.set("n", "<leader>ga", ":Git add %<CR>", { desc = "[G]it [A]dd/stage current file" })
+
 end
 
 return M
