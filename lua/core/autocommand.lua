@@ -3,6 +3,26 @@
 -----------------------------------------------------------
 local cmd = vim.cmd
 
+-- Filetype detection
+vim.filetype.add({
+    filename = {
+        ["firestore.rules"] = "firestore",
+    },
+    pattern = {
+        [".*%.rules"] = {
+            priority = 10,
+            function(path)
+                local content = vim.fn.readfile(path, "", 10)
+                for _, line in ipairs(content) do
+                    if line:match("service%s+cloud%.firestore") then
+                        return "firestore"
+                    end
+                end
+            end,
+        },
+    },
+})
+
 local function augroup(name)
     return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
