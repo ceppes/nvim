@@ -131,3 +131,18 @@ vim.keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 -- local hush = { silent = true }
 -- vim.vim.keymap.set("v", "<space>", ":fold<CR>", hush)
 -- vim.vim.keymap.set("n", "<space>", "zA", hush)
+
+-----------------------------------------------------------
+-- Markdown checkboxes
+-----------------------------------------------------------
+local function set_checkbox(state)
+    local line = vim.api.nvim_get_current_line()
+    local new_line = line:gsub("%- %[.%]", "- [" .. state .. "]")
+    if new_line ~= line then
+        vim.api.nvim_set_current_line(new_line)
+    end
+end
+
+vim.keymap.set("n", "<leader>mu", function() set_checkbox(" ") end, { desc = "Checkbox: unchecked" })
+vim.keymap.set("n", "<leader>mc", function() set_checkbox("x") end, { desc = "Checkbox: checked" })
+vim.keymap.set("n", "<leader>mt", function() set_checkbox("-") end, { desc = "Checkbox: todo" })
