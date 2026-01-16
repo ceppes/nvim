@@ -11,8 +11,3 @@ vim.api.nvim_create_user_command(
 
 vim.api.nvim_create_user_command("LspTextOff", "lua vim.diagnostic.config({virtual_text=false})", { nargs = 0 })
 vim.api.nvim_create_user_command("LspTextOn", "lua vim.diagnostic.config({virtual_text=true})", { nargs = 0 })
-vim.api.nvim_create_user_command(
-    "ErrorD",
-    "lua vim.diagnostic.setqflist({ severity = vim.diagnostic.severity.ERROR })",
-    { nargs = 0 }
-)

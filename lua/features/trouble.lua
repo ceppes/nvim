@@ -27,6 +27,9 @@ function M.keymaps()
     vim.keymap.set("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
     vim.keymap.set("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
     vim.keymap.set("n", "<leader>xr", "<cmd>Trouble lsp_references<cr>")
+    vim.keymap.set("n", "<leader>xd", function()
+        vim.diagnostic.setqflist({ severity = vim.diagnostic.severity.ERROR })
+    end, { desc = "Quickfix Diag Error Only" })
 end
 
 function M.setup()
