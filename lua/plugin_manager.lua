@@ -53,6 +53,7 @@ local plugins = {
     require("features.session"),
     require("features.http"),
     require("features.jira"),
+    require("features.image"),
     require("features.filetree"),
     require("features.mini"),
     require("features.languages.markdown").plugin(),
