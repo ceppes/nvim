@@ -1,13 +1,16 @@
-vim.api.nvim_create_user_command(
-    "LspLineOff",
-    "lua vim.diagnostic.config({ virtual_lines = false, virtual_text = true })",
-    { nargs = 0 }
-)
-vim.api.nvim_create_user_command(
-    "LspLineOn",
-    "lua vim.diagnostic.config({ virtual_lines = true, virtual_text = false })",
-    { nargs = 0 }
-)
+local lsp_text_enabled = true
+vim.api.nvim_create_user_command("ToogleLspText", function()
+    lsp_text_enabled = not lsp_text_enabled
+    vim.diagnostic.config({ virtual_text = lsp_text_enabled })
+    print("LSP virtual text: " .. (lsp_text_enabled and "ON" or "OFF"))
+end, { nargs = 0, desc = "Toggle LSP virtual text" })
 
-vim.api.nvim_create_user_command("LspTextOff", "lua vim.diagnostic.config({virtual_text=false})", { nargs = 0 })
-vim.api.nvim_create_user_command("LspTextOn", "lua vim.diagnostic.config({virtual_text=true})", { nargs = 0 })
+local lsp_line_enabled = false
+vim.api.nvim_create_user_command("ToggleLspLine", function()
+    lsp_line_enabled = not lsp_line_enabled
+    vim.diagnostic.config({
+        virtual_lines = lsp_line_enabled,
+        virtual_text = not lsp_line_enabled,
+    })
+    print("LSP virtual lines: " .. (lsp_line_enabled and "ON" or "OFF"))
+end, { nargs = 0, desc = "Toggle LSP virtual lines" })

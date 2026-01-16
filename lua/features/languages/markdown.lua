@@ -5,6 +5,14 @@ M.filetypes = { "markdown" }
 M.treesitter = { "markdown", "markdown_inline" }
 
 
+-- Disable LSP text diagnostics for markdown files
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.diagnostic.config({virtual_text=false}) -- @../../../lua/features/lspconfig/commands.lua
+    end,
+})
+
 function M.plugin()
     return {
         "MeanderingProgrammer/render-markdown.nvim",
