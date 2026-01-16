@@ -1,5 +1,9 @@
 return {
     "letieu/jira.nvim",
+    cmd = "Jira",
+    keys = {
+        { "<leader>jj", function() vim.cmd("Jira " .. (vim.env.JIRA_PROJECT or "")) end, desc = "Open Jira Board" },
+    },
     config = function()
         require("jira").setup({
             -- Jira connection settings
@@ -11,14 +15,17 @@ return {
                 limit = 200, -- Global limit of tasks per view (default: 200)
             },
 
-            active_sprint_query = "project = '%s' AND sprint in openSprints() ORDER BY Rank ASC",
+            -- Kanban board query: In Progress first, then To Do, grouped by assignee, sorted by updated
+            active_sprint_query = "project = '%s' AND statusCategory != Done ORDER BY statusCategory DESC, assignee ASC, updated DESC",
 
-            -- Saved JQL queries for the JQL tab
+            -- Saved JQL queries for Kanban workflow
             -- Use %s as a placeholder for the project key
             queries = {
-                ["Next sprint"] = "project = '%s' AND sprint in futureSprints() ORDER BY Rank ASC",
-                ["Backlog"] = "project = '%s' AND (issuetype IN standardIssueTypes() OR issuetype = Sub-task) AND (sprint IS EMPTY OR sprint NOT IN openSprints()) AND statusCategory != Done ORDER BY Rank ASC",
-                ["My Tasks"] = "assignee = currentUser() AND statusCategory != Done ORDER BY updated DESC",
+                ["All Issues"] = "project = '%s' ORDER BY statusCategory DESC, assignee ASC, updated DESC",
+                ["To Do"] = "project = '%s' AND statusCategory = 'To Do' ORDER BY created DESC",
+                ["In Progress"] = "project = '%s' AND statusCategory = 'In Progress' ORDER BY created DESC",
+                ["Done"] = "project = '%s' AND statusCategory = 'Done' ORDER BY updated DESC",
+                ["My Tasks"] = "project = '%s' AND assignee = currentUser() ORDER BY updated DESC",
             },
 
             -- Project-specific overrides
