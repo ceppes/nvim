@@ -2,9 +2,12 @@ local M = {}
 
 M.lsp_key = { "jdtls" }
 
-
+-- M.linter = { "checkstyle" }
+-- Checkstyle config file (not args!)
+-- M.linter_config_file = "/sun_checks.xml"  -- Sun/Oracle style (4-space, industry standard for Spring Boot)
+-- M.linter_config_file = "/google_checks.xml"  -- Google style (2-space, rarely used in Spring)
 M.treesitter = "java"
-M.formatter = "google-java-format"
+M.formatter = { "google-java-format" }  -- Using with --aosp flag (4 spaces) to match Spring Boot
 M.filetypes = { "java" }
 M.debugger = { "java-debug-adapter", "java-test" }
 
@@ -317,9 +320,7 @@ end
 
 function M.format()
     require("conform").formatters["google-java-format"] = {
-        inherit = false,
-        command = "google-java-format",
-        args = { "--aosp", "--skip-sorting-imports", "$FILENAME" },
+        prepend_args = { "--aosp", "--skip-sorting-imports" },
     }
 end
 

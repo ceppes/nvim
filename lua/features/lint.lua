@@ -82,6 +82,11 @@ function M.setup()
                         lint.linters[linter].cmd = config.linter_cmd
                     end
 
+                    -- Configure checkstyle config_file (special case)
+                    if config.linter_config_file and lint.linters[linter] then
+                        lint.linters[linter].config_file = config.linter_config_file
+                    end
+
                     -- Configure linter args if provided
                     if config.linter_args and lint.linters[linter] then
                         local base_args = lint.linters[linter].args or {}
