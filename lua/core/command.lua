@@ -15,3 +15,11 @@ local function copy_relative_filepath()
 end
 
 vim.api.nvim_create_user_command("CopyRelativeFilepath", copy_relative_filepath, {})
+
+-----------------------------------------------------------
+-- Toggle wrap
+-----------------------------------------------------------
+vim.api.nvim_create_user_command("ToggleWrap", function()
+    vim.wo.wrap = not vim.wo.wrap
+    print("wrap: " .. (vim.wo.wrap and "on" or "off"))
+end, { desc = "Toggle word wrap" })
