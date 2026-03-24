@@ -113,6 +113,12 @@ vim.api.nvim_create_autocmd("FileType", {
         --- Disable LSP text diagnostics for markdown files
         vim.diagnostic.config({ virtual_text = false })
         vim.keymap.set("n", "<leader>mtr", todo_report, { buffer = true, desc = "Todo Report" })
+        vim.schedule(function()
+            vim.opt_local.expandtab = true
+            vim.opt_local.shiftwidth = 4
+            vim.opt_local.tabstop = 4
+            vim.opt_local.softtabstop = 4
+        end)
     end,
 })
 
